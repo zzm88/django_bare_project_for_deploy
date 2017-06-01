@@ -5,6 +5,7 @@ from tastypie.api import Api
 
 from .api import ImageResource, ThumbnailResource, PinResource, UserResource
 from .views import CreateImage
+from pinry.core.views import root_txt
 
 v1_api = Api(api_name='v1')
 v1_api.register(ImageResource())
@@ -27,6 +28,8 @@ urlpatterns = patterns('',
         name='recent-pins'),
     url(r'^$', TemplateView.as_view(template_name='core/pins.html'),
         name='recent-pins'),
+    url(r'^root.txt/', view=root_txt),
 
 )
+
 

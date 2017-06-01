@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 
 
 from django.conf import settings
@@ -35,4 +35,7 @@ class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         return self.render_json_response({'error': form.errors})
 
-
+#tmp for validation to Ali union.
+def root_txt(request):
+    txt = 'ff322344b6bc9198061e82355f1662b2'
+    return HttpResponse(txt)
