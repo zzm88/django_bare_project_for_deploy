@@ -1,7 +1,9 @@
 {% verbatim %}
     <script id="pins-template" type="text/x-handlebars-template">
         {{#each pins}}
-        <div class="pin" data-id="{{id}}">
+
+        <div class="pin" data-id="{{id}}" {{ readyState }}{{responseText }}>
+
             {{#if editable}}
                 <div class="editable">
                     <div class="borderable">
@@ -35,7 +37,13 @@
                     {{/if}}
                 </div>
             </div>
+            <div><span><a class="like-Unlike" href="#">{{is_it_in_list id}}</a></span></div>
+
+            {% endverbatim %}
+
+            {% verbatim %}
         </div>
         {{/each}}
     </script>
+
 {% endverbatim %}

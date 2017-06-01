@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('pinry.core.urls', namespace='core')),
     url(r'', include('pinry.users.urls', namespace='users')),
+    url(r'', include('like.urls', namespace='like')),
 )
 
 

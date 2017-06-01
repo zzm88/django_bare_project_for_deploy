@@ -28,7 +28,13 @@ INSTALLED_APPS = [
     'django_images',
     'pinry.core',
     'pinry.users',
+    'vote',
+    'like'
 ]
+
+
+
+
 
 ROOT_URLCONF = 'pinry.urls'
 

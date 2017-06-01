@@ -1,4 +1,6 @@
 from django.http import HttpResponseRedirect
+
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView
@@ -32,3 +34,5 @@ class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
 
     def form_invalid(self, form):
         return self.render_json_response({'error': form.errors})
+
+

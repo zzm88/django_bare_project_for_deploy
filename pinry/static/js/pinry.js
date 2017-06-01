@@ -16,7 +16,8 @@ $(window).load(function() {
     window.tileLayout = function() {
         var blockContainer = $('#pins'),
             blocks = blockContainer.children('.pin'),
-            blockMargin = 15,
+            blockMargin = 0,
+            //to change: related to the margin of blocks.
             blockWidth = 240,
             rowSize = Math.floor(blockContainer.width()/(blockWidth+blockMargin)),
             colHeights = [],
@@ -112,6 +113,8 @@ $(window).load(function() {
         $('.spinner').css('display', 'block');
 
         // Fetch our pins from the api using our current offset
+        console.log(offset)
+        console.log(tagFilter)
         var apiUrl = '/api/v1/pin/?format=json&order_by=-id&offset='+String(offset);
         if (tagFilter) apiUrl = apiUrl + '&tag=' + tagFilter;
         if (userFilter) apiUrl = apiUrl + '&submitter__username=' + userFilter;
@@ -127,6 +130,8 @@ $(window).load(function() {
             // Use the fetched pins as our context for our pins template
             var template = Handlebars.compile($('#pins-template').html());
             var html = template({pins: pins.objects});
+            console.log('html'+ html)
+            console.log('template'+ template)
 
             // Append the newly compiled data to our container
             $('#pins').append(html);

@@ -6,7 +6,6 @@ from tastypie.api import Api
 from .api import ImageResource, ThumbnailResource, PinResource, UserResource
 from .views import CreateImage
 
-
 v1_api = Api(api_name='v1')
 v1_api.register(ImageResource())
 v1_api.register(ThumbnailResource())
@@ -28,4 +27,6 @@ urlpatterns = patterns('',
         name='recent-pins'),
     url(r'^$', TemplateView.as_view(template_name='core/pins.html'),
         name='recent-pins'),
+
 )
+

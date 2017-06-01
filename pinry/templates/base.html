@@ -37,7 +37,12 @@
             pinFilter = "{{ request.resolver_match.kwargs.pin }}",
             tagFilter = "{{ request.resolver_match.kwargs.tag }}",
             userFilter = "{{ request.resolver_match.kwargs.user }}";
+        //a global variable for checking current user's authentication.
+        var is_authenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
         </script>
+
+
+
         <!-- End JavaScript Variables -->
     </head>
 
@@ -63,7 +68,7 @@
                             <li><a href="{% url 'users:logout' %}">Logout</a></li>
                             <li>{% include "includes/bookmarklet_link.html" %}</li>
                         {% else %}
-                            <li><a href="{% url 'users:login' %}">Login</a></li>
+                            <li><a href="{% url 'users:login' %}" data-toggle="tooltip" title="请登录！" data-placement="bottom">Login</a></li>
                             <li><a href="{% url 'users:register' %}">Register</a></li>
                         {% endif %}
                     </ul>
@@ -103,16 +108,19 @@
         <script src="https://unpkg.com/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
         <script src="https://unpkg.com/handlebars@4.0.6/dist/handlebars.min.js"></script>
         <script src="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.js"></script>
+        <script src="/js/jquery.balloon.js"></script>
         {% compress js %}
             <script src="{% static "js/helpers.js" %}"></script>
             <script src="{% static "js/messages.js" %}"></script>
             <script src="{% static "js/lightbox.js" %}"></script>
             <script src="{% static "js/pinry.js" %}"></script>
+            <script src="{% static "js/like.js" %}"></script>
             <script src="{% static "js/pin-form.js" %}"></script>
         {% endcompress %}
         {% compress js inline %}
             {% block extra_js %}{% endblock %}
         {% endcompress %}
+
         <!-- End JavaScript -->
     </body>
 </html>

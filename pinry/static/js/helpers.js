@@ -59,6 +59,7 @@ function getUrlParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
 
+
 Handlebars.registerHelper('niceLinks', (function () {
     var reNL = /\r?\n/g,
         reURL = /https?:[/][/](?:www[.])?([^/]+)(?:[/]([.]?[^\s,.])+)?/g;
@@ -69,4 +70,5 @@ Handlebars.registerHelper('niceLinks', (function () {
         return new Handlebars.SafeString(t);
     };
 })());
+
 

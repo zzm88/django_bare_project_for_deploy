@@ -59,6 +59,8 @@ class UserResource(ModelResource):
         include_resource_uri = False
 
 
+
+
 def filter_generator_for(size):
     def wrapped_func(bundle, **kwargs):
         if hasattr(bundle.obj, '_prefetched_objects_cache') and 'thumbnail' in bundle.obj._prefetched_objects_cache:
@@ -149,3 +151,4 @@ class PinResource(ModelResource):
         include_resource_uri = False
         always_return_data = True
         authorization = PinryAuthorization()
+

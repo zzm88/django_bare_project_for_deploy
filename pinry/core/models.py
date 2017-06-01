@@ -9,6 +9,7 @@ from django_images.models import Image as BaseImage, Thumbnail
 from taggit.managers import TaggableManager
 
 from ..users.models import User
+from vote.models import VoteModel
 
 
 class ImageManager(models.Manager):
@@ -36,7 +37,7 @@ class Image(BaseImage):
         proxy = True
 
 
-class Pin(models.Model):
+class Pin(VoteModel,models.Model):
     submitter = models.ForeignKey(User)
     url = models.URLField(null=True)
     origin = models.URLField(null=True)
@@ -44,6 +45,8 @@ class Pin(models.Model):
     image = models.ForeignKey(Image, related_name='pin')
     published = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager()
+    like_count = models.IntegerField(null= False, default= 0 )
+    #expire_date = models.DateTimeField()
 
     def __unicode__(self):
         return '%s - %s' % (self.submitter, self.published)
