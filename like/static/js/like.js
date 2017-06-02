@@ -1,0 +1,59 @@
+/**
+ * Created by user on 2017/5/6.
+ */
+
+$('body').on('click', '.like-Unlike', function(e) {
+    e.preventDefault(); //don't use return false; has nothing to do with the issue though
+    if (is_authenticated){
+        console.log('yes! logged in ')
+    }
+    else{
+        console.log('no ! logged out ')
+
+        $('[data-toggle="tooltip"]').tooltip('show');
+        // window.open("/login/","_self");
+        return;
+
+    }
+    var elm = $(this); //cache the element
+    id = elm.closest('.pin').attr('data-id')
+
+    $.get("/pins/like/"+id , function(data){
+        json = JSON.parse(data);
+        alert("Data: " + json );
+    });
+    (elm.text() == 'Like') ? elm.text('Unlike') : elm.text('Like'); //keeping it short
+});
+
+/*
+this helper is for rendering "like" buttons as "unlike"
+getVotedPin returns current user's voted pins as an object.
+*/
+
+Handlebars.registerHelper("is_it_in_list", function(id){
+    data = getVotedPin()
+
+    if( data.voted_pins.indexOf(id) == 0 ){
+        return new Handlebars.SafeString("unLike");
+    }
+    else {
+        return new Handlebars.SafeString("Like");
+    }
+
+});
+
+function getVotedPin(  )
+{
+     var result = null;
+     var apiUrl = "/pins/voted_pins";
+     $.ajax({
+        url: apiUrl,
+        type: 'get',
+        dataType: 'html',
+        async: false,
+        success: function(data) {
+            result = JSON.parse(data);
+        }
+     });
+     return result;
+}
