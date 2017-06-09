@@ -174,7 +174,9 @@ textarea {
 
 /* Start Pins */
 #pins {
+    /*display: flex;*/
     top: 80px;
+    /*width: 100%;*/
 }
 
 .pin {
@@ -303,3 +305,5 @@ textarea {
     text-align: center;
 }
 /* End Pins */
+
+

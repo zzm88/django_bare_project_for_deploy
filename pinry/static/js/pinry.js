@@ -19,11 +19,23 @@ $(window).load(function() {
             blockMargin = 0,
             //to change: related to the margin of blocks.
             blockWidth = 240,
-            rowSize = Math.floor(blockContainer.width()/(blockWidth+blockMargin)),
             colHeights = [],
             rowMargins = [],
             marginLeft = 0;
+        
+        var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
+            if (isMobile.matches) {
+                rowSize =2;
+            }
+            else{
+                rowSize = Math.floor(blockContainer.width()/(blockWidth+blockMargin));
+
+            }
+           
+        // if (rowSize < 2) {
+        //     rowSize = 2;
+        // }
         // Fill our colHeights array with 0 for each row we have
         for (var i=0; i < rowSize; i++) colHeights[i] = 0;
         // Fill out our rowMargins which will be static after this

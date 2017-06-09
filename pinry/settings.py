@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'pinry.core',
     'pinry.users',
     'vote',
-    'like'
+    'like',
+    'django_mobile',
 ]
 
 
@@ -46,6 +47,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'pinry.users.middleware.Public',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
 ]
 
 TEMPLATES = [
@@ -60,10 +63,17 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'pinry.core.context_processors.template_settings',
+                'django_mobile.context_processors.flavour',
             ],
+
         },
     },
 ]
+
+TEMPLATE_LOADERS = (
+    ('django_mobile.loader.Loader',
+     ),
+)
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
