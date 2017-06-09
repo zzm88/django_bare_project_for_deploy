@@ -26,26 +26,31 @@ $('body').on('click', '.like-Unlike', function(e) {
         console.log(json);
         // alert("Data: " + json );
     });
-    (elm.text() == 'Like') ? elm.text('Unlike') : elm.text('Like'); //keeping it short
+    heart = elm.children()
+    heart.toggleClass('like');
+    heart.toggleClass('unlike');
+    // (elm.text() == 'Like') ? elm.text('Unlike') : elm.text('Like'); //keeping it short
 });
 
 /*
-this helper is for rendering "like" buttons as "unlike"
-getVotedPin returns current user's voted pins as an object.
+this helper is for rendering "like" buttons as "unlike" when page is loaded
 */
 
 Handlebars.registerHelper("is_it_in_list", function(id){
     data = getVotedPin();
 
     if( data.voted_pins.indexOf(id) == -1 ){
-        return new Handlebars.SafeString("Like");
+        return new Handlebars.SafeString("<span class='like'></span>");
     }
     else {
-        return new Handlebars.SafeString("UnLike");
+        return new Handlebars.SafeString("<span class='unlike'></span>");
     }
 
 });
 
+/*
+getVotedPin returns current user's voted pins as an object.
+*/
 function getVotedPin(  )
 {
      var result = null;

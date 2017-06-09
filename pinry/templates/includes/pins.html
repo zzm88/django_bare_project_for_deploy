@@ -4,7 +4,7 @@
         {{#each pins}}
 
         <div class="pin" data-id="{{id}}" {{ readyState }}{{responseText }}>
-
+                <div><span class="editable like-Unlike" style="opacity: 1; display: none;" href="#">{{is_it_in_list id}}</span></div>
             {{#if editable}}
                 <div class="editable">
                     <div class="borderable">
@@ -23,6 +23,7 @@
             {{#if description}}
                 <p>{{niceLinks description}}</p>
             {{/if}}
+{{!--
             <div class="pin-footer clearfix">
                 <div class="avatar pull-left">
                     <img src="//gravatar.com/avatar/{{submitter.gravatar}}">
@@ -38,8 +39,7 @@
                     {{/if}}
                 </div>
             </div>
-            <div><span><a class="like-Unlike" href="#">{{is_it_in_list id}}</a></span></div>
-
+--}}
             {% endverbatim %}
 
             {% verbatim %}
