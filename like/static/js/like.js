@@ -15,12 +15,16 @@ $('body').on('click', '.like-Unlike', function(e) {
         return;
 
     }
+
     var elm = $(this); //cache the element
+
     id = elm.closest('.pin').attr('data-id')
 
     $.get("/pins/like/"+id , function(data){
-        json = JSON.parse(data);
-        alert("Data: " + json );
+        // json = JSON.parse(data);
+        json = data;
+        console.log(json);
+        // alert("Data: " + json );
     });
     (elm.text() == 'Like') ? elm.text('Unlike') : elm.text('Like'); //keeping it short
 });
@@ -31,13 +35,13 @@ getVotedPin returns current user's voted pins as an object.
 */
 
 Handlebars.registerHelper("is_it_in_list", function(id){
-    data = getVotedPin()
+    data = getVotedPin();
 
-    if( data.voted_pins.indexOf(id) == 0 ){
-        return new Handlebars.SafeString("unLike");
+    if( data.voted_pins.indexOf(id) == -1 ){
+        return new Handlebars.SafeString("Like");
     }
     else {
-        return new Handlebars.SafeString("Like");
+        return new Handlebars.SafeString("UnLike");
     }
 
 });
