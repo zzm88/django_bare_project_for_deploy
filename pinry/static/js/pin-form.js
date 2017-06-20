@@ -18,6 +18,8 @@ $(window).load(function() {
             submitter: currentUser,
             url: $('#pin-form-image-url').val(),
             description: $('#pin-form-description').val(),
+            purchase_link: $('#pin-form-purchase-link').val(),
+            price: $('#price').val(),
             tags: cleanTags($('#pin-form-tags').val())
         }
     }
@@ -27,6 +29,8 @@ $(window).load(function() {
                 submitter: currentUser,
                 image: {thumbnail: {image: $('#pin-form-image-url').val()}},
                 description: $('#pin-form-description').val(),
+                purchase_link: $('#pin-form-purchase-link').val(),
+                price: $('#price').val(),
                 tags: cleanTags($('#pin-form-tags').val())
             }]},
             html = renderTemplate('#pins-template', context),
@@ -128,7 +132,9 @@ $(window).load(function() {
                 var apiUrl = '/api/v1/pin/'+editedPin.id+'/?format=json';
                 var data = {
                     description: $('#pin-form-description').val(),
-                    tags: cleanTags($('#pin-form-tags').val())
+                    tags: cleanTags($('#pin-form-tags').val()),
+                    origin: $('#pin-form-purchase-link').val(),
+                    price: $('#price').val(),
                 }
                 var promise = $.ajax({
                     type: "put",
@@ -156,7 +162,9 @@ $(window).load(function() {
                 var data = {
                     submitter: '/api/v1/user/'+currentUser.id+'/',
                     description: $('#pin-form-description').val(),
-                    tags: cleanTags($('#pin-form-tags').val())
+                    tags: cleanTags($('#pin-form-tags').val()),
+                    origin: $('#pin-form-purchase-link').val(),
+                    price: $('#price').val(),
                 };
                 if (uploadedImage) data.image = '/api/v1/image/'+uploadedImage+'/';
                 else data.url = $('#pin-form-image-url').val();

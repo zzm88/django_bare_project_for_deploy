@@ -23,9 +23,9 @@ $(window).load(function() {
             rowMargins = [],
             marginLeft = 0;
         
-        var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+        // var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
-            if (isMobile.matches) {
+            if (isMobile) {
                 rowSize =2;
             }
             else{
@@ -127,7 +127,13 @@ $(window).load(function() {
         // Fetch our pins from the api using our current offset
         console.log(offset)
         console.log(tagFilter)
-        var apiUrl = '/api/v1/pin/?format=json&order_by=-id&offset='+String(offset);
+        if (window.location.href.includes('liked')) {
+            var apiUrl = '/api/v1/like/?format=json&order_by=-id&offset='+String(offset);
+        }
+        else {
+            var apiUrl = '/api/v1/pin/?format=json&order_by=-id&offset='+String(offset);        
+        }
+        
         if (tagFilter) apiUrl = apiUrl + '&tag=' + tagFilter;
         if (userFilter) apiUrl = apiUrl + '&submitter__username=' + userFilter;
         $.get(apiUrl, function(pins) {
@@ -142,8 +148,6 @@ $(window).load(function() {
             // Use the fetched pins as our context for our pins template
             var template = Handlebars.compile($('#pins-template').html());
             var html = template({pins: pins.objects});
-            console.log('html'+ html)
-            console.log('template'+ template)
 
             // Append the newly compiled data to our container
             $('#pins').append(html);

@@ -4,7 +4,8 @@
         {{#each pins}}
 
         <div class="pin" data-id="{{id}}" {{ readyState }}{{responseText }}>
-                <div><span class="editable like-Unlike" style="opacity: 1; display: none;" href="#">{{is_it_in_list id}}</span></div>
+                <div class=""><span class="editable like-Unlike" style="opacity: 1; display: none;" href="#">{{is_it_in_list id}}</span></div>
+                <div class="phone-only Absolute-Center editable " style="pointer-events: none;"><span class="detail"></span></div>
             {{#if editable}}
                 <div class="editable">
                     <div class="borderable">
@@ -22,7 +23,9 @@
             </a>
             {{#if description}}
                 <p>{{niceLinks description}}</p>
+
             {{/if}}
+
 {{!--
             <div class="pin-footer clearfix">
                 <div class="avatar pull-left">

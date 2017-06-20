@@ -39,3 +39,4 @@ class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
 def root_txt(request):
     txt = 'ff322344b6bc9198061e82355f1662b2'
     return HttpResponse(txt)
+

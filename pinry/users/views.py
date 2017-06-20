@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -41,7 +42,7 @@ class CreateUser(CreateView):
 @login_required
 def logout_user(request):
     logout(request)
-    messages.success(request, 'You have successfully logged out.')
+    messages.success(request, u'已登出')
     return HttpResponseRedirect(reverse('core:recent-pins'))
 
 

@@ -7,6 +7,7 @@ from tastypie.resources import ModelResource
 from django_images.models import Thumbnail
 
 from .models import Pin, Image
+from vote.models import Vote
 from ..users.models import User
 
 
@@ -140,7 +141,7 @@ class PinResource(ModelResource):
         return super(PinResource, self).save_m2m(bundle)
 
     class Meta:
-        fields = ['id', 'url', 'origin', 'description']
+        fields = ['id', 'url', 'origin', 'description','price']
         ordering = ['id']
         filtering = {
             'submitter': ALL_WITH_RELATIONS
@@ -152,3 +153,47 @@ class PinResource(ModelResource):
         always_return_data = True
         authorization = PinryAuthorization()
 
+# this api returns pins which are voted by the current requesting user.
+# class LikeResource(ModelResource):
+#     class Meta:
+#         queryset = Pin.objects.all()
+#         resource_name = 'like'
+#         filtering = {
+#             'user': ALL_WITH_RELATIONS,
+#             'user_id': ALL_WITH_RELATIONS,
+#         }
+#     def get_object_list(self, request):
+#         return super(LikeResource, self).get_object_list(request).filter(votes__user_id=request.user.id)
+
+class LikeResource(PinResource):
+    submitter = fields.ToOneField(UserResource, 'submitter', full=True)
+
+
+    image = fields.ToOneField(ImageResource, 'image', full=True)
+    tags = fields.ListField()
+    class Meta:
+        fields = ['id', 'url', 'origin', 'description', 'price']
+        ordering = ['id']
+        filtering = {
+            'submitter': ALL_WITH_RELATIONS
+        }
+        queryset = Pin.objects.all().select_related('submitter', 'image'). \
+            prefetch_related('image__thumbnail_set', 'tags')
+        resource_name = 'like'
+        include_resource_uri = False
+        always_return_data = True
+        authorization = PinryAuthorization()
+    def get_object_list(self, request):
+        return super(LikeResource, self).get_object_list(request).filter(votes__user_id=request.user.id)
+
+# def like_api(request):
+#     liked_pins = Pin.objects.all(user_id=request.user.id)
+#     from django.utils import simplejson
+#
+#     some_data_to_dump = {
+#        'some_var_1': 'foo',
+#        'some_var_2': 'bar',
+#     }
+#
+#     data = simplejson.dumps(some_data_to_dump)
+#     return

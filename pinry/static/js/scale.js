@@ -11,10 +11,10 @@ var basePage = {
   scaleY: 1
 };
 
-var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+// var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
 $(function(){
-  if (!isMobile.matches) {
+  if (!isMobile) {
     return;
   }
   var $page = $('.page_content');

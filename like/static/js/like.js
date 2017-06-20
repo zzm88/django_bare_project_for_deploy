@@ -20,16 +20,24 @@ $('body').on('click', '.like-Unlike', function(e) {
 
     id = elm.closest('.pin').attr('data-id')
 
-    $.get("/pins/like/"+id , function(data){
-        // json = JSON.parse(data);
+
+    heart = elm.children()
+
+    if (heart.hasClass('like')) {
+        $.get("/pins/unlike/"+id , function(data){
         json = data;
         console.log(json);
-        // alert("Data: " + json );
-    });
-    heart = elm.children()
+        });
+    }
+
+    if (heart.hasClass('unlike')) {
+        $.get("/pins/like/"+id , function(data){
+        json = data;
+        console.log(json);
+        });
+    }
     heart.toggleClass('like');
     heart.toggleClass('unlike');
-    // (elm.text() == 'Like') ? elm.text('Unlike') : elm.text('Like'); //keeping it short
 });
 
 /*
@@ -40,16 +48,17 @@ Handlebars.registerHelper("is_it_in_list", function(id){
     data = getVotedPin();
 
     if( data.voted_pins.indexOf(id) == -1 ){
-        return new Handlebars.SafeString("<span class='like'></span>");
+        return new Handlebars.SafeString("<span class='unlike'></span>");
     }
     else {
-        return new Handlebars.SafeString("<span class='unlike'></span>");
+        return new Handlebars.SafeString("<span class='like'></span>");
     }
 
 });
 
 /*
 getVotedPin returns current user's voted pins as an object.
+it's a helper to previous function.
 */
 function getVotedPin(  )
 {

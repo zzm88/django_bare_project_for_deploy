@@ -3,7 +3,7 @@
         <div class="lightbox-background">
             <div class="lightbox-wrapper">
                 <div class="lightbox-image-wrapper">
-                    <img class="lightbox-image" src="{{image.standard.image}}" />
+                    <img class="lightbox-image" src="{{image.standard.image}}" style="width:100%"/>
                 </div>
                 <div class="lightbox-data clearfix">
                 {{#if description}}
@@ -11,6 +11,7 @@
                         {{niceLinks description}}
                     </div>
                 {{/if}}
+
                     <div class="avatar pull-left">
                         <img src="//gravatar.com/avatar/{{submitter.gravatar}}.jpg">
                     </div>
@@ -24,8 +25,8 @@
                         {{/if}}
                     </div>
                     <div class="text extra pull-right">
-                        <a href="{{url}}" class="btn btn-sm btn-default btn-warning">Original URL</a>
-                        <a href="/{{id}}/" class="btn btn-sm btn-default btn-success">Pin URL</a>
+
+                        <a href="{{ origin }}" class="btn btn-sm btn-default btn-success">{{#if price}}￥{{price}}{{/if}}去购买</a>
                     </div>
                 </div>
             </div>

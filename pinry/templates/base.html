@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-        <title>{% block title %}蛋壳DANKE{% endblock %}{% if flavour == "mobile" %}(mobile version){% endif %}</title>
+        <title>{% block title %}蛋壳DANKE{% endblock %}</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
@@ -42,6 +42,7 @@
             userFilter = "{{ request.resolver_match.kwargs.user }}";
         //a global variable for checking current user's authentication.
         var is_authenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+        var is_superuser = {{ request.user.is_superuser |yesno:"true,false" }};
         var isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
         </script>
@@ -66,13 +67,16 @@
                         <img id="logo" src="{% static "img/egg-logo.png" %}" alt="Pinry"/>
                     </a>
                 </div>
-                <div  class="navbar-left"><span id="logo-text" class="navbar-brand">DANKE{{ flavour }}</span></div>
+                <div  class="navbar-left"><span id="logo-text" class="navbar-brand">DANKE</span></div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li><a onclick="pinForm()">New Pin</a></li>
-                            <li><a href="{% url 'users:logout' %}">登出</a></li>
-                            <li>{% include "includes/bookmarklet_link.html" %}</li>
+                           {% with request.user.is_superuser as superuser %}
+                           {% if superuser %} <li><a onclick="pinForm()">New Pin</a></li>{% endif %}
+                            <li><a href="{% url 'users:logout' %}">登出({{ user.username }}/{{ user.id }})</a></li>
+                            <li><a href="{% url 'core:liked-pins' %}">我的喜爱</a></li>
+                            {% if superuser %}<li>{% include "includes/bookmarklet_link.html" %}</li>{% endif %}
+                            {% endwith %}
                         {% else %}
                             <li><a href="{% url 'users:login' %}" data-toggle="tooltip" title="请登录！" data-placement="bottom">登录</a></li>
                             <li><a href="{% url 'users:register' %}">注册</a></li>

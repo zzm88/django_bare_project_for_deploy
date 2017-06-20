@@ -175,9 +175,11 @@ textarea {
 /* Start Pins */
 #pins {
     /*display: flex;*/
-    top: 80px;
+    top: 170px;
     /*width: 100%;*/
 }
+
+
 
 .pin {
     background: #fff;
@@ -196,12 +198,13 @@ textarea {
     background: rgba(255, 255, 255, 0.4);
     border: 2px solid rgba(255, 255, 255, 0.4);
     -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
     position: absolute;
     right: 7px;
     top: 7px;
     color: white;
+    /* display: none; */
 }
 
 .pin:hover .editable {
@@ -247,6 +250,13 @@ textarea {
     padding: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .pin p {
+    font-size: 18px;
+    }
+
 }
 
 .pin strong {
@@ -303,6 +313,61 @@ textarea {
     font-size: 1.4em;
     font-style: italic;
     text-align: center;
+
+}
+
+@media (min-width: 768px) {
+    .phone-only{
+        display: none;
+    }
+
+}
+
+
+.detail {
+    color:white;
+    background-color: rgba(129, 231, 255, 0.44);
+    padding: 20px;
+    font-size: xx-large;
+    /* display: none; */
+    /* border: none; */
+}
+.detail:before{
+    content: "\1f50d";
+    font-family: 'entypo', sans-serif;
+}
+
+.Absolute-Center{
+
+width: 50%; /* Fallback */
+
+width: -moz-fit-content;
+
+width: -webkit-fit-content;
+
+width: fit-content;
+
+height: 50%; /* Fallback */
+
+height: -moz-fit-content;
+
+height: -webkit-fit-content;
+
+height: fit-content;
+
+overflow: hidden; /* Recommended in case content is larger than the container */
+
+margin: auto; /* Center the item vertically & horizontally */
+
+position: absolute; /* Break it out of the regular flow */
+
+top: 0;
+
+left: 0;
+
+bottom: 0;
+
+right: 0; /* Set the bounds in which to center it, relative to its parent/container */
 }
 /* End Pins */
 

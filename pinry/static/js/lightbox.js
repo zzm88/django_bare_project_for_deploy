@@ -15,20 +15,22 @@ $(window).load(function() {
     // Start Helper Functions
     function freezeScroll(freeze) {
         freeze = typeof freeze !== 'undefined' ? freeze : true;
+
+
         if (freeze) {
             $('body').data('scroll-level', $(window).scrollTop());
             $('#pins').css({
-                'position': 'fixed',
-                'margin-top': -$('body').data('scroll-level')
+                // 'position': 'fixed',
+                // 'margin-top': -$('body').data('scroll-level')
             });
-            $(window).scrollTop(0);
+            // $(window).scrollTop(0);
             /* disable the global pin-loading scroll handler so we don't
                load pins when scrolling a selected image */
             $(window).off('scroll');
         } else {
             $('#pins').css({
-                'position': 'static',
-                'margin-top': 0
+                // 'position': 'static',
+                // 'margin-top': 0
             });
             $(window).scrollTop($('body').data('scroll-level'));
             /* enable the pin-loading scroll handler unless we've already
@@ -48,20 +50,31 @@ $(window).load(function() {
         freezeScroll();
         $('body').append(renderTemplate('#lightbox-template', context));
         var box = $('.lightbox-background');
-        box.css('height', $(document).height());
-        $('.lightbox-image-wrapper').css('height', context.image.standard.height);
+        // box.css('height', $(document).height());
+        var height = Math.max($(document).height(), $(window).height());
+        box.css('height', height);
+
+
+        var img_wrapper_height = ((context.image.standard.width >= $(window).width())) ? context.image.standard.height * $(window).width() /context.image.standard.width : context.image.standard.height;
+        img_wrapper_height = (img_wrapper_height> 0.8 * $(window).height) ? img_wrapper_height * 0.8 :  img_wrapper_height;
+
+        $('.lightbox-image-wrapper').css('height', img_wrapper_height);
         box.fadeIn(200);
         $('.lightbox-image').load(function() {
             $(this).fadeIn(200);
         });
+
+        var lightbox_wrapper_width = (context.image.standard.width > $(window).width()) ?  $(window).width(): context.image.standard.width ;
+        var lightbox_wrapper_top_offset = ($(window).height()- img_wrapper_height)/2;
+
         $('.lightbox-wrapper').css({
-            'width': context.image.standard.width,
-            'margin-top': 80,
+            'width': lightbox_wrapper_width,
+            'margin-top':  $(window).scrollTop()+ lightbox_wrapper_top_offset ,
             'margin-bottom': 80,
-            'margin-left': -context.image.standard.width/2
+            'margin-left': -lightbox_wrapper_width/2
         });
-        if ($('.lightbox-wrapper').height()+140 > $(window).height())
-            $('.lightbox-background').height($('.lightbox-wrapper').height()+160);
+        // if ($('.lightbox-wrapper').height()+140 > $(window).height())
+        //     $('.lightbox-background').height($('.lightbox-wrapper').height()+160);
 
         box.click(function() {
             $(this).fadeOut(200);

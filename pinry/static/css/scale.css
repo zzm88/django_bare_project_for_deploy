@@ -5,15 +5,21 @@ body{
 #container{
   position:absolute;
   left:20px;
-  top:20px;
+  top: -46px;
   right:20px;
   bottom:20px;
   font-family:Arial, sans-serif;
-  color:#fff;
-  background-color:#52a5de;
+  /* background-color: #3ca5ff; */
+}
+@media (max-width: 768px) {
+    #container {
+        /*display: flex;*/
+        top: 0px;
+        /*width: 100%;*/
+    }
 }
 .page_content{
-  background-color:#ee233b;
+  /* background-color: #ee233b; */
   width:480px;
   height:600px;
   -ms-transform-origin: top left;
@@ -21,7 +27,8 @@ body{
   transform-origin: top left;
   -webkit-transition: all 500ms ease-in-out !important;
   transition: all 500ms ease-in-out !important;
-  position: absolute;}
+  position: absolute;
+  }
 
 .page_content>img{
     float:left;

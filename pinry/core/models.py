@@ -41,6 +41,7 @@ class Pin(VoteModel,models.Model):
     submitter = models.ForeignKey(User)
     url = models.URLField(null=True)
     origin = models.URLField(null=True)
+    price = models.IntegerField(null=True)
     description = models.TextField(blank=True, null=True)
     image = models.ForeignKey(Image, related_name='pin')
     published = models.DateTimeField(auto_now_add=True)
