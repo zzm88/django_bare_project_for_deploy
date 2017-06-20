@@ -64,9 +64,9 @@ $(window).load(function() {
         // Edit pin if pencil icon clicked
         $('.glyphicon-pencil').each(function() {
             var thisPin = $(this);
-            $(this).off('click');
+            // $(this).off('click');
             $(this).click(function() {
-                $(this).off('click');
+                // $(this).off('click');
                 pinForm($(this).data('id'));
             });
         });

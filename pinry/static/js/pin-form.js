@@ -76,6 +76,9 @@ $(window).load(function() {
                 $('#pin-form-image-upload').parent().hide();
                 $('#pin-form-description').val(editedPin.description);
                 $('#pin-form-tags').val(editedPin.tags);
+                $('#pin-form-purchase-link').val(editedPin.origin);
+                $('#price').val(editedPin.price);
+
                 createPinPreviewFromForm();
             });
         }
