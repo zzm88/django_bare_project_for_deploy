@@ -19,6 +19,7 @@ $(window).load(function() {
             url: $('#pin-form-image-url').val(),
             description: $('#pin-form-description').val(),
             purchase_link: $('#pin-form-purchase-link').val(),
+            tao_kouling: $('#pin-form-tao-kouling').val(),
             price: $('#price').val(),
             tags: cleanTags($('#pin-form-tags').val())
         }
@@ -30,6 +31,7 @@ $(window).load(function() {
                 image: {thumbnail: {image: $('#pin-form-image-url').val()}},
                 description: $('#pin-form-description').val(),
                 purchase_link: $('#pin-form-purchase-link').val(),
+                tao_kouling: $('#pin-form-tao-kouling').val(),
                 price: $('#price').val(),
                 tags: cleanTags($('#pin-form-tags').val())
             }]},
@@ -77,6 +79,7 @@ $(window).load(function() {
                 $('#pin-form-description').val(editedPin.description);
                 $('#pin-form-tags').val(editedPin.tags);
                 $('#pin-form-purchase-link').val(editedPin.origin);
+                $('#pin-form-tao-kouling').val(editedPin.tao_kouling);
                 $('#price').val(editedPin.price);
 
                 createPinPreviewFromForm();
@@ -137,6 +140,7 @@ $(window).load(function() {
                     description: $('#pin-form-description').val(),
                     tags: cleanTags($('#pin-form-tags').val()),
                     origin: $('#pin-form-purchase-link').val(),
+                    tao_kouling: $('#pin-form-purchase-link').val(),
                     price: $('#price').val(),
                 }
                 var promise = $.ajax({
@@ -167,6 +171,7 @@ $(window).load(function() {
                     description: $('#pin-form-description').val(),
                     tags: cleanTags($('#pin-form-tags').val()),
                     origin: $('#pin-form-purchase-link').val(),
+                    tao_kouling: $('#pin-form-tao-kouling').val(),
                     price: $('#price').val(),
                 };
                 if (uploadedImage) data.image = '/api/v1/image/'+uploadedImage+'/';

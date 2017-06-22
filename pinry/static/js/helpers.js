@@ -71,4 +71,12 @@ Handlebars.registerHelper('niceLinks', (function () {
     };
 })());
 
+//writing my own helper
+Handlebars.registerHelper('is_weixin', function() {
+    var is_weixin = (navigator.userAgent.includes('MicroMessenger')) ? true :  false;
+    var ua_str = navigator.userAgent;
+    console.log(ua_str);
+    return ua_str; //just return global variable value
+});
 
+//end of writing my own writer
