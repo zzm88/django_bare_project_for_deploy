@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'vote',
     'like',
     'django_mobile',
+    'django_user_agents',
+    # 'is_weixin',
 ]
 
 
@@ -49,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'pinry.users.middleware.Public',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
+
 ]
 
 TEMPLATES = [
@@ -64,6 +68,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'pinry.core.context_processors.template_settings',
                 'django_mobile.context_processors.flavour',
+                # "is_weixin.context_processors.is_weixin",
+
             ],
 
         },
@@ -120,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 TIME_ZONE = 'UTC'
 
@@ -168,3 +174,16 @@ IMAGE_SIZES = {
     'standard': {'size': [600, 0]},
     'square': {'crop': True, 'size': [125, 125]},
 }
+
+# django-user-agent
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+USER_AGENTS_CACHE = 'default'
+# end of django-user-agent
+
+
+

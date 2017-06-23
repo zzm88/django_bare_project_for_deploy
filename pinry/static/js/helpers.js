@@ -76,6 +76,10 @@ Handlebars.registerHelper('is_weixin', function() {
     var is_weixin = (navigator.userAgent.includes('MicroMessenger')) ? true :  false;
     var ua_str = navigator.userAgent;
     console.log(ua_str);
+    return is_weixin; //just return global variable value
+});
+Handlebars.registerHelper('user_agent', function() {
+    var ua_str = navigator.userAgent;
     return ua_str; //just return global variable value
 });
 

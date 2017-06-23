@@ -167,7 +167,8 @@ textarea {
 }
 
 .modal-body {
-    overflow: hidden;
+    /*overflow: hidden;*/
+    overflow: auto;
 }
 /* End Forms */
 

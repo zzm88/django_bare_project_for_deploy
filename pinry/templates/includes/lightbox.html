@@ -26,8 +26,14 @@
                     </div>
                     <div class="text extra pull-right">
 
-                        <a href="{{ origin }}" class="btn btn-lg btn-default btn-success">{{is_weixin}}{{#if price}}￥{{price}}{{/if}}去购买</a>
 
+                        {{#if is_weixin}}
+                        <input type="text" id="copy-content" value='{{tao_kouling}}' style="">
+                        <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
+                        {{else}}
+
+                        <a href="{{ origin }}" class="btn btn-lg btn-default btn-success">{{user_agent}}{{#if price}}￥{{price}}{{/if}}去购买</a>
+                        {{/if}}
                     </div>
                 </div>
             </div>

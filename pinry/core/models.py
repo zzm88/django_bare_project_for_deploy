@@ -47,6 +47,7 @@ class Pin(VoteModel,models.Model):
     published = models.DateTimeField(auto_now_add=True)
     tags = TaggableManager()
     like_count = models.IntegerField(null= False, default= 0 )
+    tao_kouling = models.CharField(max_length=100,blank=True, null=True)
     #expire_date = models.DateTimeField()
 
     def __unicode__(self):
