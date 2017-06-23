@@ -78,7 +78,8 @@ Handlebars.registerHelper('is_weixin', function(block) {
     console.log(ua_str);
     if (/micromessenger/.test(ua_str)) {
         return block(this);
-    } else {
+    }
+    else {
         return block.inverse(this);
     }
     
