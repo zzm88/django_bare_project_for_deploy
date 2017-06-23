@@ -25,12 +25,16 @@
                         {{/if}}
                     </div>
                     <div class="text extra pull-right">
-                        {{#if is_weixin}}caocaocaocaocaoaco{{/if}}
+                        {{#is_weixin}}yes
+                        {{else}}no
+                        {{/is_weixin}}
 
-                        {{#if is_weixin}}
-                        isweixin:{{is_weixin}}
-                        <input type="text" id="copy-content" value='{{tao_kouling}}' style="">
-                        <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买isweixin:{{is_weixin}}</a>
+                        {{#if not_weixin}}
+                            <a href="{{ origin }}" class="btn btn-lg btn-default btn-info">{{#if price}}￥{{price}}{{/if}}去购买</a>
+                        {{else}}
+
+                            <input type="text" id="copy-content" value='{{tao_kouling}}' style="">
+                            <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
                         {{/if}}
 
                     </div>
