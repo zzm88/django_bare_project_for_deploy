@@ -31,10 +31,10 @@
                         isweixin:{{is_weixin}}
                         <input type="text" id="copy-content" value='{{tao_kouling}}' style="">
                         <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买isweixin:{{is_weixin}}</a>
-                        {{else}}
-
-                        <a href="{{ origin }}" class="btn btn-lg btn-default btn-success">{{user_agent}}{{#if price}}￥{{price}}{{/if}}去购买isweixin:{{is_weixin}}</a>
                         {{/if}}
+                        {{#unless is_weixin}}
+                        <a href="{{ origin }}" class="btn btn-lg btn-default btn-info">{{user_agent}}{{#if price}}￥{{price}}{{/if}}去购买isweixin:{{is_weixin}}</a>
+                        {{/unless}}
                     </div>
                 </div>
             </div>
