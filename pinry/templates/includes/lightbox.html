@@ -25,9 +25,8 @@
                         {{/if}}
                     </div>
                     <div class="text extra pull-right">
-                        {{#is_weixin}}yes
-                        {{else}}no
-                        {{/is_weixin}}
+                        <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
+                        {{#isWeixin}}yes{{else}}no{{/isWeixin}}
                     </div>
                 </div>
             </div>

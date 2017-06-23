@@ -72,17 +72,14 @@ Handlebars.registerHelper('niceLinks', (function () {
 })());
 
 //writing my own helper
-Handlebars.registerHelper('is_weixin', function(block) {
+Handlebars.registerHelper('isWeixin', function(block) {
     // var is_weixin = (navigator.userAgent.includes('MicroMessenger')) ? true :  false;
-    var ua_str = navigator.userAgent.toLowerCase();
-    console.log(ua_str);
-    if (/micromessenger/.test(ua_str)) {
-        return block(this);
-    }
-    else {
-        return block.inverse(this);
-    }
-    
+        if (navigator.userAgent.includes('MicroMessenger')) {
+            return block(this);
+        } else {
+            return block.inverse(this);
+        }
+
 });
 Handlebars.registerHelper('user_agent', function() {
     var ua_str = navigator.userAgent.toLowerCase();
