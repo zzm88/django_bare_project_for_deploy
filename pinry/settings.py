@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'vote',
     'like',
     'django_mobile',
-    'django_user_agents',
+    # 'django_user_agents',
     # 'is_weixin',
 ]
 
@@ -51,7 +51,7 @@ MIDDLEWARE_CLASSES = [
     'pinry.users.middleware.Public',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-    'django_user_agents.middleware.UserAgentMiddleware',
+    # 'django_user_agents.middleware.UserAgentMiddleware',
 
 ]
 
