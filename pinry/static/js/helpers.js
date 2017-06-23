@@ -72,14 +72,17 @@ Handlebars.registerHelper('niceLinks', (function () {
 })());
 
 //writing my own helper
-Handlebars.registerHelper('isWeixin', function(block) {
-    // var is_weixin = (navigator.userAgent.includes('MicroMessenger')) ? true :  false;
-        if (navigator.userAgent.includes('MicroMessenger')) {
-            return block(this);
-        } else {
-            return block.inverse(this);
-        }
+$(document).ready(function() {
 
+    Handlebars.registerHelper('isWeixin', function(block) {
+        // var is_weixin = (navigator.userAgent.includes('MicroMessenger')) ? true :  false;
+            if (navigator.userAgent.includes('MicroMessenger')) {
+                return block(this);
+            } else {
+                return block.inverse(this);
+            }
+
+    });
 });
 Handlebars.registerHelper('user_agent', function() {
     var ua_str = navigator.userAgent.toLowerCase();
