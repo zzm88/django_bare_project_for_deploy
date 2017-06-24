@@ -140,7 +140,7 @@ $(window).load(function() {
                     description: $('#pin-form-description').val(),
                     tags: cleanTags($('#pin-form-tags').val()),
                     origin: $('#pin-form-purchase-link').val(),
-                    tao_kouling: $('#pin-form-purchase-link').val(),
+                    tao_kouling: $('#pin-form-tao-kouling').val(),
                     price: $('#price').val(),
                 }
                 var promise = $.ajax({

@@ -10,8 +10,6 @@
 function copyToClipboard() {
 
 var $input = $('#copy-content');
-result= $input.val();
-$input.val(result);
 if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
   var el = $input.get(0);
   var editable = el.contentEditable;

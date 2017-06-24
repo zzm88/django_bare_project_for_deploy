@@ -27,8 +27,10 @@
                     <div class="text extra pull-right">
                         {{#isWechat null}}
 
-                        <input type="text" id="copy-content" value='{{tao_kouling}}' style="display:none">
-                        <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
+                        <div id="target" data-toggle="tao_tooltip" title="已复制淘口令，打开淘宝客户端即可转到购买页" data-placement="top">{{tao_kouling}}</div>
+
+                        <a class="copy-btn btn btn-lg btn-default btn-success" data-clipboard-action="copy" data-clipboard-target="#target" onclick="intantiate_clipboard()">{{#if price}}￥{{price}}{{/if}}去购买</a>
+
                         {{else}}
 
                         <a href="{{ origin }}" class="btn btn-lg btn-default btn-info">{{#if price}}￥{{price}}{{/if}}去购买</a>
@@ -38,5 +40,20 @@
                 </div>
             </div>
         </div>
+    </script>
+    <script>
+    function intantiate_clipboard() {
+
+        var clipboard = new Clipboard('.copy-btn');
+        $('[data-toggle="tao_tooltip"]').tooltip('show');
+        clipboard.on('success', function(e) {
+            console.log(e);
+        });
+
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });
+
+    };
     </script>
  {% endverbatim %}
