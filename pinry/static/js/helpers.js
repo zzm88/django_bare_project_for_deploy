@@ -74,7 +74,7 @@ Handlebars.registerHelper('niceLinks', (function () {
 //writing my own helper
 // $(document).ready(function() {
 //
-Handlebars.registerHelper('hasAccess', function(val, options) {
+Handlebars.registerHelper('isWechat', function(val, options) {
     var fnTrue = options.fn,
         fnFalse = options.inverse;
 

@@ -25,13 +25,16 @@
                         {{/if}}
                     </div>
                     <div class="text extra pull-right">
+                        {{#isWechat null}}
                         <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
-                        {{#hasAccess null}}
-                        yes{{else}}no
-                        {{/hasAccess}}
+                        {{else}}
+
+                        <a href="{{ origin }}" class="btn btn-lg btn-default btn-info">{{#if price}}￥{{price}}{{/if}}去购买</a>
+
+                        {{/isWechat}}
                     </div>
                 </div>
             </div>
         </div>
     </script>
-{% endverbatim %}
+ {% endverbatim %}
