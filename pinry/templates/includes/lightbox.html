@@ -26,6 +26,8 @@
                     </div>
                     <div class="text extra pull-right">
                         {{#isWechat null}}
+
+                        <input type="text" id="copy-content" value='{{tao_kouling}}' style="display:none">
                         <a href="#" class="btn btn-lg btn-default btn-success" onclick="copyToClipboard()">{{#if price}}weixin￥{{price}}{{/if}}去wechat购买</a>
                         {{else}}
 
