@@ -55,6 +55,8 @@ function postPinData(data) {
 }
 
 
+
+
 function getUrlParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
@@ -95,3 +97,59 @@ Handlebars.registerHelper('isWechat', function(val, options) {
 // });
 //
 // //end of writing my own writer
+
+
+function postPinData(data) {
+    return $.ajax({
+        type: "post",
+        url: "/api/v1/pin/",
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+    });
+}
+
+function postTbkURL(data) {
+    var tbk_url = $('#pin-form-purchase-link').val();
+    var description = $('#pin-form-description').val();
+    return $.ajax({
+        url: "/gettkl/",
+        type: "post", //send it through get method
+        data: {
+            'tbk_url': tbk_url,
+            'description':description
+        },
+        success: function(response) {
+            $('#pin-form-tao-kouling').val(response.model);
+        },
+
+
+    });
+}
+
+function showImages(){
+    var img_urls = $(event.target).attr('data-images');
+    $.ajax({
+      url: "/view_images/",
+      type: "post", //send it through get method
+      data: {
+        'img_urls':img_urls
+      },
+      success: function(response) {
+          img_urls =response.img_urls;
+          $('.other-images').html('');
+          for (var key in img_urls ) {
+            $('.other-images').append("<img style='width:50%' src=" + img_urls[key] + ">");
+
+          }
+          $('#modal-container-848864').modal('show');
+          console.log(response);
+
+
+      },
+
+    });
+
+}
+
+
+

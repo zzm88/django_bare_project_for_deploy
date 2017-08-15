@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'', include('pinry.core.urls', namespace='core')),
     url(r'', include('pinry.users.urls', namespace='users')),
     url(r'', include('like.urls', namespace='like')),
+    url(r'', include('tbk_picker.urls', namespace='tbk_picker')),
 )
 
 

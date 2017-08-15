@@ -27,9 +27,9 @@
                     <div class="text extra pull-right">
                         {{#isWechat null}}
 
-                        <div id="target" data-toggle="tao_tooltip" title="已复制淘口令，打开淘宝客户端即可转到购买页" data-placement="top">{{tao_kouling}}</div>
+                        <div id="target" >{{tao_kouling}}</div>
 
-                        <a class="copy-btn btn btn-lg btn-default btn-success" data-clipboard-action="copy" data-clipboard-target="#target" onclick="intantiate_clipboard()">{{#if price}}￥{{price}}{{/if}}去购买</a>
+                        <a class="copy-btn btn btn-lg btn-default btn-success" data-clipboard-action="copy" data-clipboard-target="#target" onclick="intantiate_clipboard()"  data-toggle="tao_tooltip" title="已复制淘口令，打开淘宝客户端即可转到购买页" data-placement="top">{{#if price}}￥{{price}}{{/if}}去购买</a>
 
                         {{else}}
 

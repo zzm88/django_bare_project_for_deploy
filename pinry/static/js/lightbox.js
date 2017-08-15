@@ -76,13 +76,18 @@ $(window).load(function() {
         // if ($('.lightbox-wrapper').height()+140 > $(window).height())
         //     $('.lightbox-background').height($('.lightbox-wrapper').height()+160);
 
-        // box.click(function() {
-        //     $(this).fadeOut(200);
-        //     setTimeout(function() {
-        //         box.remove();
-        //     }, 200);
-        //     freezeScroll(false);
-        // });
+        box.click(function(event) {
+            // event.stopPropagation();
+            if (event.target.className.includes('btn')) {
+                return;
+            }
+            // alert(event.target.id);
+            $(this).fadeOut(200);
+            setTimeout(function() {
+                box.remove();
+            }, 200);
+            freezeScroll(false);
+        });
     }
     // End View Functions
 

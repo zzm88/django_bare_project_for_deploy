@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block yield %}
+<div class="container-fluid">
+	<div class="row">
+		{%for element in items%}
+        <div class="col-md-2">
+			<img alt="Bootstrap Image Preview" src="{{ element.pict_url }}" style="width: 100%;" class="img-rounded"  /> <span class="label label-default">{{ element.zk_final_price}}</span>
+			<dl>
+				<dt>
+					{{ element.title}}
+				</dt>
+                <dt>
+                    <a href="{%url 'tbk_picker:fav_items'  element.favorites_id %}">{{ element.favorites_id }}</a>
+				</dt>
+			</dl>
+		</div>
+        {% endfor %}
+	</div>
+</div>
+
+
+{% endblock %}

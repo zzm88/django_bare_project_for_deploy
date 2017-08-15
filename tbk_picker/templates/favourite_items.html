@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block yield %}
+<div class="container-fluid">
+    <div class="row" >
+        {%for element in items%}
+
+
+            <div class="col-md-2">
+                <img alt="Bootstrap Image Preview" src="{{ element.pict_url }}" style="width: 100%;" class="img-rounded"  /> <span class="label label-default" id="price-{{ element.num_iid }}">{{ element.zk_final_price|floatformat}}</span>
+                <dl>
+                    <dt>
+                        <a href="{{ element.click_url }}"></a>{{ element.title}}
+                    </dt>
+                    <dt>
+                        <a onclick="pinForm()" >new pin</a>
+                    </dt>
+                    <dt>
+                        <a onclick="showImages()"  data-images = "{{ element.small_images.string }}" id="modal-848864" href="#modal-container-848864" role="button" class="btn" data-toggle="modal">pics</a>
+                        <div class="modal fade" id="modal-container-848864" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title" id="myModalLabel">
+                                            Modal title
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body other-images">
+
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="button" class="btn btn-primary">
+                                            Save changes
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </dt>
+                </dl>
+            </div>
+            {% if forloop.counter|divisibleby:6 %}</div><div class="row" >{% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+<div class="row">
+		<div class="col-md-12">
+
+
+		</div>
+	</div>

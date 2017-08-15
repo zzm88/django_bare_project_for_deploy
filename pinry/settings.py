@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'vote',
     'like',
     'django_mobile',
+    'tbk_picker',
     # 'django_user_agents',
     # 'is_weixin',
 ]
@@ -78,6 +79,7 @@ TEMPLATES = [
 
 TEMPLATE_LOADERS = (
     ('django_mobile.loader.Loader',
+     'django.template.loaders.app_directories.Loader',
      ),
 )
 

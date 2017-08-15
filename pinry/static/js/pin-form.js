@@ -85,6 +85,18 @@ $(window).load(function() {
                 createPinPreviewFromForm();
             });
         }
+        //Auto filling blanks by getting datas from page
+        else{
+            // postTbkURL();
+            $('#price').val($(event.target).closest('div').find('span').text());
+
+            $('#pin-form-image-url').val();
+            $('#pin-form-image-url').val($(event.target).closest('div').children('img').attr('src'));
+            createPinPreviewFromForm();
+            $('#pin-form-description').val($(event.target).closest('div').find('dt:first-child').text().trim());
+            $('#pin-form-purchase-link').val($(event.target).closest('div').find('dt:first-child').children().attr('href'));
+            console.log($(event.target).closest('div').find('span').text());
+        }
         modal.modal('show');
         // Auto update preview on field changes
         var timer;
@@ -166,6 +178,7 @@ $(window).load(function() {
                     message('Problem updating image.', 'alert alert-danger');
                 });
             } else {
+
                 var data = {
                     submitter: '/api/v1/user/'+currentUser.id+'/',
                     description: $('#pin-form-description').val(),

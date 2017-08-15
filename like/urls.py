@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     url(r'^pins/voted/(?P<pin_id>(\w|-)+)/$',view=is_voted),
     url(r'^pins/voted_pins/$',view=voted_pins),
 
+
 )
