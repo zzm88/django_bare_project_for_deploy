@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block yield %}
+<div class="container-fluid">
+    <form method='post'>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="提交">
+    </form>
+</div>
+{% endblock %}
