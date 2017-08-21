@@ -9,7 +9,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse
 # 引入我们创建的表单类
-from .forms import AddForm
+from .forms import AddForm,isVaildForm
 
 
 def itemQuery(query,start_price,end_price):
@@ -219,3 +219,30 @@ def view_images(request):
     img_urls = map(clean,img_urls)
     foo = {'img_urls':img_urls}
     return JsonResponse(foo)
+
+def is_vaild(request):
+    if request.method == 'POST':  # 当提交表单时
+
+        form = isVaildForm(request.POST)  # form 包含提交的数据
+
+        if form.is_valid():  # 如果提交的数据合法
+            num_iid = form.cleaned_data['num_iid']
+            return render_to_response('search_result.html', {"items":top_isValid(num_iid)})
+
+    else:  # 当正常访问时
+        form = isVaildForm()
+    return render(request, 'search_form.html', {'form': form})
+
+def top_isValid(num_iid):
+    import top.api
+
+    req = top.api.TbkRebateAuthGetRequest()
+    req.set_app_info(top.appinfo(24521510,'cdaf54fdf7f03e78cb70739c6e1e260e'))
+    req.fields = "param,rebate"
+    req.params = num_iid
+    req.type = 1
+    try:
+        resp = req.getResponse()
+        print(resp)
+    except Exception, e:
+        print(e)

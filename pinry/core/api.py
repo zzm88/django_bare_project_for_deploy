@@ -15,6 +15,20 @@ class PinryAuthorization(DjangoAuthorization):
     """
     Pinry-specific Authorization backend with object-level permission checking.
     """
+
+    def create_detail(self, object_list, bundle):
+        klass = self.base_checks(bundle.request, bundle.obj.__class__)
+
+        if klass is False:
+            raise Unauthorized("You are not allowed to access that resource.")
+
+        permission = '%s.add_%s' % (klass._meta.app_label, klass._meta.model_name)
+        print bundle.request.user.has_perm(permission)
+        if not bundle.request.user.has_perm(permission):
+            raise Unauthorized("You are not allowed to access that resource.")
+
+        return True
+
     def update_detail(self, object_list, bundle):
         klass = self.base_checks(bundle.request, bundle.obj.__class__)
 
@@ -30,7 +44,7 @@ class PinryAuthorization(DjangoAuthorization):
 
     def delete_detail(self, object_list, bundle):
         klass = self.base_checks(bundle.request, bundle.obj.__class__)
-
+        print bundle.obj.__class__
         if klass is False:
             raise Unauthorized("You are not allowed to access that resource.")
 

@@ -55,8 +55,6 @@ function postPinData(data) {
 }
 
 
-
-
 function getUrlParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 }
@@ -99,14 +97,7 @@ Handlebars.registerHelper('isWechat', function(val, options) {
 // //end of writing my own writer
 
 
-function postPinData(data) {
-    return $.ajax({
-        type: "post",
-        url: "/api/v1/pin/",
-        contentType: 'application/json',
-        data: JSON.stringify(data)
-    });
-}
+
 
 function postTbkURL(data) {
     var tbk_url = $('#pin-form-purchase-link').val();
