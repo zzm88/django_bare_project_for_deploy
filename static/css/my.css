@@ -1,0 +1,11 @@
+.container-header{
+    margin-right: 5%;
+    margin-left: 5%;
+    width: 90%;
+}
+#logo{
+    padding-right:0;
+}
+#logo-text{
+    padding-left:0;
+}
