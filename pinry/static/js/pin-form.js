@@ -81,6 +81,7 @@ $(window).load(function() {
                 $('#pin-form-purchase-link').val(editedPin.origin);
                 $('#pin-form-tao-kouling').val(editedPin.tao_kouling);
                 $('#price').val(editedPin.price);
+                $('#num_iid').val(editedPin.num_iid);
 
                 createPinPreviewFromForm();
             });
@@ -95,7 +96,8 @@ $(window).load(function() {
             createPinPreviewFromForm();
             $('#pin-form-description').val($(event.target).closest('div').find('dt:first-child').text().trim());
             $('#pin-form-purchase-link').val($(event.target).closest('div').find('dt:first-child').children().attr('href'));
-            console.log($(event.target).closest('div').find('span').text());
+            $('#num_iid').val($(event.target).attr('data-id'));
+
         }
         modal.modal('show');
         // Auto update preview on field changes
@@ -186,6 +188,7 @@ $(window).load(function() {
                     origin: $('#pin-form-purchase-link').val(),
                     tao_kouling: $('#pin-form-tao-kouling').val(),
                     price: $('#price').val(),
+                    num_iid: $('#num_iid').val(),
                 };
                 if (uploadedImage) data.image = '/api/v1/image/'+uploadedImage+'/';
                 else data.url = $('#pin-form-image-url').val();

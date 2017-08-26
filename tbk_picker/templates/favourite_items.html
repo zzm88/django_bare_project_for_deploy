@@ -13,7 +13,7 @@
                         <a href="{{ element.click_url }}">{% if not element.click_url %}失效{% endif %}</a>{{ element.title}}
                     </dt>
                     <dt>
-                        <a onclick="pinForm()" >new pin{{ element.num_iid }}</a>
+                        <a onclick="pinForm()" data-id="{{ element.num_iid }}">new pin{{ element.num_iid }}</a>
                     </dt>
                     <dt>
                         <a onclick="showImages()"  data-images = "{{ element.small_images.string }}" id="modal-848864" href="#modal-container-848864" role="button" class="btn" data-toggle="modal">pics</a>

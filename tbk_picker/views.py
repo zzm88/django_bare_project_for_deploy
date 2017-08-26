@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # 引入我们创建的表单类
 from .forms import AddForm,isVaildForm
-
+from pinry.core.models import ExpiredPin,Pin
 
 def itemQuery(query,start_price,end_price):
     #URL等参数在base.py里修改
@@ -125,7 +125,7 @@ def search(request):
     return render(request, 'search_form.html', {'form': form})
 
 
-def getFvrList(request):
+def getFvrList(request=None):
     # -*- coding: utf-8 -*-
     import top.api
 
@@ -143,11 +143,13 @@ def getFvrList(request):
         pretty(resp)
     except Exception, e:
         print(e)
+    if not request:
+        return favourites
     return render(request, 'favourites.html', {"items":favourites})
 
     # return render_to_response('favourites.html', {"items":favourites})
 
-def getFvrItem(request,fav_id):
+def getFvrItem(request=None,fav_id=None):
     # -*- coding: utf-8 -*-
     import top.api
 
@@ -165,14 +167,16 @@ def getFvrItem(request,fav_id):
         resp = req.getResponse()
 
         pretty(resp)
-
+        print resp
         favourites = resp['tbk_uatm_favorites_item_get_response']['results']['uatm_tbk_item']
-
+        #hiding pins that have been chosen before.
+        delete_existed_pin(favourites)
 
     except Exception, e:
         print(e)
 
-
+    if request == None:
+        return favourites
     return render(request,'favourite_items.html', {"items":favourites})
 
 def pretty(d, indent=0):
@@ -203,6 +207,7 @@ def get_taokouling(request):
         print(e)
     return JsonResponse(tkl)
 
+#view images of items. data come from attribute of link.
 def view_images(request):
     print request.POST
     print request
@@ -220,6 +225,7 @@ def view_images(request):
     foo = {'img_urls':img_urls}
     return JsonResponse(foo)
 
+# don't have the permission to access the api.
 def is_vaild(request):
     if request.method == 'POST':  # 当提交表单时
 
@@ -233,6 +239,9 @@ def is_vaild(request):
         form = isVaildForm()
     return render(request, 'search_form.html', {'form': form})
 
+# don't have the permission to access this top
+#
+# api.
 def top_isValid(num_iid):
     import top.api
 
@@ -246,3 +255,65 @@ def top_isValid(num_iid):
         print(resp)
     except Exception, e:
         print(e)
+
+
+# find out expired pins and create records in database
+def set_expired_to_database(request):
+    fav_list=get_fav_list()
+    for fav_id in fav_list:
+        items = getFvrItem(fav_id = fav_id)
+        for item in items:
+            try:
+                item['click_url']
+            except:
+                ExpiredPin.objects.get_or_create(num_iid = item['num_iid'])
+    return render_to_response('panel.html',{'msg':'success'})
+
+def get_fav_list():
+    resp = getFvrList()
+    fav_list = []
+    for fav in resp:
+        fav_list.append(fav['favorites_id'])
+    #do sth to resp, so that you get a fav_id list.
+    return fav_list
+
+#delete expired pin according to records in database
+def delete_expired_pin(request):
+    expired_pin= get_expired_pin()
+    expired_pin.delete()
+    return render_to_response('panel.html',{'msg':'deleted'})
+
+    # ExpiredPin.objects.all.remove() # empty the data of expired pin
+
+def get_expired_pin():
+    expired_pin= Pin.objects.filter(num_iid__in= list_of_expired())
+    return expired_pin #which is a query_set
+
+def list_of_expired():
+    list_of_expired = ExpiredPin.objects.all()
+    id_list_of_expired=[]
+    for exp_pin in list_of_expired:
+        id_list_of_expired.append(exp_pin.num_iid)
+    return id_list_of_expired
+
+
+from django.views.generic.base import TemplateView
+
+class CommonView(TemplateView):
+    template_name = "panel.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CommonView, self).get_context_data(**kwargs)
+        return context
+
+
+def delete_existed_pin(pins):
+
+    existed_pins = Pin.objects.all()
+    for pin in pins:
+        try:
+            Pin.objects.get(num_iid = pin['num_iid'])
+            pins.remove(pin)
+        except:
+            pass
+

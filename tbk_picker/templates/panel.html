@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block yield %}
+<div class="container-fluid">
+	<div>
+        <label>{{ msg }}</label>
+        <a type="button" href="{% url "tbk_picker:set_expired_to_database" %}">更新过期列表</a>
+        <a type="button" href="{% url "tbk_picker:delete_expired_pin" %}">删除过期商品</a>
+        <label for="">使用说明：更新过期列表后，再删除即可。</label>
+	</div>
+</div>
+
+
+{% endblock %}

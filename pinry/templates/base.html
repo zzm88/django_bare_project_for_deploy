@@ -75,7 +75,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                            {% with request.user.is_superuser as superuser %}
-                           {% if superuser %} <li><a onclick="pinForm()">New Pin</a></li>{% endif %}
+                           {% if superuser %}
+                               <li><a onclick="pinForm()">New Pin</a></li>
+                               <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>
+                           {% endif %}
                             <li><a href="{% url 'users:logout' %}">登出({{ user.username }}/{{ user.id }})</a></li>
                             <li><a href="/liked" class="like">我的喜爱</a></li>
                             {% if superuser %}<li>{% include "includes/bookmarklet_link.html" %}</li>{% endif %}
@@ -124,7 +127,7 @@
         <script src="https://unpkg.com/handlebars@4.0.6/dist/handlebars.min.js"></script>
         <script src="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.js"></script>
         {% if flavour == "mobile" %}<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>{% endif %}
-        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=24521510"></script>
+{#        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=24521510"></script>#}
 
 
 
@@ -141,7 +144,7 @@
             <script src="{% static "js/pin-form.js" %}"></script>
             <script src="{% static "js/copy-to-clipboard.js" %}"></script>
             {% if flavour == "mobile" %}<script src="{% static "js/scale.js" %}"></script>{% endif %}
-            <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=24521510"></script>
+{#            <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=24521510"></script>#}
 
 
         {% endcompress %}

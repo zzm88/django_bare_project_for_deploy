@@ -117,6 +117,7 @@ class PinResource(ModelResource):
     submitter = fields.ToOneField(UserResource, 'submitter', full=True)
     image = fields.ToOneField(ImageResource, 'image', full=True)
     tags = fields.ListField()
+    # num_iid = fields.IntegerField(unique=True)
 
     def hydrate_image(self, bundle):
         url = bundle.data.get('url', None)
@@ -155,7 +156,7 @@ class PinResource(ModelResource):
         return super(PinResource, self).save_m2m(bundle)
 
     class Meta:
-        fields = ['id', 'url', 'origin', 'description','price','tao_kouling']
+        fields = ['id', 'url', 'origin', 'description','price','tao_kouling','num_iid']
         ordering = ['id']
         filtering = {
             'submitter': ALL_WITH_RELATIONS

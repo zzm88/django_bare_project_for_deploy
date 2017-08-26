@@ -48,8 +48,15 @@ class Pin(VoteModel,models.Model):
     tags = TaggableManager()
     like_count = models.IntegerField(null= False, default= 0 )
     tao_kouling = models.CharField(max_length=100,blank=True, null=True)
+    num_iid = models.IntegerField(null=True,unique=True)
     #expire_date = models.DateTimeField()
 
     def __unicode__(self):
         return '%s - %s' % (self.submitter, self.published)
+
+
+class ExpiredPin(models.Model):
+    num_iid = models.IntegerField(null=True)
+    def __unicode__(self):
+        return '%s' % (self.num_iid)
 
