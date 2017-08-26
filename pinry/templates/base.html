@@ -7,9 +7,11 @@
         <title>{% block title %}蛋壳DANKE{% endblock %}</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.6/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.css"/>
+{#        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700"/>#}
+{#        <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.6/dist/css/bootstrap.min.css"/>#}
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+{#        <link rel="stylesheet" href="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.css"/>#}
+        <link rel="stylesheet" href="https://cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css"/>
         {% compress css %}
             <link rel="stylesheet" href="{% static "css/messages.css" %}"/>
             <link rel="stylesheet" href="{% static "css/lightbox.css" %}"/>
@@ -80,7 +82,7 @@
                                <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>
                            {% endif %}
                             <li><a href="{% url 'users:logout' %}">登出({{ user.username }}/{{ user.id }})</a></li>
-                            <li><a href="/liked" class="like">我的喜爱</a></li>
+                            <li><a href="/liked" class="glyphicon  littlelike">我的喜爱</a></li>
                             {% if superuser %}<li>{% include "includes/bookmarklet_link.html" %}</li>{% endif %}
                             {% endwith %}
                         {% else %}
@@ -122,10 +124,14 @@
         <!-- End Templates -->
 
         <!-- JavaScript -->
-        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.min.js"></script>
-        <script src="https://unpkg.com/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/handlebars@4.0.6/dist/handlebars.min.js"></script>
-        <script src="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+{#        <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.min.js"></script>#}
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{#        <script src="https://unpkg.com/bootstrap@3.3.6/dist/js/bootstrap.min.js"></script>#}
+        <script src="https://cdn.bootcss.com/handlebars.js/4.0.6/handlebars.min.js"></script>
+{#        <script src="https://unpkg.com/handlebars@4.0.6/dist/handlebars.min.js"></script>#}
+{#        <script src="https://unpkg.com/dropzone@4.3.0/dist/min/dropzone.min.js"></script>#}
+        <script src="https://cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.js"></script>
         {% if flavour == "mobile" %}<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>{% endif %}
 {#        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=24521510"></script>#}
 

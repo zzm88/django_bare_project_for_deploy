@@ -1,20 +1,30 @@
-@font-face {
-  font-family: 'entypo';
-  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-90/entypo.woff") format("woff");
-}
+/*@font-face {*/
+  /*font-family: 'entypo';*/
+  /*src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-90/entypo.woff") format("woff");*/
+/*}*/
 
 .like:before {
-  content: "\2665";
-  font-family: 'entypo', sans-serif;
+  /*content: "\2665";*/
+  /*font-family: 'entypo', sans-serif;*/
+  content: "\e005";
   color: red;
   font-size: 1.5em;
     padding-left: 10px;
 
 }
 
+.littlelike:before {
+  content: "\e005";
+  color: red;
+  font-size: 1.5em;
+    padding-left: 10px;
+
+
+}
 .unlike:before {
-  content: "\2665";
-  font-family: 'entypo', sans-serif;
+  /*content: "\2665";*/
+  /*font-family: 'entypo', sans-serif;*/
+  content: "\e005";
   color: #c3c3c3;
   font-size: 1.5em;
     padding-left: 10px;
@@ -24,7 +34,7 @@
 .pin  .like-Unlike{
     position: absolute;
     left: 0px;
-    top: 3px;
+    top: 10px;
     border: none;
     right: inherit;
     background: none;

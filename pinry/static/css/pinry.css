@@ -334,8 +334,10 @@ textarea {
     /* border: none; */
 }
 .detail:before{
-    content: "\1f50d";
-    font-family: 'entypo', sans-serif;
+
+    content: "\e003";
+    /*content: "\1f50d";*/
+    /*font-family: 'entypo', sans-serif;*/
 }
 
 .Absolute-Center{
