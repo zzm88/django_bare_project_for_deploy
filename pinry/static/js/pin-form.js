@@ -12,6 +12,10 @@ $(window).load(function() {
     var uploadedImage = false;
     var editedPin = null;
 
+
+
+
+
     // Start Helper Functions
     function getFormData() {
         return {
@@ -143,6 +147,20 @@ $(window).load(function() {
                 'margin-left': -281
             });
         }
+
+        //append tags on tag-button click
+        $('.tags').click(function(){
+            newtag = $(this).text()
+          current_tags = $('#pin-form-tags').val()
+          if( current_tags.indexOf(newtag+",") ==-1){
+                $('#pin-form-tags').val($('#pin-form-tags').val()+$(this).text()+",")
+          }
+          else{
+          current_tags = current_tags.replace(newtag+",","");
+          $('#pin-form-tags').val(current_tags)
+          }
+            });
+
         // Submit pin on post click
         $('#pin-form-submit').click(function(e) {
             e.preventDefault();
@@ -152,7 +170,7 @@ $(window).load(function() {
                 var apiUrl = '/api/v1/pin/'+editedPin.id+'/?format=json';
                 var data = {
                     description: $('#pin-form-description').val(),
-                    tags: cleanTags($('#pin-form-tags').val()),
+                    tags: cleanTags($('#pin-form-tags').val().replace(/,$/gi,"")),
                     origin: $('#pin-form-purchase-link').val(),
                     tao_kouling: $('#pin-form-tao-kouling').val(),
                     price: $('#price').val(),
