@@ -44,8 +44,16 @@ $('body').on('click', '.like-Unlike', function(e) {
 this helper is for rendering "like" buttons as "unlike" when page is loaded
 */
 
+
+
 Handlebars.registerHelper("is_it_in_list", function(id){
-    data = getVotedPin();
+    // data = getVotedPin();
+    if (typeof data !== 'undefined') {
+    }
+    else{
+        data = getVotedPin();
+    }
+
 
     if( data.voted_pins.indexOf(id) == -1 ){
         return new Handlebars.SafeString("<span class='unlike'></span>");

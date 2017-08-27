@@ -194,6 +194,7 @@ $(window).load(function() {
                 else data.url = $('#pin-form-image-url').val();
                 var promise = postPinData(data);
                 promise.success(function(pin) {
+                    message('成功发布', 'alert alert-success');
                     if (pinFromUrl) return window.close();
                     pin.editable = true;
                     pin = renderTemplate('#pins-template', {pins: [pin]});
@@ -202,6 +203,7 @@ $(window).load(function() {
                     lightbox();
                     dismissModal(modal);
                     uploadedImage = false;
+
                 });
                 promise.error(function() {
                     message('Problem saving image.', 'alert alert-danger');
