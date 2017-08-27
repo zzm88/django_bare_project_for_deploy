@@ -112,8 +112,8 @@ $(window).load(function() {
                 timer = setTimeout(function() {
                     createPinPreviewFromForm()
                 }, 700);
-                if (!uploadedImage)
-                    $('#pin-form-image-upload').parent().fadeOut(300);
+                // if (!uploadedImage)
+                //     $('#pin-form-image-upload').parent().fadeOut(300);
             });
         }
         // Drag and drop upload
