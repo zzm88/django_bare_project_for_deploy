@@ -309,11 +309,14 @@ class CommonView(TemplateView):
 
 def delete_existed_pin(pins):
 
-    existed_pins = Pin.objects.all()
+    to_remove = []
     for pin in pins:
+
         try:
             Pin.objects.get(num_iid = pin['num_iid'])
-            pins.remove(pin)
-        except:
-            pass
 
+            to_remove.append(pin)
+        except Pin.DoesNotExist:
+            pass
+    for pin in to_remove:
+        pins.remove(pin)
