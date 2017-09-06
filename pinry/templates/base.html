@@ -79,8 +79,14 @@
                            {% with request.user.is_superuser as superuser %}
                            {% if superuser %}
                                <li><a onclick="pinForm()">New Pin</a></li>
-                               <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>
                            {% endif %}
+
+
+                           {% if perms.core.add_pin %}
+                               <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>
+                            {% else %}cannot
+                           {% endif %}
+
                             <li><a href="{% url 'users:logout' %}">登出({{ user.username }}/{{ user.id }})</a></li>
                             <li><a href="/liked" class="glyphicon  littlelike">我的喜爱</a></li>
                             {% if superuser %}<li>{% include "includes/bookmarklet_link.html" %}</li>{% endif %}
