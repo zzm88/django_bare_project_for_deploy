@@ -11,7 +11,13 @@
 					{{ element.title}}
 				</dt>
                 <dt>
+                    <a onclick="pinForm()" data-id="{{ element.num_iid }}">new pin{{ element.num_iid }}d</a>
+                </dt>
+                <dt>
                     <a href="{{ element.item_url}}">淘宝链接</a>
+				</dt>
+                <dt>
+                    <a onclick="showImages()"  data-images = "{{ element.small_images.string }}" id="modal-848864" href="#modal-container-848864" role="button" class="btn" data-toggle="modal">pics</a>
 				</dt>
 			</dl>
 		</div>

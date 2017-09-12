@@ -92,7 +92,7 @@ $(window).load(function() {
         }
         //Auto filling blanks by getting datas from page
         else{
-            // postTbkURL();
+            postTbkURL();
             $('#price').val($(event.target).closest('div').find('span').text());
 
             $('#pin-form-image-url').val();
@@ -104,6 +104,8 @@ $(window).load(function() {
 
         }
         modal.modal('show');
+        //click get-taokouling
+
         // Auto update preview on field changes
         var timer;
         for (var i in formFields) {
@@ -197,7 +199,7 @@ $(window).load(function() {
                 promise.error(function() {
                     message('Problem updating image.', 'alert alert-danger');
                 });
-            } else {
+            } else {//Summit a new pin
 
                 var data = {
                     submitter: '/api/v1/user/'+currentUser.id+'/',
@@ -223,8 +225,13 @@ $(window).load(function() {
                     uploadedImage = false;
 
                 });
-                promise.error(function() {
-                    message('Problem saving image.', 'alert alert-danger');
+                // promise.error(function() {
+                //     message('Problem saving image.', 'alert alert-danger');
+                //
+                // });
+                promise.error(function(req, textStatus, errorThrown) {
+                    //this is going to happen when you send something different from a 200 OK HTTP
+                     alert('Ooops, something happened: ' + textStatus + ' ' +errorThrown);
                 });
             }
         });

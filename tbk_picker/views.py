@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.http import JsonResponse
 
-import top
+import top.api
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -118,7 +118,7 @@ def search(request):
             start_price = form.cleaned_data['start_price']
             end_price = form.cleaned_data['end_price']
             items = itemQuery(query, start_price, end_price)
-            return render_to_response('search_result.html', {"items":itemQuery(query,start_price,end_price)})
+            return render(request,'search_result.html', {"items":itemQuery(query,start_price,end_price)})
 
     else:  # 当正常访问时
         form = AddForm()
@@ -206,6 +206,31 @@ def get_taokouling(request):
     except Exception, e:
         print(e)
     return JsonResponse(tkl)
+
+# top.api.TbkItemConvertRequest() only accessable when you have a website with 10k PV /day.
+# see more at https://github.com/orzcc/taobao-top-client/issues/3
+def get_clickurl(request):
+    # -*- coding: utf-8 -*-
+    import top.api
+
+    # num_iid = request.POST['num_iid']
+    num_iid = 538649382048
+
+    req = top.api.TbkItemConvertRequest()
+    req.set_app_info(top.appinfo(24521510, 'cdaf54fdf7f03e78cb70739c6e1e260e'))
+
+    req.fields = "num_iid,click_url"
+    req.num_iids = num_iid
+    req.adzone_id = 538649382048
+    req.platform = 1
+    req.unid = "danke"
+    try:
+        resp = req.getResponse()
+        print(resp)
+    except Exception, e:
+        print(e)
+    return JsonResponse()
+
 
 #view images of items. data come from attribute of link.
 def view_images(request):
