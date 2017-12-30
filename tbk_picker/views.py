@@ -149,7 +149,7 @@ def getFvrList(request=None):
 
     # return render_to_response('favourites.html', {"items":favourites})
 
-def getFvrItem(request=None,fav_id=None):
+def getFvrItem(request=None,fav_id=None,page=None):
     # -*- coding: utf-8 -*-
     import top.api
 
@@ -157,11 +157,15 @@ def getFvrItem(request=None,fav_id=None):
     req.set_app_info(top.appinfo(24521510, 'cdaf54fdf7f03e78cb70739c6e1e260e'))
 
     req.platform = 1
-    req.page_size = 20
+    # todo:pagination is a better option here, since loading of 200 items would cost a bunch of time.I would like to implement it when I have time.
+    req.page_size = 200
     req.adzone_id = 122118293
     req.unid = "3456"
     req.favorites_id = fav_id
-    req.page_no = 1
+    if page:
+        req.page_no = page
+    else:
+        req.page_no = 1
     req.fields = "num_iid,click_url,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick,shop_title,zk_final_price_wap,event_start_time,event_end_time,tk_rate,status,type"
     try:
         resp = req.getResponse()

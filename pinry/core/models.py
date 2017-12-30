@@ -60,3 +60,11 @@ class ExpiredPin(models.Model):
     def __unicode__(self):
         return '%s' % (self.num_iid)
 
+
+class Activation(models.Model):
+    activate_code = models.CharField(null=True,max_length=100)
+    uid = models.CharField(null=True,max_length=100,blank=True)
+    times = models.IntegerField(null=True,default = 0)
+
+
+

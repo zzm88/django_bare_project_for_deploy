@@ -10,7 +10,7 @@ from braces.views import JSONResponseMixin, LoginRequiredMixin
 from django_images.models import Thumbnail
 
 from .forms import ImageForm
-
+from .models import Activation
 
 class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
     template_name = None  # JavaScript-only view
@@ -38,5 +38,53 @@ class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
 #tmp for validation to Ali union.
 def root_txt(request):
     txt = 'ff322344b6bc9198061e82355f1662b2'
-    return HttpResponse(txt)
+    return HttpResponse(response)
 
+
+def validation(request):
+    activate_code = request.GET['activate_code']
+
+    try:
+        request_device_code = int(request.GET['device_code'])
+    except:
+        txt = 'device_code is null'
+        response = 5
+        return HttpResponse(response)
+    try:
+        a = Activation.objects.get(activate_code=activate_code)
+        txt = 'code is validated'
+    except:
+        txt = 'wrong activate_code'
+        response = 4
+        return HttpResponse(response)
+
+    try :
+        device_code =int(a.uid)
+    except ValueError:
+        a.uid = request_device_code
+
+        a.save()
+        txt +='activated successfully'
+        response = 1
+        return HttpResponse(response)
+
+    if device_code == request_device_code:
+        txt += '& device is matched'
+        response = 2
+    else:
+        txt += ' but device does not match'
+        response = 3
+    return HttpResponse(response)
+
+def bulk_create_validation(request):
+    import random
+    response = []
+    for i in range(10):
+
+        hash = random.getrandbits(128)
+        hash = '%032x' % hash
+        a = Activation.objects.create(activate_code = hash)
+        response.append(a.activate_code)
+
+
+    return HttpResponse(response)

@@ -5,7 +5,7 @@ from tastypie.api import Api
 
 from .api import ImageResource, ThumbnailResource, PinResource, UserResource, LikeResource
 from .views import CreateImage
-from pinry.core.views import root_txt
+from .views import root_txt, validation,bulk_create_validation
 
 v1_api = Api(api_name='v1')
 v1_api.register(ImageResource())
@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^liked/$', TemplateView.as_view(template_name='core/pins.html'),
         name='liked-pins'),
     url(r'^root.txt/', view=root_txt),
+    url(r'^validation/', view=validation),
+    url(r'^generate_keys/', view=bulk_create_validation),
 
 )
 
