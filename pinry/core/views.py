@@ -60,7 +60,7 @@ def validation(request):
 
     try :
         device_code =int(a.uid)
-    except ValueError:
+    except:
         a.uid = request_device_code
 
         a.save()
