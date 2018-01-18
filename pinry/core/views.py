@@ -12,6 +12,9 @@ from django_images.models import Thumbnail
 from .forms import ImageForm
 from .models import Activation
 
+import datetime
+import calendar
+
 class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
     template_name = None  # JavaScript-only view
     model = Image
@@ -40,6 +43,12 @@ def root_txt(request):
     txt = 'ff322344b6bc9198061e82355f1662b2'
     return HttpResponse(response)
 
+def add_months(sourcedate,months):
+    month = sourcedate.month - 1 + months
+    year = sourcedate.year + month // 12
+    month = month % 12 + 1
+    day = min(sourcedate.day,calendar.monthrange(year,month)[1])
+    return datetime.date(year,month,day)
 
 def validation(request):
     activate_code = request.GET['activate_code']
@@ -62,7 +71,9 @@ def validation(request):
         device_code =int(a.uid)
     except:
         a.uid = request_device_code
-
+        now = datetime.date.today()
+        exp = add_months(now,1)
+        a.expired_date = exp
         a.save()
         txt +='activated successfully'
         response = 2
@@ -80,7 +91,7 @@ def validation(request):
     except:
         return HttpResponse(response)
 
-    import datetime
+
     now = datetime.date.today()
     try:
         if now <= ex_date:
