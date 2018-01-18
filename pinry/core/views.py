@@ -65,7 +65,7 @@ def validation(request):
 
         a.save()
         txt +='activated successfully'
-        response = 1
+        response = 2
         return HttpResponse(response)
 
     if device_code == request_device_code:
