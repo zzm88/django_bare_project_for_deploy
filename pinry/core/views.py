@@ -74,6 +74,25 @@ def validation(request):
     else:
         txt += ' but device does not match'
         response = 3
+
+    try:
+        ex_date = a.expired_date
+    except:
+        return HttpResponse(response)
+
+    import datetime
+    now = datetime.date.today()
+    try:
+        if now <= ex_date:
+            pass
+        elif response == 2:
+            txt += 'however expired'
+            response = 6
+        else:
+            pass
+    #exception:expired_date is null
+    except:
+        pass
     return HttpResponse(response)
 
 def bulk_create_validation(request):
