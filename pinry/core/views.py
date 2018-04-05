@@ -121,8 +121,9 @@ def bulk_create_validation(request):
     return HttpResponse(response)
 
 from django.http import JsonResponse
-from coupon import *
-def get_market(request):
-    jack = buyer()
-    market = jack.get_market()
-    return JsonResponse(market)
+
+# from coupon import *
+# def get_market(request):
+#     jack = buyer()
+#     market = jack.get_market()
+#     return JsonResponse(market)
