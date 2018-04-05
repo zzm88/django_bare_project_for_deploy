@@ -113,8 +113,16 @@ def bulk_create_validation(request):
 
         hash = random.getrandbits(128)
         hash = '%032x' % hash
-        a = Activation.objects.create(activate_code = hash)
+        a = Activation.objects.create(activate_code = hash,owner = request.user)
         response.append(a.activate_code)
 
 
+
     return HttpResponse(response)
+
+from django.http import JsonResponse
+from coupon import *
+def get_market(request):
+    jack = buyer()
+    market = jack.get_market()
+    return JsonResponse(market)

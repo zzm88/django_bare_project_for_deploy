@@ -66,5 +66,6 @@ class Activation(models.Model):
     uid = models.CharField(null=True,max_length=100,blank=True)
     times = models.IntegerField(null=True,default = 0)
     expired_date = models.DateField(blank=True, null=True)
+    owner = models.ForeignKey(User,blank=True,null=True)
 
 
