@@ -1,0 +1,133 @@
+{% extends "base_activation.html" %}
+
+{% block content %}
+
+{##}
+{#    <head>#}
+{#        <meta charset="utf-8"/>#}
+{#        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>#}
+{#        <title>activation</title>#}
+{#       <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>#}
+{##}
+{##}
+{#    </head>#}
+<div >
+
+
+
+{% if user.is_authenticated %}
+<h3>精灵码管理系统</h3>
+<a class="btn btn-primary" href="/generate_keys/">一键生成验证码（10个）</a>
+
+
+
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">激活码</th>
+      <th scope="col">owner</th>
+      <th scope="col">到期日</th>
+        <th scope="col">机器码</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for activation in object_list %}
+    <tr>
+
+      <th scope="row">{{ activation.id }}</th>
+      <td>{{ activation.activate_code }}</td>
+      <td> {{ activation.owner }}</td>
+      <td> {{ activation.expired_date }}</td>
+        <td> {{ activation.uid }}</td>
+          <td ><a href="/activation/edit/{{ activation.pk }}" class="btn">修改</a></td>
+
+    </tr>
+{% empty %}
+    <li>No activation yet.</li>
+{% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+{% else %}<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h2>
+					欢迎使用<strong>精灵码</strong>
+				</h2>
+				<p>
+					专门为按键精灵制作的验证码管理系统
+				</p>
+				<p>
+					一键批量生成、一机一码、方便管理
+				</p>
+                <p>
+					助力您的脚本销售
+				</p>
+				<p>
+					<a class="btn btn-primary btn-large" href="#">了解更多</a>
+				</p>
+			</div>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h2>
+				一键生成
+			</h2>
+			<p>
+				一键批量生成激活码
+			</p>
+			<div>
+				方便快捷
+			</div>
+
+
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>
+				一机一码
+			</h2>
+			<p>
+				一台手机对应一个激活码
+			</p>
+			<div>
+				不会发生多人共享、转卖激活码的情况
+
+			</div>
+
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>
+				整合方便
+			</h2>
+			<p>
+				只需要添加几行代码
+			</p>
+			<div>
+				<span>就可以使你的脚本对接</span><strong>精灵码系统</strong>
+			</div>
+
+
+			<p>
+				<a class="btn" href="#">View details »</a>
+			</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+
+{% endblock %}

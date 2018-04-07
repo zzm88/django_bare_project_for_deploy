@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect,HttpResponse
 
 
@@ -52,6 +53,9 @@ def add_months(sourcedate,months):
 
 def validation(request):
     activate_code = request.GET['activate_code']
+    activate_code = activate_code.strip()
+
+
 
     try:
         request_device_code = int(request.GET['device_code'])
@@ -66,6 +70,21 @@ def validation(request):
         txt = 'wrong activate_code'
         response = 4
         return HttpResponse(response)
+
+    try:
+        owner = request.GET['owner']
+        print a.owner
+        print type(a.owner)
+        print owner
+        print type(owner)
+
+        if a.owner.username == owner:
+            pass
+        else:
+            response = 7
+            return HttpResponse(response)
+    except:
+        pass
 
     try :
         device_code =int(a.uid)
@@ -106,6 +125,10 @@ def validation(request):
         pass
     return HttpResponse(response)
 
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def bulk_create_validation(request):
     import random
     response = []
@@ -118,7 +141,7 @@ def bulk_create_validation(request):
 
 
 
-    return HttpResponse(response)
+    return HttpResponse('生成成功')
 
 from django.http import JsonResponse
 
@@ -127,3 +150,62 @@ def get_market(request):
     jack = buyer()
     market = jack.get_market()
     return JsonResponse(market)
+
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.utils import timezone
+from .models import Activation
+
+
+class ActivationDetailView(DetailView):
+    model = Activation
+
+    template_name = 'activation_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivationDetailView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
+# views.py
+
+
+class  ActivationListView(ListView):
+    model =  Activation
+    template_name = 'activation_list.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super( ActivationListView, self).get_context_data(**kwargs)
+    #     context['now'] = timezone.now()
+    #     return context
+    def get_queryset(self):
+        try:
+            r = Activation.objects.filter(owner=self.request.user)
+        except Exception as e:
+            print "HAHA"
+            print e
+            r= "nothing"
+        return r
+
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.views import redirect_to_login
+
+class ActivationUpdateView(UpdateView):
+    def user_passes_test(self, request):
+        if request.user.is_authenticated():
+            self.object = self.get_object()
+            return self.object.owner == request.user
+        return False
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.user_passes_test(request):
+            return redirect_to_login(request.get_full_path())
+        return super(ActivationUpdateView, self).dispatch(
+            request, *args, **kwargs)
+
+
+
+    model = Activation
+    fields = ['activate_code','expired_date','uid']
+    template_name_suffix = '_update_form'

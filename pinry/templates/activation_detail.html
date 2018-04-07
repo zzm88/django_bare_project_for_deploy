@@ -1,0 +1,103 @@
+{% extends "base_activation.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>标题：{{ object.activate_code }}</h1>
+<p>内容：{{ object.uid }}</p>
+<p>发表人: {{ object.expired_date }}</p>
+
+</body>
+</html>
+
+
+<fieldset class="module aligned ">
+
+
+
+        <div class="form-row field-activate_code">
+
+
+                <div>
+
+
+                        <label class="required" for="id_activate_code">activate_code</label>
+
+                            <input class="vTextField" id="id_activate_code" maxlength="100" name="activate_code" type="text" value="95827b21a6ab5b0f4d4ca66b847d0ef7">
+
+
+
+                </div>
+
+        </div>
+
+        <div class="form-row field-uid">
+
+
+                <div>
+
+
+                        <label for="id_uid">Uid:</label>
+
+                            <input class="vTextField" id="id_uid" maxlength="100" name="uid" type="text">
+
+
+
+                </div>
+
+        </div>
+
+
+
+        <div class="form-row field-expired_date">
+
+
+                <div>
+
+
+                        <label for="id_expired_date">Expired date:</label>
+
+                            <input class="vDateField" id="id_expired_date" name="expired_date" size="10" type="text"><span class="datetimeshortcuts">&nbsp;<a href="javascript:DateTimeShortcuts.handleCalendarQuickLink(0, 0);">今天</a>&nbsp;|&nbsp;<a href="javascript:DateTimeShortcuts.openCalendar(0);" id="calendarlink0"><img src="/static/admin/img/icon_calendar.gif" alt="日历"></a></span>
+
+
+
+                <br><span class="timezonewarning">Note: You are 8 hours ahead of server time.</span></div>
+
+        </div>
+
+        <div class="form-row field-owner">
+
+
+                <div>
+
+
+                        <label for="id_owner">Owner:</label>
+
+
+<div class="related-widget-wrapper">
+    <select id="id_owner" name="owner">
+</select>
+
+
+
+
+
+</div>
+
+
+
+
+                </div>
+
+        </div>
+
+</fieldset>
+
+</div>
+{% endblock %}

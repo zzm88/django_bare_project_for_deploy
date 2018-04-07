@@ -43,7 +43,7 @@ class CreateUser(CreateView):
 def logout_user(request):
     logout(request)
     messages.success(request, u'已登出')
-    return HttpResponseRedirect(reverse('core:recent-pins'))
+    return HttpResponseRedirect(reverse('core:activation-list'))
 
 
 def private(request):
