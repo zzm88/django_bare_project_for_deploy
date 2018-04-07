@@ -8,6 +8,7 @@ class PinAdmin(admin.ModelAdmin):
 class ExpiredPinAdmin(admin.ModelAdmin):
     pass
 class ActivationAdmin(admin.ModelAdmin):
+    #list_display = ('activate_code','uid','times','expired_date','owner')
     list_display = ('activate_code','uid','times','expired_date','owner')
 admin.site.register(Pin, PinAdmin)
 admin.site.register(ExpiredPin, ExpiredPinAdmin)

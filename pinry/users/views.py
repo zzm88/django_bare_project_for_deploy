@@ -21,7 +21,7 @@ class CreateUser(CreateView):
     template_name = 'users/register.html'
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('core:recent-pins')
+    success_url = reverse_lazy('core:activation-list')
 
     def get(self, request, *args, **kwargs):
         if not settings.ALLOW_NEW_REGISTRATIONS:
