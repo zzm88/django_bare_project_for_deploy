@@ -35,9 +35,7 @@ INSTALLED_APPS = [
     # 'django_user_agents',
     # 'is_weixin',
      # The following apps are required:
-
     'django.contrib.sites',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
