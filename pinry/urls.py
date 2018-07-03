@@ -9,15 +9,15 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('pinry.core.urls', namespace='core')),
-    url(r'', include('pinry.users.urls', namespace='users')),
-    url(r'', include('like.urls', namespace='like')),
-    url(r'', include('tbk_picker.urls', namespace='tbk_picker')),
+    # url(r'', include('pinry.core.urls', namespace='core')),
+    # url(r'', include('pinry.users.urls', namespace='users')),
+    # url(r'', include('like.urls', namespace='like')),
+    # url(r'', include('tbk_picker.urls', namespace='tbk_picker')),
 )
 
 
-if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
-        'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
+# if settings.DEBUG:
+#     urlpatterns += staticfiles_urlpatterns()
+#     urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
+#         'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
 
