@@ -36,11 +36,11 @@ INSTALLED_APPS = [
     # 'is_weixin',
      # The following apps are required:
 
-    'django.contrib.sites',
+    # 'django.contrib.sites',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
 ]
 
 
@@ -74,10 +74,10 @@ TEMPLATES = [
 
                 # `allauth` needs this from django
                 'django.template.context_processors.request',
-                'django.template.context_processors.debug',
+                # 'django.template.context_processors.debug',
                 
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                # 'django.contrib.auth.context_processors.auth',
+                # 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
