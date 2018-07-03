@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     # 'django_user_agents',
     # 'is_weixin',
      # The following apps are required:
+
     'django.contrib.sites',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -197,4 +199,4 @@ USER_AGENTS_CACHE = 'default'
 # end of django-user-agent
 
 
-SITE_ID = 1
+# SITE_ID = 1
