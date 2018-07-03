@@ -34,13 +34,6 @@ INSTALLED_APPS = [
     'tbk_picker',
     # 'django_user_agents',
     # 'is_weixin',
-     # The following apps are required:
-
-    # 'django.contrib.sites',
-
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
 ]
 
 
@@ -66,19 +59,20 @@ MIDDLEWARE_CLASSES = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'pinry/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                # Already defined Django-related contexts here
-
-                # `allauth` needs this from django
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                # 'django.template.context_processors.debug',
-                
-                # 'django.contrib.auth.context_processors.auth',
-                # 'django.contrib.messages.context_processors.messages',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'pinry.core.context_processors.template_settings',
+                'django_mobile.context_processors.flavour',
+                # "is_weixin.context_processors.is_weixin",
+
             ],
+
         },
     },
 ]
@@ -160,11 +154,6 @@ PUBLIC = True
 AUTHENTICATION_BACKENDS = [
     'pinry.users.auth.backends.CombinedAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
-        # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 LOGIN_URL = '/login/'
@@ -199,4 +188,4 @@ USER_AGENTS_CACHE = 'default'
 # end of django-user-agent
 
 
-# SITE_ID = 1
+
