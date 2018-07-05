@@ -23,17 +23,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'taggit',
+    
+    #'taggit',
     'compressor',
     'django_images',
     'pinry.core',
     'pinry.users',
-    'vote',
-    'like',
-    'django_mobile',
-    'tbk_picker',
+    #'vote',
+    #'like',
+    #'django_mobile',
+    #'tbk_picker',
     # 'django_user_agents',
     # 'is_weixin',
+    
+     'django.contrib.sites',
+     #'allauth',
+     #'allauth.account',
+     #'allauth.socialaccount',
 ]
 
 
@@ -70,7 +76,10 @@ TEMPLATES = [
                 'pinry.core.context_processors.template_settings',
                 'django_mobile.context_processors.flavour',
                 # "is_weixin.context_processors.is_weixin",
+                # Already defined Django-related contexts here
 
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
 
         },
@@ -154,6 +163,10 @@ PUBLIC = True
 AUTHENTICATION_BACKENDS = [
     'pinry.users.auth.backends.CombinedAuthBackend',
     'django.contrib.auth.backends.ModelBackend',
+        # Needed to login by username in Django admin, regardless of `allauth`
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 LOGIN_URL = '/login/'
@@ -189,3 +202,4 @@ USER_AGENTS_CACHE = 'default'
 
 
 
+SITE_ID = 1
