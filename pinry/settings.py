@@ -23,7 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'userena',
+    'guardian',
+    'easy_thumbnails',
     #'taggit',
     'compressor',
     'django_images',
@@ -40,6 +42,9 @@ INSTALLED_APPS = [
      #'allauth',
      #'allauth.account',
      #'allauth.socialaccount',
+     
+     'accounts',
+     
 ]
 
 
@@ -161,12 +166,15 @@ ALLOW_NEW_REGISTRATIONS = True
 PUBLIC = True
 
 AUTHENTICATION_BACKENDS = [
-    'pinry.users.auth.backends.CombinedAuthBackend',
-    'django.contrib.auth.backends.ModelBackend',
-        # Needed to login by username in Django admin, regardless of `allauth`
+    # 'pinry.users.auth.backends.CombinedAuthBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+    #     # Needed to login by username in Django admin, regardless of `allauth`
 
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # # `allauth` specific authentication methods, such as login by e-mail
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 LOGIN_URL = '/login/'
@@ -200,6 +208,11 @@ CACHES = {
 USER_AGENTS_CACHE = 'default'
 # end of django-user-agent
 
+#userena
+SITE_ID=1
 
+ANONYMOUS_USER_ID = -1
 
-SITE_ID = 1
+AUTH_PROFILE_MODULE = 'accounts.MyProfile'
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'

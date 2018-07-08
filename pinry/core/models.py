@@ -6,7 +6,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models, transaction
 
 from django_images.models import Image as BaseImage, Thumbnail
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 from ..users.models import User
 from vote.models import VoteModel
@@ -45,7 +45,7 @@ class Pin(VoteModel,models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ForeignKey(Image, related_name='pin')
     published = models.DateTimeField(auto_now_add=True)
-    tags = TaggableManager()
+    # tags = TaggableManager()
     like_count = models.IntegerField(null= False, default= 0 )
     tao_kouling = models.CharField(max_length=100,blank=True, null=True)
     num_iid = models.IntegerField(null=True,unique=True)

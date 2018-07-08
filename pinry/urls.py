@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
-
+from pinry.core.views import notify_validation
 
 admin.autodiscover()
 
@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     url(r'', include('like.urls', namespace='like')),
     #url(r'', include('tbk_picker.urls', namespace='tbk_picker')),
     #url(r'^accounts/', include('allauth.urls')),
+    (r'^accounts/', include('userena.urls')),
+    url(r'^ali/notify/',notify_validation)
 )
 
 
