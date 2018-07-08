@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 from alipay import AliPay
 # from alipay import ISVAlipay
-app_private_key_string = open("key/app_private_key.pem").read()
-alipay_public_key_string = open("key/alipay_public_key.pem").read()
+import os.path
+BASE = os.path.dirname(os.path.abspath(__file__))
+app_private_key = open(os.path.join(BASE, "key/app_private_key.pem"))
+alipay_public_key = open(os.path.join(BASE, "key/alipay_public_key.pem"))
+
+app_private_key_string = app_private_key.read()
+alipay_public_key_string = alipay_public_key.read()
 
 alipay = AliPay(
     appid="2018062460380864",
