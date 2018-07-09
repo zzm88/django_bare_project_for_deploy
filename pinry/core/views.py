@@ -224,7 +224,8 @@ def notify_validation(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     content = body['content']
-    print 
+    print content
+    print body
     # signature = data.pop("sign")
     success = alipay.verify(data, signature)
     if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
@@ -232,11 +233,6 @@ def notify_validation(request):
         logger.error('ali trade succeed')
         print >>sys.stderr, 'good, cruel world!'
     else:
-        print 'success'
-        print success
-        print 'data'
-        print data
-        print 'signature'
-        print signature
+
         logger.error('success' & success)
         print >>sys.stderr, 'bad, cruel world!'
