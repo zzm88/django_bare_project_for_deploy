@@ -215,12 +215,17 @@ class ActivationUpdateView(UpdateView):
 
 import logging
 logger = logging.getLogger(__name__)
-import sys
+import sys,json
+
 from test_ali_api import alipay
 def notify_validation(request):
     # data = request.GET['data']
-    data = request.form.to_dict()
-    signature = data.pop("sign")
+
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    content = body['content']
+    print 
+    # signature = data.pop("sign")
     success = alipay.verify(data, signature)
     if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
         print("ali trade succeed")
