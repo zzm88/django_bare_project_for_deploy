@@ -215,6 +215,7 @@ class ActivationUpdateView(UpdateView):
 
 import logging
 logger = logging.getLogger(__name__)
+import sys
 from test_ali_api import alipay
 def notify_validation(request):
     data = request.GET['data']
@@ -223,6 +224,7 @@ def notify_validation(request):
     if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
         print("ali trade succeed")
         logger.error('ali trade succeed')
+        print >>sys.stderr, 'good, cruel world!'
     else:
         print 'success'
         print success
@@ -231,3 +233,4 @@ def notify_validation(request):
         print 'signature'
         print signature
         logger.error('success' & success)
+        print >>sys.stderr, 'bad, cruel world!'
