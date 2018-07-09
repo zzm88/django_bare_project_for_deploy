@@ -218,7 +218,8 @@ logger = logging.getLogger(__name__)
 import sys
 from test_ali_api import alipay
 def notify_validation(request):
-    data = request.GET['data']
+    # data = request.GET['data']
+    data = request.form.to_dict()
     signature = data.pop("sign")
     success = alipay.verify(data, signature)
     if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
