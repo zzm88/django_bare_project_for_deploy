@@ -11,7 +11,7 @@ alipay_public_key_string = alipay_public_key.read()
 
 alipay = AliPay(
     appid="2018062460380864",
-    app_notify_url="http://www.getsms.club/alipay/success",  # 默认回调url
+    app_notify_url="http://www.getsms.club/ali/notify/",  # 默认回调url
     app_private_key_string=app_private_key_string,
     alipay_public_key_string=alipay_public_key_string,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
     sign_type="RSA2", # RSA 或者 RSA2
@@ -40,11 +40,11 @@ subject = u"充值1元".encode("utf8")
 
 # Pay via Web，open this url in your browser: https://openapi.alipay.com/gateway.do? + order_string
 order_string = alipay.api_alipay_trade_page_pay    (
-    out_trade_no="201611111",
+    out_trade_no="2016111113",
     total_amount=0.01,
     subject=subject,
     return_url="http://www.getsms.club/accounts/profile",
-    notify_url="http://www.getsms.club/alipay/success" # this is optional
+    notify_url="http://www.getsms.club/ali/notify/" # this is optional
 )
 
 # url =  'https://openapi.alipaydev.com/gateway.do?' + order_string
