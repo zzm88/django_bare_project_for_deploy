@@ -227,12 +227,14 @@ def notify_validation(request):
     print content
     print body
     # signature = data.pop("sign")
-    success = alipay.verify(data, signature)
-    if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
-        print("ali trade succeed")
-        logger.error('ali trade succeed')
-        print >>sys.stderr, 'good, cruel world!'
-    else:
 
-        logger.error('success' & success)
-        print >>sys.stderr, 'bad, cruel world!'
+
+    # success = alipay.verify(data, signature)
+    # if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
+    #     print("ali trade succeed")
+    #     logger.error('ali trade succeed')
+    #     print >>sys.stderr, 'good, cruel world!'
+    # else:
+
+    #     logger.error('success' & success)
+    #     print >>sys.stderr, 'bad, cruel world!'
