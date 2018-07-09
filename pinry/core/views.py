@@ -210,6 +210,11 @@ class ActivationUpdateView(UpdateView):
     fields = ['activate_code','expired_date','uid']
     template_name_suffix = '_update_form'
 
+
+
+
+import logging
+logger = logging.getLogger(__name__)
 from test_ali_api import alipay
 def notify_validation(request):
     data = request.GET['data']
@@ -217,3 +222,12 @@ def notify_validation(request):
     success = alipay.verify(data, signature)
     if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
         print("ali trade succeed")
+        logger.error('ali trade succeed')
+    else:
+        print 'success'
+        print success
+        print 'data'
+        print data
+        print 'signature'
+        print signature
+        logger.error('success' & success)
