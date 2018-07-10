@@ -40,7 +40,7 @@ subject = u"充值1元".encode("utf8")
 
 # Pay via Web，open this url in your browser: https://openapi.alipay.com/gateway.do? + order_string
 order_string = alipay.api_alipay_trade_page_pay    (
-    out_trade_no="2016111113",
+    out_trade_no="2016111117",
     total_amount=0.01,
     subject=subject,
     return_url="http://www.getsms.club/accounts/profile",

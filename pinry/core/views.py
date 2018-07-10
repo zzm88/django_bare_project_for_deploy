@@ -214,18 +214,22 @@ class ActivationUpdateView(UpdateView):
 
 
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('APPNAME')
 import sys,json
 
 from test_ali_api import alipay
 def notify_validation(request):
     # data = request.GET['data']
-
+    json.dump
     body_unicode = request.body.decode('utf-8')
-    body = json.loads(body_unicode)
-    content = body['content']
-    print content
-    print body
+    logger.info(request.body)
+    # try:
+    #     body = json.loads(body_unicode)
+    # except:
+    #     print "No JSON object could be decoded"        
+    # content = body['content']
+    # print content
+    # print body
     # signature = data.pop("sign")
 
 
