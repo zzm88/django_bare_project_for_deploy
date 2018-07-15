@@ -216,13 +216,29 @@ class ActivationUpdateView(UpdateView):
 import logging
 logger = logging.getLogger('APPNAME')
 import sys,json
-
+import urlparse
 from test_ali_api import alipay
 def notify_validation(request):
     # data = request.GET['data']
-    json.dump
-    body_unicode = request.body.decode('utf-8')
-    logger.info(request.body)
+    # json.dump
+    # body_unicode = request.body.decode('utf-8')
+
+    # logger.info(request.body)
+
+    data = '?gmt_create=2018-07-13+01%3A44%3A08&charset=utf-8&gmt_payment=2018-07-13+01%3A44%3A20&notify_time=2018-07-13+01%3A44%3A21&subject=1yuan&sign=gNeQnb45XIPBa%2FoHy4vXDc5gg0pQARs2OvHMfwZUcSH7HvgcRmsapycCWpwXNAvkVLRMwEQENk8AXFYTpNNHd5a9WTD%2BfGn3dKZJBNbEktJwO%2BqGwFD2ok63447E6JNZbUkNH3BRJig%2BWDByg1vmGWoQLaQ%2BPnkY8Kx3GvElND802CPGey5avkUrrE7chyAP99FtIetrhoV%2B8HYTfniiKIz597xs2fQbbyY0s3icNSBES0iptaVP%2FCV1tIjr0Og0mgXW8lkQgVw%2FRZL3pSGWSnaSDjazt%2BxsLsCS6pHst8j9MgvcmZCesQbutw%2B7Fi92SZUzcw2CqpJil%2B1I9jse4Q%3D%3D&buyer_id=2088802801047800&invoice_amount=0.01&version=1.0&notify_id=7411b27bba7e72d09599020300fc373m6d&fund_bill_list=%5B%7B%22amount%22%3A%220.01%22%2C%22fundChannel%22%3A%22ALIPAYACCOUNT%22%7D%5D&notify_type=trade_status_sync&out_trade_no=2016111119&total_amount=0.01&trade_status=TRADE_SUCCESS&trade_no=2018071321001004800534588101&auth_app_id=2018062460380864&receipt_amount=0.01&point_amount=0.00&app_id=2018062460380864&buyer_pay_amount=0.01&sign_type=RSA2&seller_id=2088102323393514'
+    # logger.info(request.GET)
+    dicted_data = dict(urlparse.parse_qsl(urlparse.urlsplit(data).query))
+    if dicted_data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
+        logger.info('ali trade succeed')
+        add_value(dicted_data["out_trade_no"])
+    else:
+        logger.info('fail')
+        
+    def add_value(out_trade_no):
+        pass
+    # data = urlparse.parse_qs(request.body)
+    # signature = data.pop('sign')
+    # success = alipay.verify(data, signature)
     # try:
     #     body = json.loads(body_unicode)
     # except:
@@ -234,11 +250,21 @@ def notify_validation(request):
 
 
     # success = alipay.verify(data, signature)
-    # if success and data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED" ):
-    #     print("ali trade succeed")
-    #     logger.error('ali trade succeed')
-    #     print >>sys.stderr, 'good, cruel world!'
-    # else:
 
-    #     logger.error('success' & success)
-    #     print >>sys.stderr, 'bad, cruel world!'
+from pinry.core.models import Order
+import random
+import datetime
+from ..users.models import User
+def create_order(request,amount):
+    uid = random.randint(10000000000,99999999999)
+    user = User.objects.get(id=request.user.id)
+    try:
+        Order.objects.get(uid = uid)
+        
+    except:
+        
+        Order(uid=uid,customer =user,amount = amount,created_time = datetime.datetime.now(),order_status= False)
+        return HttpResponse('success')
+    else:
+        return HttpResponse('failed,please try again')
+        

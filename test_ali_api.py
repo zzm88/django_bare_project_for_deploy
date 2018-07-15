@@ -36,11 +36,11 @@ alipay = AliPay(
 
 # 如果你是Python 2用户（考虑考虑升级到Python 3吧），请确保非ascii的字符串为utf8编码：
 # For Python 2 users(you should really think about Python 3), making sure non-ascii strings are utf-8 encoded
-subject = u"充值1元".encode("utf8")
+subject = u"1yuan".encode("utf8")
 
 # Pay via Web，open this url in your browser: https://openapi.alipay.com/gateway.do? + order_string
 order_string = alipay.api_alipay_trade_page_pay    (
-    out_trade_no="2016111117",
+    out_trade_no="2016111119",
     total_amount=0.01,
     subject=subject,
     return_url="http://www.getsms.club/accounts/profile",

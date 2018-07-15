@@ -8,7 +8,8 @@ from django.db import models, transaction
 from django_images.models import Image as BaseImage, Thumbnail
 # from taggit.managers import TaggableManager
 
-from ..users.models import User
+# from ..users.models import User
+from django.contrib.auth.models import User
 from vote.models import VoteModel
 
 
@@ -69,3 +70,13 @@ class Activation(models.Model):
     owner = models.ForeignKey(User,blank=True,null=True)
 
 
+class Order(models.Model):
+    uid = models.CharField(null=True,max_length=100,blank=True)
+    customer = models.ForeignKey(User)
+    created_time = models.DateField(auto_now=True)
+    amount = models.IntegerField()
+    order_status = models.BooleanField()
+
+
+    # def __unicode__(self):
+    #     return '%s - %s' % (self.customer, self.uid)
