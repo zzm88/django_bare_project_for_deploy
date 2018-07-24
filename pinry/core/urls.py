@@ -56,7 +56,6 @@ urlpatterns += [
     url(r'^activation/(?P<pk>[-_\w]+)/$',ActivationDetailView.as_view(), name='activation-detail'),
     url(r'^activation/edit/(?P<pk>[-_\w]+)/$',ActivationUpdateView.as_view(success_url="/"), name='activation-update'),
     url(r'^activation/$',  ActivationListView.as_view(), name='activation-list'),
-    url(r'^$',ActivationListView.as_view(), name='activation-list')
 
 ]
 

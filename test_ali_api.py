@@ -39,14 +39,16 @@ alipay = AliPay(
 subject = u"1yuan".encode("utf8")
 
 # Pay via Web，open this url in your browser: https://openapi.alipay.com/gateway.do? + order_string
-order_string = alipay.api_alipay_trade_page_pay    (
-    out_trade_no="2016111119",
-    total_amount=0.01,
-    subject=subject,
-    return_url="http://www.getsms.club/accounts/profile",
-    notify_url="http://www.getsms.club/ali/notify/" # this is optional
-)
+def get_alipay_url(amount,out_trade_no):
+    order_string = alipay.api_alipay_trade_page_pay    (
+        out_trade_no=out_trade_no,
+        total_amount=amount,
+        subject=subject,
+        return_url="http://www.getsms.club/accounts/profile",
+        notify_url="http://www.getsms.club/ali/notify/" # this is optional
+    )
 
-# url =  'https://openapi.alipaydev.com/gateway.do?' + order_string
-url = 'https://openapi.alipay.com/gateway.do?' + order_string
-print url
+    # url =  'https://openapi.alipaydev.com/gateway.do?' + order_string
+    url = 'https://openapi.alipay.com/gateway.do?' + order_string
+   
+    return url

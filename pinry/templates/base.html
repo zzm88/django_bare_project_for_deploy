@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+{% load staticfiles compress %}
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>{% block title %}Userena{% endblock %}</title>
+  {% block meta %}{% endblock %}
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+  <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+        <!-- Navigation -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container container-header">
+                    <div class="navbar-left">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                            {% if flavour == "mobile" %}<a id='login-reminder' data-toggle="tooltip" title="请登录！" data-placement="bottom" href=""></a>{% endif %}
+    
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+    
+    
+                    </div>
+                    <div  class="navbar-left"><span id="logo-text" class="navbar-brand"><a href="/">GETSMS</a></span>
+                        <ul class="nav nav-pills navbar-left navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    {% with request.user.username as username%}
+                                
+                                        {% if username %}
+                                        <a class="nav-link" href={% url 'userena_profile_detail' username %}>Profile</a>
+
+                                        {% else %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="{% url 'topup' %}">充值</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link disabled" href="{% url 'getsmsview' %}">getsmsview</a>
+                                    </li>
+                            </ul>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                               {% with request.user.is_superuser as superuser %}
+                               {% if superuser %}
+                                   <li><a onclick="">super_user_view</a></li>
+                               {% endif %}
+    
+    {##}
+    {#                           {% if perms.core.add_pin %}#}
+    {#                               <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>#}
+    {#                            {% else %}cannot#}
+    {#                           {% endif %}#}
+    
+                                <li><a href="{% url 'users:logout' %}">登出({{ user.username }})</a></li>
+    
+                                {% endwith %}
+                            {% else %}
+    
+    
+                                <li><a href="{% url 'users:login' %}" {% if not flavour == "mobile" %}data-toggle="tooltip" title="请登录！" data-placement="bottom"{% endif %}>登录</a></li>
+                                <li><a href="{% url 'users:register' %}">注册</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- End Navigation -->
+
+  <div id="body" style="padding: 50px;">
+    {% block body %}
+      <div class="content_title">
+        {% block content_title %}{% endblock %}
+      </div>
+      <div class="content">
+        {% block content %}{% endblock %}
+      </div>
+    {% endblock %}
+  </div>
+</body>
+</html>
+
+

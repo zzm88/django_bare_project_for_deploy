@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView,TemplateView,View
 from django_images.models import Image
 
 from braces.views import JSONResponseMixin, LoginRequiredMixin
@@ -15,6 +15,7 @@ from .models import Activation
 
 import datetime
 import calendar
+import yimaapi
 
 class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
     template_name = None  # JavaScript-only view
@@ -218,6 +219,16 @@ logger = logging.getLogger('APPNAME')
 import sys,json
 import urlparse
 from test_ali_api import alipay
+from accounts.models import MyProfile
+
+price = {
+    1:1,
+    5:6,
+    10:15,
+    20:40
+    }
+
+
 def notify_validation(request):
     # data = request.GET['data']
     # json.dump
@@ -230,11 +241,20 @@ def notify_validation(request):
     dicted_data = dict(urlparse.parse_qsl(urlparse.urlsplit(data).query))
     if dicted_data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
         logger.info('ali trade succeed')
-        add_value(dicted_data["out_trade_no"])
+        amount = dicted_data["total_amount"]
+        add_value(dicted_data["out_trade_no"],amount)
     else:
         logger.info('fail')
         
-    def add_value(out_trade_no):
+    def add_value(out_trade_no,amount):
+        order = Order.objects.get(uid = out_trade_no)
+        order.order_status = True
+        customer = order.customer
+        p = MyProfile.objects.get(user= customer)
+        p.credit += price[amount]
+        p.save()
+        
+        
         pass
     # data = urlparse.parse_qs(request.body)
     # signature = data.pop('sign')
@@ -255,16 +275,68 @@ from pinry.core.models import Order
 import random
 import datetime
 from ..users.models import User
+from test_ali_api import get_alipay_url
+
+@login_required(login_url='/accounts/signin/') 
 def create_order(request,amount):
     uid = random.randint(10000000000,99999999999)
     user = User.objects.get(id=request.user.id)
+    
+
     try:
         Order.objects.get(uid = uid)
         
     except:
         
-        Order(uid=uid,customer =user,amount = amount,created_time = datetime.datetime.now(),order_status= False)
-        return HttpResponse('success')
+        order = Order(uid=uid,customer =user,amount = amount,created_time = datetime.datetime.now(),order_status= False)
+        order.save()
+        ali_url = get_alipay_url(amount,uid)
+        print ali_url
+        return HttpResponseRedirect(ali_url)
     else:
         return HttpResponse('failed,please try again')
-        
+    
+
+       
+class OrderListView(ListView):
+    model = Order
+    # context_object_name = ''
+    template_name = 'order_list.html'
+
+    def get_queryset(self):
+        try:
+            r = Order.objects.filter(customer=self.request.user)
+        except Exception as e:
+            print "HAHA"
+            print e
+            r= "nothing"
+        return r
+
+
+
+class GetSmsView(TemplateView):
+    template_name = "getphone.html"
+    def get_context_data(self, **kwargs):
+     
+        context = super(GetSmsView, self).get_context_data(**kwargs)
+        return context
+
+class Getphone(View):
+    def get(self, request, *args, **kwargs):
+        res = yimaapi.getphone('106','170.171')
+        return HttpResponse(res)
+
+class GetSms(View):
+
+    def get(self, request, *args, **kwargs):
+        phonenum = request.GET['phonenum']
+        print phonenum
+        res = yimaapi.getsms(phonenum,'106')
+        return HttpResponse(json.dumps(res), content_type='application/json')
+
+from django.views.generic.base import TemplateView
+class TopupView(TemplateView):
+    template_name = "topup.html"
+    def get_context_data(self,**kwargs):
+            context = super(TopupView,self).get_context_data(**kwargs)
+            return context

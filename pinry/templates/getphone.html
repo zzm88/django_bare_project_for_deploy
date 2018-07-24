@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+function getPhone() {
+    $.ajax({
+        url:'/getphone/',
+        beforeSend: function() {
+            $("#phonenum").html('正在获取手机号');
+        },
+        complete: function (response) {
+            $('#phonenum').html(response.responseText);
+        },
+        error: function () {
+            $('#phonenum').html('error');
+        },
+    });
+    return false;
+}
+
+function getSms() {
+    $.ajax({
+        url:'/getsms/?phonenum=' + $('#phonenum').html(),
+        beforeSend: function() {
+            $("#validcode-msg").html('正在获取验证码');
+        },
+        complete: function (response) {
+            $('#validcode-msg').html(response.responseText);
+            if (response.responseText.includes('msg')) {
+                $('#validcode').html(response.responseJSON['msg']);
+                
+            }
+            else{
+                $('#validcode').html("try again");
+            }
+        },
+        error: function () {
+            $('#validcode-msg').html('error');
+        },
+    });
+    return false;
+}
+
+</script>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+            <a href="#" onclick="return getPhone();"> test success </a> 
+			<button type="button" href="#" onclick="return getPhone();" class="btn btn-primary">
+				获得一个手机号
+            </button>
+            <span id="phonenum" class="badge badge-default">Label</span>
+            <button onclick="return getSms();" type="button" class="btn btn-success">
+				查看验证码
+            </button>
+            <span id="validcode-msg" class="badge badge-default">Label</span>
+            <span id="validcode" class="badge badge-default">Label</span>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
