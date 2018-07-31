@@ -255,3 +255,5 @@ LOGGING = {
 
     }
 }
+
+USERENA_ACTIVATION_REQUIRED = False
