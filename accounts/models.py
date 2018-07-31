@@ -12,4 +12,4 @@ class MyProfile(UserenaBaseProfile):
                                 related_name='my_profile')
     favourite_snack = models.CharField(_('favourite snack'),
                                        max_length=5)
-    credit = models.IntegerField()
+    credit = models.IntegerField(null=True,default=0)
