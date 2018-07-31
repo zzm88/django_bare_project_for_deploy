@@ -44,3 +44,5 @@
 /pinry/core/migrations
 /pinry/core/migrations/0001_initial.py
 /pinry/core/migrations/__init__.py
+/db.sqlite3
+/db.sqlite3

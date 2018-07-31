@@ -6,6 +6,8 @@ from pinry.core.views import notify_validation,create_order,OrderListView,GetSms
 admin.autodiscover()
 from userena import views as userena_views
 
+from django.contrib.auth.decorators import login_required
+
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('pinry.core.urls', namespace='core')),
@@ -20,10 +22,10 @@ urlpatterns = patterns('',
     url(r'^order/create/(?P<amount>(\w|-)+)/$',create_order),
     url(r'^order/list$',OrderListView.as_view()),
     
-    url(r'^getsms_panel/$', GetSmsView.as_view(), name='getsmsview'),
+    url(r'^getsms_panel/$',login_required(GetSmsView.as_view()) , name='getsmsview'),
     url(r'^getphone/$', Getphone.as_view(), name='getphone'),
     url(r'^getsms/$', GetSms.as_view(), name='getsms'),
-    url(r'^topup/$', TopupView.as_view(), name='topup'),
+    url(r'^topup/$', login_required(TopupView.as_view()), name='topup'),
  
 
 

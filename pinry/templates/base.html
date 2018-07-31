@@ -63,7 +63,7 @@
     {#                           {% endif %}#}
     
                                 <li><a href="{% url 'userena_signout' %}">登出({{ user.username }})</a></li>
-    
+                                <li><a href="{% url 'topup' %}">可用积分：{{ user.credit }}</a></li>
                                 {% endwith %}
                             {% else %}
     

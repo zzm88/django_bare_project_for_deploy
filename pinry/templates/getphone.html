@@ -1,62 +1,110 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <script>
-function getPhone() {
+  function getPhone() {
     $.ajax({
-        url:'/getphone/',
-        beforeSend: function() {
-            $("#phonenum").html('正在获取手机号');
-        },
-        complete: function (response) {
-            $('#phonenum').html(response.responseText);
-        },
-        error: function () {
-            $('#phonenum').html('error');
-        },
+      url: '/getphone/',
+      beforeSend: function() {
+        $("#phonenum").html('正在获取手机号');
+      },
+      complete: function(response) {
+        $('#phonenum').html(response.responseText);
+      },
+      error: function() {
+        $('#phonenum').html('error');
+      },
     });
     return false;
-}
+  }
 
-function getSms() {
+  function getSms() {
     $.ajax({
-        url:'/getsms/?phonenum=' + $('#phonenum').html(),
-        beforeSend: function() {
-            $("#validcode-msg").html('正在获取验证码');
-        },
-        complete: function (response) {
-            $('#validcode-msg').html(response.responseText);
-            if (response.responseText.includes('msg')) {
-                $('#validcode').html(response.responseJSON['msg']);
-                
-            }
-            else{
-                $('#validcode').html("try again");
-            }
-        },
-        error: function () {
-            $('#validcode-msg').html('error');
-        },
+      url: '/getsms/?phonenum=' + $('#phonenum').html(),
+      beforeSend: function() {
+        $("#validcode-msg").html('正在获取验证码');
+        countdown( "countdown", 0, 60 );
+      },
+      complete: function(response) {
+        $('#validcode-msg').html(response.responseText);
+        if (response.responseText.includes('msg')) {
+          $('#validcode').html(response.responseJSON['msg']);
+
+        } else {
+          $('#validcode').html("try again");
+        }
+      },
+      error: function() {
+        $('#validcode-msg').html('error');
+      },
     });
     return false;
-}
+  }
+
+  function countdown( elementName, minutes, seconds )
+  {
+      var element, endTime, hours, mins, msLeft, time;
+  
+      function twoDigits( n )
+      {
+          return (n <= 9 ? "0" + n : n);
+      }
+  
+      function updateTimer()
+      {
+          msLeft = endTime - (+new Date);
+          if ( msLeft < 1000 ) {
+              element.innerHTML = "";
+          } else {
+              time = new Date( msLeft );
+              hours = time.getUTCHours();
+              mins = time.getUTCMinutes();
+              element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+              setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+          }
+      }
+  
+      element = document.getElementById( elementName );
+      endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+      updateTimer();
+  }
+  
+  
 
 </script>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-            <a href="#" onclick="return getPhone();"> test success </a> 
-			<button type="button" href="#" onclick="return getPhone();" class="btn btn-primary">
+<div class="container-fluid" style="margin-top:20px">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+
+
+        </div>
+        <div class="col-md-4">
+          <div style="width:100%">
+          <button style="width:100%" type="button" href="#" onclick="return getPhone();" class="btn btn-primary">
 				获得一个手机号
-            </button>
-            <span id="phonenum" class="badge badge-default">Label</span>
-            <button onclick="return getSms();" type="button" class="btn btn-success">
+            </button></div>
+          <button onclick="return getSms();" type="button" class="btn btn-success" style="width:100%;">
 				查看验证码
             </button>
-            <span id="validcode-msg" class="badge badge-default">Label</span>
-            <span id="validcode" class="badge badge-default">Label</span>
-		</div>
-	</div>
+            <br>
+            <span style="font-size:40px;width:100%;color:black;background-color:#7770;" id="phonenum" class="badge badge-default" style="font-size:40px;"></span>
+            <br>
+          <span id="validcode-msg" class=""></span>
+          <div id="countdown"></div>
+          <span id="validcode" class=""></span>
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+
+    </div>
+  </div>
 </div>
 {% endblock content %}
-
