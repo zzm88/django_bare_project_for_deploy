@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     (r'^accounts/', include('userena.urls')),
     url(r'^ali/notify/',notify_validation),
     url(r'^order/create/(?P<amount>(\w|-)+)/$',create_order),
-    url(r'^order/list$',OrderListView.as_view()),
+    url(r'^order/list$',OrderListView.as_view(),name = 'order_list'),
     
     url(r'^getsms_panel/$',login_required(GetSmsView.as_view()) , name='getsmsview'),
     url(r'^getphone/$', Getphone.as_view(), name='getphone'),

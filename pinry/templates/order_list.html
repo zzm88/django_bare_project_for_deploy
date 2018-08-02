@@ -40,8 +40,8 @@
       <td>{{ order.customer }}</td>
       <td> {{ order.created_time }}</td>
       <td> {{ order.amount }}</td>
-        <td> {%if order.orderstatus %}已付款{% else %}未付款{% endif %}</td>
-          <td ><a href="/activation/edit/{{ activation.pk }}" class="btn">修改</a></td>
+        <td> {%if order.order_status %}已付款{% else %}未付款{% endif %}</td>
+         
 
     </tr>
 {% empty %}
@@ -52,80 +52,8 @@
 </table>
 </div>
 
-{% else %}<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="jumbotron">
-				<h2>
-					欢迎使用<strong>精灵码</strong>
-				</h2>
-				<p>
-					专门为按键精灵制作的验证码管理系统
-				</p>
-				<p>
-					一键批量生成、一机一码、方便管理
-				</p>
-                <p>
-					助力您的脚本销售
-				</p>
-				<p>
-					<a class="btn btn-primary btn-large" href="#">了解更多</a>
-				</p>
-			</div>
-
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<h2>
-				一键生成
-			</h2>
-			<p>
-				一键批量生成激活码
-			</p>
-			<div>
-				方便快捷
-			</div>
-
-
-			<p>
-				<a class="btn" href="#">View details »</a>
-			</p>
-		</div>
-		<div class="col-md-4">
-			<h2>
-				一机一码
-			</h2>
-			<p>
-				一台手机对应一个激活码
-			</p>
-			<div>
-				不会发生多人共享、转卖激活码的情况
-
-			</div>
-
-			<p>
-				<a class="btn" href="#">View details »</a>
-			</p>
-		</div>
-		<div class="col-md-4">
-			<h2>
-				整合方便
-			</h2>
-			<p>
-				只需要添加几行代码
-			</p>
-			<div>
-				<span>就可以使你的脚本对接</span><strong>精灵码系统</strong>
-			</div>
-
-
-			<p>
-				<a class="btn" href="#">View details »</a>
-			</p>
-		</div>
-	</div>
-</div>
+{% else %}
+请登录
 {% endif %}
 
 

@@ -253,6 +253,7 @@ def notify_validation(request):
         p = MyProfile.objects.get(user= customer)
         p.credit += int(price[amount])
         p.save()
+        order.save()
         
         
         pass
