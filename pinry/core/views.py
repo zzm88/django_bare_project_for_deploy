@@ -248,7 +248,7 @@ def notify_validation(request):
     # dicted_data = dict(urlparse.parse_qsl(urlparse.urlsplit(data).query))
     if dicted_data["trade_status"] in ("TRADE_SUCCESS", "TRADE_FINISHED"):
         logger.info('ali trade succeed')
-        amount = dicted_data["total_amount"]
+        amount = int(dicted_data["total_amount"])
         add_value(dicted_data["out_trade_no"],amount)
         return HttpResponse('success')
 
