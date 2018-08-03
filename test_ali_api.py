@@ -44,7 +44,7 @@ def get_alipay_url(amount,out_trade_no):
         out_trade_no=out_trade_no,
         total_amount=amount,
         subject=subject,
-        return_url="http://www.getsms.club/accounts/profile",
+        return_url="http://www.getsms.club/accounts/",
         notify_url="http://www.getsms.club/ali/notify/" # this is optional
     )
 
