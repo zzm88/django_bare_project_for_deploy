@@ -58,6 +58,7 @@ def validation(request):
 
 
 
+
     try:
         request_device_code = int(request.GET['device_code'])
     except:

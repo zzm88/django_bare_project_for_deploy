@@ -80,3 +80,4 @@ class Order(models.Model):
 
     # def __unicode__(self):
     #     return '%s - %s' % (self.customer, self.uid)
+
