@@ -296,7 +296,7 @@ from test_ali_api import get_alipay_url
 def create_order(request,amount):
     uid = random.randint(10000000000,99999999999)
     user = User.objects.get(id=request.user.id)
-    
+    username = user.username
 
     try:
         Order.objects.get(uid = uid)
@@ -305,7 +305,7 @@ def create_order(request,amount):
         
         order = Order(uid=uid,customer =user,amount = amount,created_time = datetime.datetime.now(),order_status= False)
         order.save()
-        ali_url = get_alipay_url(amount,uid)
+        ali_url = get_alipay_url(amount,uid,username)
         print ali_url
         return HttpResponseRedirect(ali_url)
     else:
