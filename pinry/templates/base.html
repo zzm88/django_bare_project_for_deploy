@@ -41,7 +41,7 @@
                                     {% endwith %}
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="{% url 'topup' %}">充值</a>
+                                    <a class="nav-link disabled" href="{% url 'topup' %}"></a>
                                 </li>
                                 <li class="nav-item">
                                         <a class="nav-link disabled" href="{% url 'getsmsview' %}" style="border-radius:0;background-color: lightskyblue;color: white; ">主界面</a>
@@ -65,14 +65,14 @@
     {#                            {% else %}cannot#}
     {#                           {% endif %}#}
     
-                                <li><a href="{% url 'userena_signout' %}">登出({{ user.username }})</a></li>
+                                <li><a href="{% url 'userena_signout' %}">({{ user.username }})</a></li>
                                 {% comment %} <li><a href="{% url 'topup' %}">可用积分：{{ user.credit }}</a></li> {% endcomment %}
                                 {% endwith %}
                             {% else %}
     
     
                                 <li><a href="{% url 'userena_signin' %}" {% if not flavour == "mobile" %}data-toggle="tooltip" title="请登录！" data-placement="bottom"{% endif %}>登录</a></li>
-                                <li><a href="{% url 'userena_signup' %}">注册</a></li>
+                                <li><a href="{% url 'userena_signup' %}"></a></li>
                             {% endif %}
                         </ul>
                     </div>
@@ -90,6 +90,7 @@
       </div>
     {% endblock %}
   </div>
+  <div style="bottom:0;margin:0;color:black;border-color: #e7e7e7"><a href="www.miitbeian.gov.cn">粤ICP备18130342号-1</a></div>
 </body>
 </html>
 
