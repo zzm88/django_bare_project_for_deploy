@@ -398,3 +398,9 @@ def get_error_name(code):
 '1002': '\xe5\x8f\x82\xe6\x95\xb0action\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba', '1001': '\xe5\x8f\x82\xe6\x95\xb0token\xe4\xb8\x8d\xe8\x83\xbd\xe4\xb8\xba\xe7\xa9\xba'}
     return error_dict[str(code)]
 
+class Beian(TemplateView):
+    template_name = "beian.html"
+    def get_context_data(self, **kwargs):
+     
+        context = super(Home, self).get_context_data(**kwargs)
+        return context
