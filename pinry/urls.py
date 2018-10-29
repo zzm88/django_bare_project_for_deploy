@@ -18,8 +18,10 @@ urlpatterns = patterns('',
     #url(r'', include('tbk_picker.urls', namespace='tbk_picker')),
     #url(r'^accounts/', include('allauth.urls')),
     (r'^accounts/', include('userena.urls')),
+
     url(r'^ali/notify/',notify_validation),
     url(r'^order/create/(?P<amount>(\w|-)+)/$',create_order),
+
     url(r'^order/list$',OrderListView.as_view(),name = 'order_list'),
     
     url(r'^getsms_panel/$',login_required(GetSmsView.as_view()) , name='getsmsview'),
