@@ -71,7 +71,7 @@
                             {% else %}
     
     
-                                <li><a href="{% url 'userena_signin' %}" {% if not flavour == "mobile" %}data-toggle="tooltip" title="请登录！" data-placement="bottom"{% endif %}>登录</a></li>
+                                <li><a href="{% url 'userena_signin' %}" {% if not flavour == "mobile" %}data-toggle="tooltip" title="请登录！" data-placement="bottom"{% endif %}></a></li>
                                 <li><a href="{% url 'userena_signup' %}"></a></li>
                             {% endif %}
                         </ul>
@@ -90,7 +90,7 @@
       </div>
     {% endblock %}
   </div>
-  <div style="bottom:0;margin:0;color:black;border-color: #e7e7e7"><a href="www.miitbeian.gov.cn">粤ICP备18130342号-1</a></div>
+  <div style="bottom:0;margin:0;color:black;border-color: #e7e7e7;padding-left: 100pt;"><a href="www.miitbeian.gov.cn">粤ICP备18130342号-1</a></div>
 </body>
 </html>
 
