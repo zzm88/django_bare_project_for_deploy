@@ -258,7 +258,11 @@ def notify_validation(request):
         return HttpResponse('fail')
 
     # username = request.user.username    
-    
+
+
+#2018/10/13 Alipay api has expired, rewrite the notify function to add value for customer.
+
+
         
 def add_value(out_trade_no,amount):
     order = Order.objects.get(uid = out_trade_no)
@@ -269,6 +273,10 @@ def add_value(out_trade_no,amount):
     p.save()
     order.save()
     
+
+
+
+
         
     # pass
     # data = urlparse.parse_qs(request.body)
