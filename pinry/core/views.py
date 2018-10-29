@@ -402,5 +402,5 @@ class Beian(TemplateView):
     template_name = "beian.html"
     def get_context_data(self, **kwargs):
      
-        context = super(Home, self).get_context_data(**kwargs)
+        context = super(Beian, self).get_context_data(**kwargs)
         return context
