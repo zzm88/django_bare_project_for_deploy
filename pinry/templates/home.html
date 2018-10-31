@@ -36,15 +36,15 @@
           【使用说明】
         </h3>
         <dl>
-          <dt>
-            <span>1注册一个帐号</span>
-          </dt>
-          
           <dd>
-            2充值购买积分
+            1<a href="{% url 'userena_signup' %}">注册</a>一个帐号
+          </dd>
+          
+          <dd> <a href="{% url 'topup' %}">充值</a>购买积分
+            
           </dd>
           <dd>
-            3获得积分后，进入主界面
+            3获得积分后，进入<a href="{% url 'getsmsview' %}">主界面</a> 
           </dd>
           <dd>
             4点击【获得一个手机号】，即可得到一个临时手机号
