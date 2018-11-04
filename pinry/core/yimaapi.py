@@ -7,7 +7,8 @@ import json
 
 header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
-TOKEN = '00606905dcd2b9c73993dca58229a93ea1917f90' 
+TOKEN = '00606905dab5db70fa5941f7e17cb921395154be5d01' 
+
 # Create your tests here.
 def getphone(ITEMID,EXCLUDENO="170.171"):
     url = 'http://api.fxhyd.cn/UserInterface.aspx?action=getmobile&token=' + \
