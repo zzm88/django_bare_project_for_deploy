@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'guardian',
     'easy_thumbnails',
     #'taggit',
+    'bookstore',
     'compressor',
     'django_images',
     'pinry.core',
@@ -44,6 +45,9 @@ INSTALLED_APPS = [
      #'allauth.socialaccount',
      
      'accounts',
+     
+     'rest_framework',
+     
      
 ]
 
@@ -257,3 +261,8 @@ LOGGING = {
 }
 
 USERENA_ACTIVATION_REQUIRED = False
+USERENA_SIGNIN_AFTER_SIGNUP = True
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
