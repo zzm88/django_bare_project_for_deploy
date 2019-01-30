@@ -1,0 +1,26 @@
+{% extends 'bookstore/bookstore-base.html' %}
+
+{% block content %}
+  
+  
+
+
+<header class="masthead text-center text-white d-flex">
+  <div class="container my-auto">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <h1 class="text-uppercase">
+          <strong>瓜瓜驿站</strong>
+        </h1>
+        <hr>
+      </div>
+      <div class="col-lg-8 mx-auto">
+        <p class="text-faded mb-5">你是风霜雨雪，日月星辰 是海天一色，暮鼓晨中 是一部愿看一生的电影 一本望读一辈子的书 一首唱不完的歌</p>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'entry-list' %}">查看列表</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% endblock content %}
+

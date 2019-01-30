@@ -1,0 +1,28 @@
+
+
+
+{% extends 'bookstore/bookstore-base.html' %}
+
+{% block content %}
+
+
+
+<section class="bg-primary" id="about" style="    padding-top: 20px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+            <!-- <h2 class="section-heading text-white">资源列表</h2> -->
+            <ul>
+            {% for entry in object_list %}
+                <li style="list-style-type: none;font-size: 150%;text-align: left;"><a href="view/entry/{{ entry.url }}" style="color:white; ">{{ entry.name }} </a> </li>
+            {% empty %}
+                <li>No entrys yet.</li>
+            {% endfor %}
+            </ul>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

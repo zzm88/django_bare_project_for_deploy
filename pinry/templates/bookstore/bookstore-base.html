@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+{% load staticfiles compress %}
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>{% block title %}瓜瓜驿站{% endblock %}</title>
+  {% block meta %}{% endblock %}
+  <!-- <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/> -->
+  <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  
+  <!-- Bootstrap core CSS -->
+  {% load staticfiles %}
+  <link href=" {% static 'home/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'home/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  
+  <!-- Plugin CSS -->
+  <link href="{% static 'home/vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+  
+  <!-- Custom styles for this template -->
+  <link href="{% static 'home/css/creative.min.css' %}"  rel="stylesheet">
+  
+
+  
+
+</head>
+
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-shrink" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url 'bookstore-home' %}">{{foo}}瓜瓜驿站</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'bookstore-home' %}">主页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'entry-list' %}">下载</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'bookstore-topup' %}">充值</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'bookstore-order-list' %}">订单记录</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link js-scroll-trigger small" href="{% url 'bookstore-order-list' %}">{% if user.is_authenticated %}当前积分:{{left_credit}}{% endif %}</span>
+            </li>
+          </ul>
+        </div>
+    
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                   {% with request.user.is_superuser as superuser %}
+                   {% if superuser %}
+                       <li><a onclick="">super_user_view</a></li>
+                   {% endif %}
+
+{##}
+{#                           {% if perms.core.add_pin %}#}
+{#                               <li><a href="{% url "tbk_picker:favourites" %}">选品库</a></li>#}
+{#                            {% else %}cannot#}
+{#                           {% endif %}#}
+
+                    <li><a href="{% url 'bookstore-signout' %}" class='nav-link '>登出({{ user.username }})</a></li>
+                    {% comment %} <li><a href="{% url 'topup' %}">可用积分：{{ user.credit }}</a></li> {% endcomment %}
+                    {% endwith %}
+                {% else %}
+
+
+                    <li><a class='nav-link ' href="{% url 'bookstore-signin' %}" {% if not flavour == "mobile" %}data-toggle="tooltip" title="请登录！" data-placement="bottom"{% endif %}>登录</a></li>
+                    <li><a class='nav-link ' href="{% url 'bookstore-signup' %}">注册</a></li>
+                {% endif %}
+            </ul>
+        </div>
+      </div>
+    </nav>
+
+   
+    <div style="padding-top: 55px;">
+    {% block content %}
+        
+    {% endblock content %}
+  </div>
+  </body>
+</html>
+
+

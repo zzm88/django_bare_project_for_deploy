@@ -1,0 +1,28 @@
+{% extends 'bookstore/bookstore-base.html' %}
+
+{% block content %}
+
+
+<section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="section-heading">{{ object.name }}</h2>
+          <hr class="my-4">
+    <p>ID:{{ object.pk }}</p>
+    <p>编号: {{ object.url }}</p>
+    <p><a href="http://cdn.getsms.club/{{ object.url }}.zip">点击下载</a></p>
+    {% if ownership %}
+    <p><span style="color:rgb(190, 190, 190)">已购买</span> 解压密码: {{ object.zipkey }}</p>
+    {% else %}
+    解压密码: 消耗1积分 <a href="/bookstore/buy/{{ object.pk }}">查看密码</a>
+    {% endif %}
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+   
+
+{% endblock content %}
