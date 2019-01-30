@@ -7,6 +7,7 @@ admin.autodiscover()
 from userena import views as userena_views
 
 from django.contrib.auth.decorators import login_required
+    
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -30,10 +31,11 @@ urlpatterns = patterns('',
     url(r'^topup/$', login_required(TopupView.as_view()), name='topup'),
     url(r'^$', Beian.as_view(), name='beian'),
     url(r'^home/$', Home.as_view(), name='home'),
-
-
-
-
+    url(r'^bookstore/', include('bookstore.urls')),
+    
+    # (r'^bookstore/', include('bookstore.urls')),
+    
+    
 )
 
 
@@ -41,4 +43,9 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
         'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
+
+
+
+
+
 
