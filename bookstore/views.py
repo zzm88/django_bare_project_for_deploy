@@ -72,12 +72,14 @@ class EntryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EntryDetailView, self).get_context_data(**kwargs)
-        all_ownership = self.request.user.entry_set.all()
-        target_entry = Entry.objects.get(url = self.kwargs['url'])
-        result = target_entry in all_ownership
-        context['ownership'] = result
-        get_general_context(self,context)
-
+        try:
+            all_ownership = self.request.user.entry_set.all()
+            target_entry = Entry.objects.get(url = self.kwargs['url'])
+            result = target_entry in all_ownership
+            context['ownership'] = result
+            get_general_context(self,context)
+        except:
+            pass
         return context
    
     def get_object(self):
@@ -91,6 +93,9 @@ https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-display/#det
 
 
 # purchase entry
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='/bookstore/accounts/signin')
 def buy(request,pk):
     buyer = request.user
     target_entry = Entry.objects.get(pk = pk)
