@@ -102,6 +102,7 @@ def buy(request,pk):
 
     if request.user.my_profile.credit>0:
         request.user.my_profile.credit-=1
+        request.user.my_profile.save()
         request.user.entry_set.add(target_entry)  
         html = "<html><body>购买成功 <a href = '/bookstore/view/entry/%s'>返回</a></body></html>" % target_entry.url
         return HttpResponse(html)
