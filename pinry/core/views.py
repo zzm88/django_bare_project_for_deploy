@@ -345,7 +345,7 @@ class GetSmsView(TemplateView):
         return context
 
 class Getphone(View):
-    def get(self, request, app_code,phone_num=None,*args, **kwargs):
+    def get(self, request, app_code,phone_num='',*args, **kwargs):
         
         credit = MyProfile.objects.get(user= request.user).credit
         if credit>0:
