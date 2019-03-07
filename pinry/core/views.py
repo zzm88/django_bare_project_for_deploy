@@ -345,11 +345,11 @@ class GetSmsView(TemplateView):
         return context
 
 class Getphone(View):
-    def get(self, request, app_code,*args, **kwargs):
+    def get(self, request, app_code,phone_num=None,*args, **kwargs):
         
         credit = MyProfile.objects.get(user= request.user).credit
         if credit>0:
-            res = yimaapi.getphone(app_code)
+            res = yimaapi.getphone(app_code,phone_num)
             
         else:
             res = '请<a href="/topup/">充值</a>'

@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     
     url(r'^getsms_panel/$',login_required(GetSmsView.as_view()) , name='getsmsview'),
     url(r'^getphone/(?P<app_code>(\w|-)+)/$', Getphone.as_view(), name='getphone'),
+    url(r'^getphone/(?P<app_code>(\w|-)+)/(?P<phone_num>(\w|-)+)/$', Getphone.as_view(), name='getphone'),
     url(r'^getsms/(?P<app_code>(\w|-)+)/(?P<phonenum>(\w|-)+)/$', GetSms.as_view(), name='getsms'),
     url(r'^topup/$', login_required(TopupView.as_view()), name='topup'),
     url(r'^$', Beian.as_view(), name='beian'),

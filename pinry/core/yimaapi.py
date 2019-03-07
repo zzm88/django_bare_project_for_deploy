@@ -10,9 +10,9 @@ header_dict = {
 TOKEN = '00606905dab5db70fa5941f7e17cb921395154be5d01' 
 
 # Create your tests here.
-def getphone(ITEMID,EXCLUDENO="170.171"):
+def getphone(ITEMID,PHONENUM='',EXCLUDENO="170.171",):
     url = 'http://api.fxhyd.cn/UserInterface.aspx?action=getmobile&token=' + \
-        TOKEN+'&itemid='+ITEMID+'&excludeno='+EXCLUDENO
+        TOKEN+'&itemid='+ITEMID+'&excludeno='+EXCLUDENO +'&mobile=' +PHONENUM
     MOBILE1 = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     if MOBILE1.split('|')[0] == 'success':
         MOBILE1 = MOBILE1.split('|')[1]

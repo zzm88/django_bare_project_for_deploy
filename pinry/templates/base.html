@@ -3,13 +3,27 @@
 {% load staticfiles compress %}
 <html lang="en">
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>{% block title %}Getsms{% endblock %}</title>
   {% block meta %}{% endblock %}
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
   <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/js/bootstrap.js"></script>
-  
+    <style>
+@media only screen and (max-width: 900px) {
+  body {
+   margin-top: 100px;
+  }
+}
+@media only screen and (min-width: 901px) {
+  body {
+   margin-top: 50px;
+  }
+}
+
+  </style>
 </head>
 <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
         <!-- Navigation -->
@@ -82,7 +96,7 @@
             </div>
             <!-- End Navigation -->
 
-  <div id="body" style="padding: 50px;">
+  <div id="body" style="">
     {% block body %}
       <div class="content_title">
         {% block content_title %}{% endblock %}

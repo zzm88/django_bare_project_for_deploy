@@ -3,7 +3,7 @@
 
 <div class="container-fluid" style="margin-top:20px">
   <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 col-xs-12">
           <h3>
             【使用说明】
           </h3>
@@ -13,10 +13,10 @@
             </dd>
             
             <dd>
-              1<a href="{% url 'userena_signup' %}">注册</a>一个帐号
+              1<a href="{% url 'userena_signup' %}">注册</a>一个帐号(不能使用中文)
             </dd>
             
-            <dd> <a href="{% url 'topup' %}">充值</a>购买积分
+            <dd>2<a href="{% url 'topup' %}">充值</a>购买积分
               
             </dd>
             <dd>
@@ -42,7 +42,7 @@
               background-color: lightskyblue;
               height:  80px;
               width: 100%;
-              font-size: -webkit-xxx-large;
+              font-size:30px;
               text-align: center;
               color: white;
               margin-top: 10px; ">
