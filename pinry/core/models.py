@@ -68,7 +68,8 @@ class Activation(models.Model):
     times = models.IntegerField(null=True,default = 0)
     expired_date = models.DateField(blank=True, null=True)
     owner = models.ForeignKey(User,blank=True,null=True)
-
+    used = models.BooleanField(default = False)
+    value = models.IntegerField(null=True,default = 1)
 
 class Order(models.Model):
     uid = models.CharField(null=True,max_length=100,blank=True)

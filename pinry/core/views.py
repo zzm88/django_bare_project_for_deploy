@@ -181,9 +181,17 @@ class  ActivationListView(ListView):
     #     context = super( ActivationListView, self).get_context_data(**kwargs)
     #     context['now'] = timezone.now()
     #     return context
+    # @login_required
     def get_queryset(self):
+        
+        if self.request.user.is_superuser:
+            pass
+        else:
+            r= "not authorized"
+            return r
+
         try:
-            r = Activation.objects.filter(owner=self.request.user)
+            r = Activation.objects.filter(used=False)
         except Exception as e:
             print "HAHA"
             print e
@@ -404,3 +412,101 @@ class Beian(TemplateView):
      
         context = super(Beian, self).get_context_data(**kwargs)
         return context
+
+
+
+
+    
+def use_code(request):
+    code = request.POST['code']
+    code = code.strip()
+
+    try:
+
+        a = Activation.objects.get(activate_code =code)
+
+        if a.used == True:
+            return HttpResponse('此码已被使用'+'<a href="/topup/">返回充值页面</a>')
+
+
+        if a != None:
+            
+            a.used = True
+            user = request.user
+            profile = MyProfile.objects.get(user= request.user)
+            profile.credit += a.value 
+            profile.save()
+            a.save()
+            return HttpResponse(user.username + '成功充值 ' + str(a.value) +' 分<a href="/getsms_panel/">返回主界面</a>')
+        
+    except:
+        response = '此码不正确'+'<a href="/topup/">返回充值页面</a>'
+        return HttpResponse(response)
+
+    # try:
+    #     request_device_code = int(request.GET['device_code'])
+    # except:
+    #     txt = 'device_code is null'
+    #     response = 5
+    #     return HttpResponse(response)
+    # try:
+    #     a = Activation.objects.get(activate_code=activate_code)
+    #     txt = 'code is validated'
+    # except:
+    #     txt = 'wrong activate_code'
+    #     response = 4
+    #     return HttpResponse(response)
+
+    # try:
+    #     owner = request.GET['owner']
+    #     print a.owner
+    #     print type(a.owner)
+    #     print owner
+    #     print type(owner)
+
+    #     if a.owner.username == owner:
+    #         pass
+    #     else:
+    #         response = 7
+    #         return HttpResponse(response)
+    # except:
+    #     pass
+
+    # try :
+    #     device_code =int(a.uid)
+    # except:
+    #     a.uid = request_device_code
+    #     now = datetime.date.today()
+    #     exp = add_months(now,1)
+    #     a.expired_date = exp
+    #     a.save()
+    #     txt +='activated successfully'
+    #     response = 2
+    #     return HttpResponse(response)
+
+    # if device_code == request_device_code:
+    #     txt += '& device is matched'
+    #     response = 2
+    # else:
+    #     txt += ' but device does not match'
+    #     response = 3
+
+    # try:
+    #     ex_date = a.expired_date
+    # except:
+    #     return HttpResponse(response)
+
+
+    # now = datetime.date.today()
+    # try:
+    #     if now <= ex_date:
+    #         pass
+    #     elif response == 2:
+    #         txt += 'however expired'
+    #         response = 6
+    #     else:
+    #         pass
+    # #exception:expired_date is null
+    # except:
+    #     pass
+    # return HttpResponse(response)

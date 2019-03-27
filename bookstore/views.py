@@ -226,3 +226,4 @@ def bookstore_signout(request):
 
     # return the response
     return response
+
