@@ -25,11 +25,11 @@
 <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">id</th>
+      <!-- <th scope="col">id</th> -->
       <th scope="col">激活码</th>
-      <th scope="col">owner</th>
+      <!-- <th scope="col">owner</th>
       <th scope="col">到期日</th>
-        <th scope="col">机器码</th>
+        <th scope="col">机器码</th> -->
     </tr>
   </thead>
   <tbody>
@@ -37,12 +37,12 @@
 {% for activation in object_list %}
     <tr>
 
-      <th scope="row">{{ activation.id }}</th>
+      <!-- <th scope="row">{{ activation.id }}</th> -->
       <td>{{ activation.activate_code }}</td>
-      <td> {{ activation.owner }}</td>
+      <!-- <td> {{ activation.owner }}</td>
       <td> {{ activation.expired_date }}</td>
         <td> {{ activation.uid }}</td>
-          <td ><a href="/activation/edit/{{ activation.pk }}" class="btn">修改</a></td>
+          <td ><a href="/activation/edit/{{ activation.pk }}" class="btn">修改</a></td> -->
 
     </tr>
 {% empty %}
