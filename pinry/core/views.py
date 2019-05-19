@@ -134,7 +134,7 @@ from django.contrib.auth.decorators import login_required
 def bulk_create_validation(request):
     import random
     response = []
-    for i in range(10):
+    for i in range(500):
 
         hash = random.getrandbits(128)
         hash = '%032x' % hash
