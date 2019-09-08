@@ -11,5 +11,5 @@ class MyProfile(UserenaBaseProfile):
                                 verbose_name=_('user'),
                                 related_name='my_profile')
     favourite_snack = models.CharField(_('favourite snack'),
-                                       max_length=5)
+                                       max_length=5,blank=True, null=True)
     credit = models.IntegerField(null=True,default=0)
