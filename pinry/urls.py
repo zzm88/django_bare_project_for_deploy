@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from pinry.core.views import notify_validation,create_order,OrderListView,GetSmsView,Getphone,GetSms,TopupView,Beian,Home,use_code
+from pinry.core.views_xinhe import GetSmsView_new,Getphone_new,GetSms_new,Releasephone_new
 admin.autodiscover()
 from userena import views as userena_views
 
@@ -38,7 +39,15 @@ urlpatterns = patterns('',
     url(r'^bookstore/', include('bookstore.urls')),
     
     # (r'^bookstore/', include('bookstore.urls')),
+
+
+    url(r'^getsms_panel_new/$',login_required(GetSmsView_new.as_view()) , name='getsmsview_new'),
+    url(r'^getphone_new/(?P<app_code>(\w|-)+)/$', Getphone_new.as_view(), name='getphone_new'),
+    url(r'^getphone_new/(?P<app_code>(\w|-)+)/(?P<phone_num>(\w|-)+)/$', Getphone_new.as_view(), name='getphone_new'),
+    url(r'^release_new/(?P<app_code>(\w|-)+)/(?P<phone_num>(\w|-)+)/$', Releasephone_new.as_view(), name='release_new'),
+    url(r'^getsms_new/(?P<app_code>(\w|-)+)/(?P<phonenum>(\w|-)+)/$', GetSms_new.as_view(), name='getsms_new'),
     
+
     
 )
 
