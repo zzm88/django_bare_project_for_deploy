@@ -16,13 +16,15 @@ def login():
     token = Token.objects.get_or_create(id=1)[0]
     token.token = response
     token.save()
+    global TOKEN
+
     TOKEN = token.token
     
 
 # Create your tests here.
 def getphone(ITEMID,PHONENUM=''):
     
-    url = '	 http://api.xinma1.com:10000/getPhone?ItemId=%s&token=%sPhone=%s' % (ITEMID,TOKEN,PHONENUM)
+    url = 'http://api.xinma1.com:10000/getPhone?ItemId=%s&token=%sPhone=%s' % (ITEMID,TOKEN,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     if 'False' not in response:
         response = response.split(';')[0]
