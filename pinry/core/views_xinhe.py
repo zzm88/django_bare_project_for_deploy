@@ -15,8 +15,9 @@ from .models import Activation
 
 import datetime
 import calendar
-import yimaapi
-import xinheapi
+# import yimaapi
+# import xinheapi
+import xinmaapi as xinheapi
 
 
 class GetSmsView_new(TemplateView):
@@ -52,7 +53,7 @@ class GetSms_new(View):
         print phonenum
         res = xinheapi.getsms(phonenum,app_code)
         try:
-            res = get_error_name(res['error'])
+            res = res['error']
         except:
             
             res = res['msg']

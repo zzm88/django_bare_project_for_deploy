@@ -15,7 +15,10 @@ from .models import Activation
 
 import datetime
 import calendar
-import yimaapi
+# import yimaapi 跑路
+import xinmaapi as yimaapi
+
+ 
 
 class CreateImage(JSONResponseMixin, LoginRequiredMixin, CreateView):
     template_name = None  # JavaScript-only view

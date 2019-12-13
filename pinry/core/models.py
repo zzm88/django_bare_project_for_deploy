@@ -82,3 +82,5 @@ class Order(models.Model):
     # def __unicode__(self):
     #     return '%s - %s' % (self.customer, self.uid)
 
+class Token(models.Model):
+    token = models.CharField(null=True,max_length=100,blank=True)
