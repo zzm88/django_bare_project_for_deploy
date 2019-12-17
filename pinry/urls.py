@@ -34,7 +34,7 @@ urlpatterns = patterns('',
 
     url(r'^topup/$', login_required(TopupView.as_view()), name='topup'),
 
-    url(r'^$', Beian.as_view(), name='beian'),
+    #url(r'^$', Beian.as_view(), name='beian'),
     url(r'^$', Home.as_view(), name='home'),
     url(r'^home/$', Home.as_view(), name='home'),
     url(r'^jui/$', Jui.as_view(), name='jui'),
