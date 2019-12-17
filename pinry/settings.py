@@ -106,7 +106,7 @@ STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pinry/static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pinry/static'),os.path.join(BASE_DIR, 'pinry/static/jui'),]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

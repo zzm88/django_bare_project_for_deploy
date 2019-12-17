@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
-from pinry.core.views import notify_validation,create_order,OrderListView,GetSmsView,Getphone,GetSms,TopupView,Beian,Home,use_code
+from pinry.core.views import notify_validation,create_order,OrderListView,GetSmsView,Getphone,GetSms,TopupView,Beian,Jui,Home,use_code
 from pinry.core.views_xinhe import GetSmsView_new,Getphone_new,GetSms_new,Releasephone_new
 admin.autodiscover()
 from userena import views as userena_views
@@ -34,9 +34,10 @@ urlpatterns = patterns('',
 
     url(r'^topup/$', login_required(TopupView.as_view()), name='topup'),
 
-    # url(r'^$', Beian.as_view(), name='beian'),
+    url(r'^$', Beian.as_view(), name='beian'),
     url(r'^$', Home.as_view(), name='home'),
     url(r'^home/$', Home.as_view(), name='home'),
+    url(r'^jui/$', Jui.as_view(), name='jui'),
     url(r'^bookstore/', include('bookstore.urls')),
     
     # (r'^bookstore/', include('bookstore.urls')),
