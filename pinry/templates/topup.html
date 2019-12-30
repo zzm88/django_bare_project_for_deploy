@@ -12,13 +12,35 @@
         $("#result").html("仅需" + val + "元");
       });
       $("#submit").click(function() {
+        gtag_report_conversion()
         var val = $("input[name=my-radio]:checked").val();
-        window.open("/order/create/" + val, "_self")
+        window.open("/order/create/" + val, "_self");
       });
     
     
     });
 </script>
+
+<!-- Event snippet for 支付宝充值 conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-906400871/5R5ZCKvR1bgBEOeomrAD',
+      'value': 1.0,
+      'currency': 'CNY',
+      'transaction_id': '',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
 <style>
     body {
       padding: 20px;
