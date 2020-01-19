@@ -5,6 +5,8 @@ from accounts.models import MyProfile
 
 class MyProfileAdmin(admin.ModelAdmin):
     model =MyProfile
+    list_display = ('credit')
+
     search_fields = ['user__username']
 
 
