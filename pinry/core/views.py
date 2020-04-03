@@ -411,7 +411,7 @@ def get_error_name(code):
     return error_dict[str(code)]
 
 class Beian(TemplateView):
-    template_name = "beian.html"
+    template_name = "cloak.html"
     def get_context_data(self, **kwargs):
      
         context = super(Beian, self).get_context_data(**kwargs)
