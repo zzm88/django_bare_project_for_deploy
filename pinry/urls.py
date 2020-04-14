@@ -36,7 +36,7 @@ urlpatterns = patterns('',
 
     url(r'^$', Beian.as_view(), name='beian'),
     # url(r'^$', Home.as_view(), name='home'),
-    url(r'^home/$', Home.as_view(), name='home'),
+    url(r'^start/$', Home.as_view(), name='start'),
     url(r'^jui/$', Jui.as_view(), name='jui'),
     url(r'^bookstore/', include('bookstore.urls')),
     
@@ -56,8 +56,8 @@ urlpatterns = patterns('',
 
 
 urlpatterns += staticfiles_urlpatterns()
-urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
-    'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
+# urlpatterns += patterns('', url(r'^media/(?P<path>.*)$',
+#     'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
     
 urlpatterns += patterns('', url(r'^static/(?P<path>.*)$',
     'django.views.static.serve', {'document_root': settings.STATIC_ROOT,}),)
