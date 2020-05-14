@@ -25,7 +25,7 @@ def login():
 # Create your tests here.
 def getphone(ITEMID,PHONENUM=''):
     
-    url = 'http://to.banma1024.com/api/do.php?action=getPhone&sid=%s&token=%s' % (ITEMID,TOKEN)
+    url = 'http://to.banma1024.com/api/do.php?action=getPhone&sid=%s&token=%s&phone=%s' % (ITEMID,TOKEN,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     
     if response.split('|')[0] == "0" :#TOKEN错误，重新登录
