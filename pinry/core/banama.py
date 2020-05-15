@@ -69,7 +69,7 @@ def getsms(MOBILE,ITEMID):
         return d
     else:
         print('获取短信超时，错误代码是')
-        print(response)
+        # print(response)
         print('循环数是'+ROUND)
         d = {"error":response,"round":ROUND}
         return d
