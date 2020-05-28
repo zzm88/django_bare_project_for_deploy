@@ -8,7 +8,7 @@ from .models import Token
 
 header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
-TOKEN = 'e8364b1268c4c3e34df01d9790b3be570e1bc882'
+TOKEN = 'a714c487438ec344b1f7fa6909104934cfd5ad9a'
 
 api = "http://to.banma1024.com"
 
