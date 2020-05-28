@@ -10,9 +10,11 @@ header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
 TOKEN = 'e8364b1268c4c3e34df01d9790b3be570e1bc882'
 
+api = "http://api.banma1024.net"
+
 def login():
     # url = 'http://api.xinma1.com:10000/login?uName=%s&pWord=%s' % ('zzm88','1988104')    
-    url = 'http://to.banma1024.com/api/do.php?action=loginIn&name=%s&password=%s' % ('api-113233-WIjNLBEXkfOz','1988104')    
+    url = '%s/api/do.php?action=loginIn&name=%s&password=%s' % (api,'api-113233-WIjNLBEXkfOz','liufei@921@@')    
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
 
     global TOKEN 
@@ -25,7 +27,7 @@ def login():
 # Create your tests here.
 def getphone(ITEMID,PHONENUM=''):
     
-    url = 'http://to.banma1024.com/api/do.php?action=getPhone&sid=%s&token=%s&phone=%s' % (ITEMID,TOKEN,PHONENUM)
+    url = '%s/api/do.php?action=getPhone&sid=%s&token=%s&phone=%s' % (api,ITEMID,TOKEN,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     
     if response.split('|')[0] == "0" :#TOKEN错误，重新登录
@@ -40,7 +42,7 @@ def getsms(MOBILE,ITEMID):
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://api.banma1024.com/api/do.php?action=getMessage&sid=%s&phone=%s&token=%s' % (ITEMID,MOBILE,TOKEN)
+    url = '%s/api/do.php?action=getMessage&sid=%s&phone=%s&token=%s' % (api,ITEMID,MOBILE,TOKEN)
       
     response = requests.get(url=url, headers=header_dict).content.decode(encoding='utf-8')
     TIME1 = time.time()
@@ -75,7 +77,7 @@ def getsms(MOBILE,ITEMID):
         return d
 
 def releasephone(ITEMID,PHONENUM):
-    url = 'http://api.banma1024.com/api/do.php?action=cancelRecv&sid=%s&phone=%s&token=%s' % (ITEMID,PHONENUM,TOKEN)
+    url = '%s/api/do.php?action=cancelRecv&sid=%s&phone=%s&token=%s' % (api,ITEMID,PHONENUM,TOKEN)
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     if response.split('|')[0]=="1": #成功释放
         # MOBILE1 = response.split('|')[1]
