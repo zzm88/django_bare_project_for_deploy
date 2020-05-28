@@ -10,7 +10,7 @@ header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
 TOKEN = 'e8364b1268c4c3e34df01d9790b3be570e1bc882'
 
-api = "http://api.banma1024.com"
+api = "http://to.banma1024.com"
 
 def login():
     # url = 'http://api.xinma1.com:10000/login?uName=%s&pWord=%s' % ('zzm88','1988104')    
