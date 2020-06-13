@@ -17,7 +17,7 @@ import datetime
 import calendar
 # import yimaapi
 # import xinheapi
-import banama as xinheapi
+import lanhu as xinheapi
 
 
 class GetSmsView_new(TemplateView):
@@ -42,7 +42,7 @@ class Releasephone_new(View):
     def get(self, request, app_code,phone_num='',*args, **kwargs):
 
         res = xinheapi.releasephone(app_code,phone_num)
-        res= res.decode('gbk') #解决乱码
+        # res= res.decode('gbk') #解决乱码
         return HttpResponse(res)
 
 
