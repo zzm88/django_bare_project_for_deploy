@@ -60,6 +60,8 @@ def getsms(MOBILE,ITEMID):
         
         time.sleep(5)
         response = requests.get(url=url, headers=header_dict).content
+        json_repsonse = json.loads(response)
+        
         TIME2 = time.time()
         ROUND = ROUND+1
         print "try"+str(ROUND)
