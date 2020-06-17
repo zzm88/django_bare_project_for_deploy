@@ -45,7 +45,7 @@ def getsms(MOBILE,ITEMID):
     WAIT = 60 # 接受短信时长60s
     
    
-    url = '	http://dev.wanzhongma.com/open/api/getMessage?token=%s&sid=%s&phone=%s&json=1' % (TOKEN,ITEMID,MOBILE)
+    url = 'http://dev.wanzhongma.com/open/api/getMessage?token=%s&sid=%s&phone=%s&json=1' % (TOKEN,ITEMID,MOBILE)
       
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse = json.loads(response)
