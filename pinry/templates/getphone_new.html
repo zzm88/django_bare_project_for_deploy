@@ -3,11 +3,8 @@
 
   function releasePhone() {
     app_code = $("#app_code").val()
-    phone_num = $("#phonenum").text()
-    if (phone_num.length != 11) {
-      phone_num = "12345678"
-      
-    }
+    phone_num = $("#phone_token").text()
+ 
     $.ajax({
       url: '/release_new/'+app_code+'/'+phone_num,
       beforeSend: function() {
@@ -34,7 +31,10 @@
         $("#phonenum").html('正在获取手机号');
       },
       complete: function(response) {
-        $('#phonenum').html(response.responseText);
+	  var phone = response.responseText.split('|')[0]
+	  var phone_token = response.responseText.split('|')[1]
+        $('#phonenum').html(phone);
+        $('#phone_token').html(phone_token);
         $('#getphone_btn').attr('disabled',true);
         
       },
@@ -57,7 +57,7 @@
     
     app_code = $("#app_code").val()
     xhr = $.ajax({
-      url: '/getsms_new/' +app_code +'/' + $('#phonenum').html(),
+      url: '/getsms_new/' +app_code +'/' + $('#phone_token').html(),
       beforeSend: function() {
         $("#validcode-msg").html('正在获取验证码...');
         $('#validcode').html("");
@@ -129,70 +129,37 @@
         </div>
         
         <div class="col-lg-4 mx-auto">
-				<h3>6.18：号源跑路了，等几天吧大家，不好意思了，先别充值了</h3>
-				<h3>6.17：已修复，如有问题请发邮件</h3>
-                <h3>6.13：已修复，如有问题请发邮件</h3>
-                <h5>新系统【5月13日通知：已修复，有疑问或需要添加app（注明app名称）请发邮件至：zzm88104@gmail.com】</h5>
-                <h5><a href="https://cighted-towessor.icu/dbbdd634-1d15-4ff0-9698-e351d2eb3863">网赚学堂，精选靠谱网赚教程</a></h5>
-				
+				<h3>6.23：已修复，如找不到你的项目，直接把项目短信模板请发邮件至：zzm88104@gmail.com</h3>
+     
 
 						
             <select name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;">
 
 							  
-				<option value="10192" selected="selected">探探</option>
-				<option value="10046" >陌陌</option>
-				<option value="10306" >小红书</option>
-				<option value="10255" >万顺叫车</option>
-				<option value="10017" >soul</option>
-				<option value="10281" >趣头条</option>
-				<option value="10117" >uki</option>
-				<option value="10377" >豆瓣</option>
-				<option value="12324" >发条</option>
-				<option value="11261" >whatsapp</option>
-				<option value="10531" >最右</option>
-				<option value="15301" >谷歌</option>
-				<option value="10263" >oyo</option>
-				<option value="10111" >贝壳</option>
-				<option value="10354" >高佣联盟</option>
-				<option value="10257" >香香科技</option>
-				<option value="11344" >一乙</option>
-				<option value="10458" >斗鱼直播</option>
-				<option value="10370" >虎牙</option>
-				<option value="11059" >触手直播</option>
-				<option value="10375" >telegram</option>
-				<option value="12924" >珍爱</option>
-				<option value="10751" >讯飞</option>
-				<option value="10150" >西瓜</option>
-				<option value="13919" >今日头条</option>
-				<option value="10316" >交易猫</option>
-				<option value="10161" >聊呗</option>
-				<option value="10607" >樊登读书</option>
-				<option value="10844" >暴雪娱乐</option>
-				<option value="10520" >海尔</option>
-				<option value="10457" >租号玩</option>
-				<option value="10147" >积目</option>
-				<option value="11661" >PUBG</option>
-				<option value="10311" >爱彼迎</option>
-				<option value="10003" >饿了么</option>
-				<option value="10431" >好省</option>
-				<option value="10612" >呼啦</option>
-				<option value="10271" >赫兹</option>
-				<option value="10247" >洋码头</option>
-				<option value="10160" >微拍堂</option>
-				<option value="13688" >云顶</option>
-				<option value="10766" >欢乐抢红包</option>
-				<option value="10314" >如祺</option>
-				<option value="10570" >5173</option>
-				<option value="14950" >buff</option>
-				<option value="10871" >九九</option>
-				<option value="10643" >云通知</option>
-				<option value="11186" >星事物</option>
-				<option value="10909" >twitter</option>
-			      
-
- 
- 
+				<option value="1000177" selected="selected">探探</option>
+				<option value="1000026" >陌陌</option>
+				<option value="1000100" >小红书</option>
+				<option value="1000196" >万顺叫车</option>
+				<option value="1000103" >soul</option>
+				<option value="1000025" >趣头条</option>
+				<option value="1000047" >豆瓣</option>
+				<option value="1000055" >贝壳</option>
+				<option value="1000124" >高佣联盟</option>
+				<option value="1000057" >斗鱼直播</option>
+				<option value="1000021" >虎牙</option>
+				<option value="1000367" >讯飞听见</option>
+				<option value="1000053" >西瓜</option>
+				<option value="1000155" >今日头条</option>
+				<option value="1000128" >交易猫</option>
+				<option value="1000101" >聊呗</option>
+				<option value="1000078" >暴雪娱乐</option>
+				<option value="1000091" >积目</option>
+				<option value="1000051" >饿了么</option>
+				<option value="1000310" >好省</option>
+				<option value="1000141" >赫兹</option>
+				<option value="1000425" >微拍堂</option>
+				<option value="1000229" >5173</option>
+				<option value="1000140" >云通知</option>
 
 
  
@@ -217,7 +184,8 @@
 				释放手机号（释放后才可以再获取新的号）
             </button>
             <br>
-            <span style="font-size:40px;width:100%;color:black;background-color:#7770;" id="phonenum" class="badge badge-default" style="font-size:40px;"></span>
+            <span style="font-size:40px;width:100%;color:black;background-color:#7770;" id="phonenum" class="badge badge-default" style="font-size:40px;"></span></br>
+            <span style="font-size:10px;width:100%;color:grey;background-color:#7770;" id="phone_token" class="badge badge-default" style="font-size:10px;"></span>
             <br>
           <span id="validcode-msg" class=""></span>
           <div id="countdown"></div>
