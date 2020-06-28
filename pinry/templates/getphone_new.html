@@ -1,6 +1,32 @@
 {% extends 'base.html' %} {% block content %}
 <script>
 
+$(document).ready(function(){
+     $.ajax({
+      url: 'https://api.npoint.io/b82807a96d501ec3779d',
+      beforeSend: function() {
+        console.log('before_send');
+      },
+      complete: function(response) {
+        console.log(response.responseText);
+        var json = response.responseJSON
+        for(var i = 0; i < json.length; i++) {
+            var obj = json[i];
+
+            console.log(obj.id);
+            $('#app_code').append('<option value="'+ obj.value + '">' +obj.app_name+'</option>')
+            
+            				
+
+        }
+        
+      },
+      error: function(response) {
+        console.log(response.responseText)
+      },
+    });
+});
+
   function releasePhone() {
     app_code = $("#app_code").val()
     phone_num = $("#phone_token").text()
@@ -136,36 +162,36 @@
             <select name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;">
 
 							  
-				<option value="1000177" selected="selected">探探</option>
-				<option value="#" >陌陌（价格上涨，暂停）</option>
-				<option value="1000100" >小红书</option>
-				<option value="1000196" >万顺叫车</option>
-				<option value="1000103" >soul</option>
-				<option value="1000025" >趣头条</option>
-				<option value="1000047" >豆瓣</option>
-				<option value="1000055" >贝壳</option>
-				<option value="1000124" >高佣联盟</option>
-				<option value="1000057" >斗鱼直播</option>
-				<option value="1000021" >虎牙</option>
-				<option value="1000367" >讯飞听见</option>
-				<option value="1000053" >西瓜</option>
-				<option value="1000155" >今日头条</option>
-				<option value="1000128" >交易猫</option>
-				<option value="1000101" >聊呗</option>
-				<option value="1000078" >暴雪娱乐</option>
-				<option value="1000091" >积目</option>
-				<option value="1000051" >饿了么</option>
-				<option value="1000310" >好省</option>
-				<option value="1000141" >赫兹</option>
-				<option value="1000425" >微拍堂</option>
-				<option value="1000229" >5173</option>
-				<option value="1000140" >云通知</option>
+				<!-- <option value="1000177" selected="selected">探探</option> -->
+				<!-- <option value="#" >陌陌（价格上涨，暂停）</option> -->
+				<!-- <option value="1000100" >小红书</option> -->
+				<!-- <option value="1000196" >万顺叫车</option> -->
+				<!-- <option value="1000103" >soul</option> -->
+				<!-- <option value="1000025" >趣头条</option> -->
+				<!-- <option value="1000047" >豆瓣</option> -->
+				<!-- <option value="1000055" >贝壳</option> -->
+				<!-- <option value="1000124" >高佣联盟</option> -->
+				<!-- <option value="1000057" >斗鱼直播</option> -->
+				<!-- <option value="1000021" >虎牙</option> -->
+				<!-- <option value="1000367" >讯飞听见</option> -->
+				<!-- <option value="1000053" >西瓜</option> -->
+				<!-- <option value="1000155" >今日头条</option> -->
+				<!-- <option value="1000128" >交易猫</option> -->
+				<!-- <option value="1000101" >聊呗</option> -->
+				<!-- <option value="1000078" >暴雪娱乐</option> -->
+				<!-- <option value="1000091" >积目</option> -->
+				<!-- <option value="1000051" >饿了么</option> -->
+				<!-- <option value="1000310" >好省</option> -->
+				<!-- <option value="1000141" >赫兹</option> -->
+				<!-- <option value="1000425" >微拍堂</option> -->
+				<!-- <option value="1000229" >5173</option> -->
+				<!-- <option value="1000140" >云通知</option> -->
 				
 				
-				<option value="1000080" >京东</option>
-				<option value="1000485" >FBOOK</option>
-				<option value="1000483" >按个摩</option>
-				<option value="1000484" >云顶天天赚</option>
+				<!-- <option value="1000080" >京东</option> -->
+				<!-- <option value="1000485" >FBOOK</option> -->
+				<!-- <option value="1000483" >按个摩</option> -->
+				<!-- <option value="1000484" >云顶天天赚</option> -->
 				
 
 
