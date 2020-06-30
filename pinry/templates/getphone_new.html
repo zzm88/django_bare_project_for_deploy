@@ -6,8 +6,12 @@ $(document).ready(function(){
       url: 'https://api.npoint.io/b82807a96d501ec3779d',
       beforeSend: function() {
         console.log('before_send');
+		$('#app_code').append('<option value="">列表加载中...</option>')
+
       },
       complete: function(response) {
+		$('#app_code').html('')
+
         console.log(response.responseText);
         var json = response.responseJSON
         for(var i = 0; i < json.length; i++) {
