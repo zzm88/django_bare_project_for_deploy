@@ -27,9 +27,9 @@ def login():
 # Create your tests here.
 def getphone(ITEMID,PHONENUM=''):
 
-    url = 'http://www.ther6.com:8080/get_phone?user=%s&password=%s&xmid=%s' % ('zzm88','1988104',ITEMID)
+    url = 'http://43.249.192.245:7777/get_phone?user=%s&password=%s&xmid=%s' % ('zzm88','1988104',ITEMID)
     if PHONENUM != '' :
-        url = 'http://www.ther6.com:8080/get_zd_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
+        url = 'http://43.249.192.245:7777/get_zd_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['msg_code'] != "OK" :#TOKEN错误，重新登录
@@ -43,7 +43,7 @@ def getphone(ITEMID,PHONENUM=''):
 
 def getphone_token(ITEMID,PHONENUM=''):
 
-    url = 'http://www.ther6.com:8080/get_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
+    url = 'http://43.249.192.245:7777/get_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['msg_code'] != "OK" :#TOKEN错误，重新登录
@@ -57,11 +57,11 @@ def getphone_token(ITEMID,PHONENUM=''):
 
 def getsms(PHONE_TOKEN,ITEMID):    
     # 获取短信，注意线程挂起5秒钟，每次取短信最少间隔5秒
-#    http://www.ther6.com:8080/cx_message?user=账号&password=密码&token=手机号对应token
+#    http://43.249.192.245:7777/cx_message?user=账号&password=密码&token=手机号对应token
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://www.ther6.com:8080/cx_message?user=%s&password=%s&token=%s' % ('zzm88','1988104',PHONE_TOKEN)
+    url = 'http://43.249.192.245:7777/cx_message?user=%s&password=%s&token=%s' % ('zzm88','1988104',PHONE_TOKEN)
       
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse = json.loads(response)
@@ -101,7 +101,7 @@ def releasephone(ITEMID,PHONENUM):
     phone_and_token = getphone_token(ITEMID,PHONENUM)
 
 
-    url = 'http://www.ther6.com:8080/sf_phone?user=zzm88&password=1988104&token=%s' % (PHONENUM)
+    url = 'http://43.249.192.245:7777/sf_phone?user=zzm88&password=1988104&token=%s' % (PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['msg_code'] == 'OK' : #成功释放
         # MOBILE1 = response.split('|')[1]
