@@ -8,38 +8,39 @@ from .models import Token
 
 header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
-TOKEN = 'Bb5f71b0abe411ea816200163e0007a2'
+TOKEN = 'BC93B122D2BD4A5B9001EC148BF46F5A'
 
 api = "http://to.banma1024.com"
 
 def login():
     # url = 'http://xiangjiuer.cn/sms/api/login?username=API用户名&password=密码' % ('zzm88','1988104')    
-    url = 'http://dev.wanzhongma.com/open/api/login?userName=%s&password=%s&json=1' % ('api-8zNeXR','1988104')    
+    url = 'http://202.95.11.35:2019/WebAPI/login?uname=%s&upwd=%s' % ('zzm88','123456a')    
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
-
+    response = response.strip('"') 
     global TOKEN 
-    if json.loads(response)['code'] == '0': #登陆成功
-        TOKEN = json.loads(response)['token'] 
+    if response.split('|')[0] == '1': #登陆成功
+        TOKEN = response.split('|')[1]
     else:
         pass
     
 
 # Create your tests here.
 def getphone(ITEMID,PHONENUM=''):
-
-    url = 'http://43.249.192.245:7777/get_phone?user=%s&password=%s&xmid=%s' % ('zzm88','1988104',ITEMID)
-    if PHONENUM != '' :
-        url = 'http://43.249.192.245:7777/get_zd_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
-    # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
+    if PHONENUM != '':
+        PHONENUM = '&phone=%s' % (PHONENUM)
+    url = 'http://202.95.11.35:2019/WebAPI/GetPhone?ukey=%s&bid=%s' % (TOKEN,ITEMID) + PHONENUM
+    # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content
-    if json.loads(response)['msg_code'] != "OK" :#TOKEN错误，重新登录
+    response = response.strip('"') 
+    if response.split('|')[1] == "身份验证失败，请重新登录" :#TOKEN错误，重新登录
+       login()#登录
+    if response.split('|')[0] == "0" :
         # login()#登录
-        response =json.loads(response)['mes'] #再次获取手机
-    elif json.loads(response)['msg_code'] == "OK":#取号成功
-        for key,value in json.loads(response)['mes'].iteritems():
-            phone_number = key
-            phone_token =  value
-        return '%s|%s' % (phone_number,phone_token)
+        return response.split('|')[1]
+    elif response.split('|')[0] == "1" : #取号成功
+      
+        phone_number = response.split('|')[1]
+        return phone_number
 
 def getphone_token(ITEMID,PHONENUM=''):
 
@@ -55,39 +56,40 @@ def getphone_token(ITEMID,PHONENUM=''):
             phone_token =  value
         return {phone_number:phone_token}
 
-def getsms(PHONE_TOKEN,ITEMID):    
+def getsms(PHONENUM,ITEMID):    
     # 获取短信，注意线程挂起5秒钟，每次取短信最少间隔5秒
 #    http://43.249.192.245:7777/cx_message?user=账号&password=密码&token=手机号对应token
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://43.249.192.245:7777/cx_message?user=%s&password=%s&token=%s' % ('zzm88','1988104',PHONE_TOKEN)
+    url = 'http://202.95.11.35:2019/WebAPI/GetMessage?ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
       
     response = requests.get(url=url, headers=header_dict).content
-    json_repsonse = json.loads(response)
+    response = response.strip('"') 
+    if response.split('|')[1] == "身份验证失败，请重新登录" :#TOKEN错误，重新登录
+       login()#登录
     TIME1 = time.time()
     TIME2 = time.time()
     ROUND = 1
 
 
-    while (TIME2-TIME1) < WAIT and json_repsonse['mes'] == '' and json_repsonse['msg_code']=='OK': # 60秒内且未成功
+    while (TIME2-TIME1) < WAIT and response.split('|')[0] == '0': # 60秒内且未成功
 
         
         time.sleep(5)
         response = requests.get(url=url, headers=header_dict).content
-        json_repsonse = json.loads(response)
-        
+        response = response.strip('"') 
         TIME2 = time.time()
         ROUND = ROUND+1
         print "try"+str(ROUND)
         
     ROUND = str(ROUND)
-    if json_repsonse['mes'] != '':# 若成功
+    if response.split('|')[0] == '1':# 若成功
         
        
         TIME = str(round(TIME2-TIME1, 1))
 
-        d = {"time":TIME,"round":ROUND,"msg":json_repsonse['mes'] }
+        d = {"time":TIME,"round":ROUND,"msg":response.split('|')[1]}
         
         return d
     else:
@@ -98,17 +100,16 @@ def getsms(PHONE_TOKEN,ITEMID):
         return d
 
 def releasephone(ITEMID,PHONENUM):
-    phone_and_token = getphone_token(ITEMID,PHONENUM)
 
-
-    url = 'http://43.249.192.245:7777/sf_phone?user=zzm88&password=1988104&token=%s' % (PHONENUM)
+    url = 'http://202.95.11.35:2019/WebAPI/CancelRecv?&ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
-    if json.loads(response)['msg_code'] == 'OK' : #成功释放
+    response = response.strip('"') 
+    if  response.split('|')[0] == "1" : #成功释放
         # MOBILE1 = response.split('|')[1]
           
         response = u"成功释放"
     else:
-        response = u'联系管理员，错误代号'+ str(json.loads(response)['code'])
+        response = u'联系管理员，错误:'+  response.split('|')[1]
        
     return response
 # def releasephone(ITEMID,PHONENUM):
