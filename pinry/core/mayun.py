@@ -14,7 +14,7 @@ api = "http://to.banma1024.com"
 
 def login():
     # url = 'http://xiangjiuer.cn/sms/api/login?username=API用户名&password=密码' % ('zzm88','1988104')    
-    url = 'http://202.95.11.35:2019/WebAPI/login?uname=%s&upwd=%s' % ('zzm88','123456a')    
+    url = 'http://43.249.192.245:2019/WebAPI/login?uname=%s&upwd=%s' % ('zzm88','123456a')    
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = response.strip('"') 
     global TOKEN 
@@ -28,7 +28,7 @@ def login():
 def getphone(ITEMID,PHONENUM=''):
     if PHONENUM != '':
         PHONENUM = '&phone=%s' % (PHONENUM)
-    url = 'http://202.95.11.35:2019/WebAPI/GetPhone?ukey=%s&bid=%s' % (TOKEN,ITEMID) + PHONENUM
+    url = 'http://43.249.192.245:2019/WebAPI/GetPhone?ukey=%s&bid=%s' % (TOKEN,ITEMID) + PHONENUM
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
@@ -62,7 +62,7 @@ def getsms(PHONENUM,ITEMID):
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://202.95.11.35:2019/WebAPI/GetMessage?ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://43.249.192.245:2019/WebAPI/GetMessage?ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
       
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
@@ -101,7 +101,7 @@ def getsms(PHONENUM,ITEMID):
 
 def releasephone(ITEMID,PHONENUM):
 
-    url = 'http://202.95.11.35:2019/WebAPI/CancelRecv?&ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://43.249.192.245:2019/WebAPI/CancelRecv?&ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
     if  response.split('|')[0] == "1" : #成功释放
