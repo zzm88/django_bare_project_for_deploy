@@ -14,7 +14,7 @@ api = "http://to.banma1024.com"
 
 def login():
     # url = 'http://xiangjiuer.cn/sms/api/login?username=API用户名&password=密码' % ('zzm88','1988104')    
-    url = 'http://43.249.192.245:2019/WebAPI/login?uname=%s&upwd=%s' % ('zzm88','123456a')    
+    url = 'http://yima.hbtfcc.com:2019/WebAPI/login?uname=%s&upwd=%s' % ('zzm88','123456a')    
     response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = response.strip('"') 
     global TOKEN 
@@ -28,7 +28,7 @@ def login():
 def getphone(ITEMID,PHONENUM=''):
     if PHONENUM != '':
         PHONENUM = '&phone=%s' % (PHONENUM)
-    url = 'http://43.249.192.245:2019/WebAPI/GetPhone?ukey=%s&bid=%s' % (TOKEN,ITEMID) + PHONENUM
+    url = 'http://yima.hbtfcc.com:2019/WebAPI/GetPhone?ukey=%s&bid=%s' % (TOKEN,ITEMID) + PHONENUM
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
@@ -44,7 +44,7 @@ def getphone(ITEMID,PHONENUM=''):
 
 def getphone_token(ITEMID,PHONENUM=''):
 
-    url = 'http://43.249.192.245:7777/get_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
+    url = 'http://yima.hbtfcc.com:7777/get_phone?user=%s&password=%s&xmid=%s&zd_phone=%s' % ('zzm88','1988104',ITEMID,PHONENUM)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['msg_code'] != "OK" :#TOKEN错误，重新登录
@@ -58,11 +58,11 @@ def getphone_token(ITEMID,PHONENUM=''):
 
 def getsms(PHONENUM,ITEMID):    
     # 获取短信，注意线程挂起5秒钟，每次取短信最少间隔5秒
-#    http://43.249.192.245:7777/cx_message?user=账号&password=密码&token=手机号对应token
+#    http://yima.hbtfcc.com:7777/cx_message?user=账号&password=密码&token=手机号对应token
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://43.249.192.245:2019/WebAPI/GetMessage?ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://yima.hbtfcc.com:2019/WebAPI/GetMessage?ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
       
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
@@ -101,7 +101,7 @@ def getsms(PHONENUM,ITEMID):
 
 def releasephone(ITEMID,PHONENUM):
 
-    url = 'http://43.249.192.245:2019/WebAPI/CancelRecv?&ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://yima.hbtfcc.com:2019/WebAPI/CancelRecv?&ukey=%s&bid=%s&phone=%s' % (TOKEN,ITEMID,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
     response = response.strip('"') 
     if  response.split('|')[0] == "1" : #成功释放
