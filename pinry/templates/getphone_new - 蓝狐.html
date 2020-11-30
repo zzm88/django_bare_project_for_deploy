@@ -1,0 +1,336 @@
+{% extends 'base.html' %} {% block content %}
+<script>
+
+  function releasePhone() {
+    app_code = $("#app_code").val()
+    phone_num = $("#phonenum").text()
+    if (phone_num.length != 11) {
+      phone_num = "12345678"
+      
+    }
+    $.ajax({
+      url: '/release_new/'+app_code+'/'+phone_num,
+      beforeSend: function() {
+        $("#phonenum").html('正在释放'+ phone_num);
+      },
+      complete: function(response) {
+        $('#phonenum').html(response.responseText);
+        setTimeout(enable_btn,0);
+        
+      },
+      error: function(response) {
+        $('#phonenum').html(response.responseText);
+      },
+    });
+    return false;
+  }
+  
+  function getPhone() {
+    app_code = $("#app_code").val()
+    phone_num = $("#required_num").val()
+    $.ajax({
+      url: '/getphone_new/'+app_code+'/'+phone_num,
+      beforeSend: function() {
+        $("#phonenum").html('正在获取手机号');
+      },
+      complete: function(response) {
+        $('#phonenum').html(response.responseText);
+        $('#getphone_btn').attr('disabled',true);
+        
+      },
+      error: function() {
+        $('#phonenum').html('error');
+      },
+    });
+    return false;
+  }
+
+  function getSms() {
+    if ($("#phonenum").html()) {
+      
+    }
+    else {
+      $('#validcode').html("先取得一个手机号");
+      return "";
+    }
+    
+    
+    app_code = $("#app_code").val()
+    xhr = $.ajax({
+      url: '/getsms_new/' +app_code +'/' + $('#phonenum').html(),
+      beforeSend: function() {
+        $("#validcode-msg").html('正在获取验证码...');
+        $('#validcode').html("");
+        $('#btn_getsms').attr('disabled',true); 
+
+        countdown( "countdown", 0, 60 );
+      },
+      complete: function(response) {
+        $('#validcode-msg').html(response.responseText);
+        $('#btn_getsms').attr('disabled',false); 
+        
+
+      },
+      error: function() {
+        $('#validcode-msg').html('error');
+        $('#btn_getsms').attr('disabled',false); 
+
+      },
+    });
+    return false;
+  }
+  
+  function enable_btn() {
+    $('#getphone_btn').attr('disabled',false);
+  }
+
+
+  function countdown( elementName, minutes, seconds )
+  {
+      var element, endTime, hours, mins, msLeft, time;
+  
+      function twoDigits( n )
+      {
+          return (n <= 9 ? "0" + n : n);
+      }
+  
+      function updateTimer()
+      {
+          msLeft = endTime - (+new Date);
+          if ( msLeft < 1000 ) {
+              element.innerHTML = "";
+          } else {
+              time = new Date( msLeft );
+              hours = time.getUTCHours();
+              mins = time.getUTCMinutes();
+              element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+              setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+          }
+      }
+  
+      element = document.getElementById( elementName );
+      endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+      updateTimer();
+  }
+  
+  
+
+</script>
+ 
+
+
+<div class="container-fluid" style="margin-top:20px">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4">
+
+
+        </div>
+        
+        <div class="col-lg-4 mx-auto">
+                <h3>6.16：已修复，如有问题请发邮件</h3>
+                <h3>6.13：已修复，如有问题请发邮件</h3>
+                <h5>新系统【5月13日通知：已修复，有疑问或需要添加app（注明app名称）请发邮件至：zzm88104@gmail.com】</h5>
+                <h5><a href="https://cighted-towessor.icu/dbbdd634-1d15-4ff0-9698-e351d2eb3863">网赚学堂，精选靠谱网赚教程</a></h5>
+				
+
+						
+            <select name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;">
+
+							  
+				<option value="370" selected="selected">探探</option>
+				<option value="258" >陌陌</option>
+				<option value="446" >小红书</option>
+				<option value="580" >万顺叫车</option>
+				<option value="785" >妈妈网</option>
+				<option value="272" >soul/soul星球</option>
+				<option value="317" >趣头条</option>
+				<option value="270" >UKI</option>
+				<option value="657" >奥电影</option>
+				<option value="302" >豆瓣网</option>
+				<option value="739" >毒APP</option>
+				<option value="767" >云钱包</option>
+				<option value="517" >发条娱乐</option>
+				<option value="1011" >whatsapp</option>
+				<option value="12645" >咪哒直播</option>
+				<option value="644" >最右</option>
+				<option value="11819" >谷歌</option>
+				<option value="869" >OYO酒店</option>
+				<option value="912" >链家</option>
+				<option value="489" >贝壳找房</option>
+				<option value="12421" >gmail邮箱</option>
+				<option value="12477" >高佣联 </option>
+				<option value="11064" >香香科技 </option>
+				<option value="898" >一乙 </option>
+				<option value="271" >斗鱼 </option>
+				<option value="325" >虎牙 </option>
+				<option value="12441" >触手直播</option>
+				<option value="691" >telegram</option>
+				<option value="874" >珍爱</option>
+				<option value="486" >讯飞听见</option>
+				<option value="612" >西瓜视</option>
+				<option value="11033" >今日头条极速版</option>
+				<option value="11592" >交易猫</option>
+				<option value="11748" >花城FM</option>
+				<option value="410" >聊呗</option>
+				<option value="11334" >二三五科技</option>
+				<option value="968" >樊登读书</option>
+				<option value="11092" >暴雪娱乐</option>
+				<option value="1164" >G加</option>
+				<option value="796" >海尔</option>
+				<option value="682" >爱彼迎</option>
+				<option value="389" >酷狗</option>
+				<option value="262" >饿了么语音</option>
+				<option value="11400" >饿了么</option>
+				<option value="841" >好省全新版</option>
+				<option value="1055" >呼啦</option>
+				<option value="1174" >赫兹</option>
+				<option value="11138" >洋码头</option>
+				<option value="627" >微拍堂</option>
+				<option value="11102" >云顶1</option>
+				<option value="11105" >云顶2</option>
+				<option value="11239" >欢乐抢红包</option>
+				<option value="1018" >如祺</option>
+				<option value="570" >青科506</option>
+				<option value="11650" >5173网</option>
+				<option value="11230" >zy8</option>
+				<option value="854" >BUFF手游</option>
+				<option value="12600" >九九</option>
+				<option value="11433" >云通知</option>
+				<option value="11869" >星事物</option>
+				<option value="559" >twitter</option>
+				<option value="11373" >全球看点</option>
+				<option value="11563" >ABEL</option>
+				<option value="11387" >520科技</option>
+				<option value="561" >懒人听书</option>
+				<option value="864" >大发棋牌</option>
+				<option value="11978" >美的美居</option>
+				<option value="11950" >IMONEY</option>
+				<option value="12839" >RAY</option>
+				<option value="316" >FB1</option>
+				<option value="316" >TINDER</option>
+				<option value="12534" >乐天聚购</option>
+				<option value="11186" >UU跑腿</option>
+				<option value="542" >微博登陆</option>
+				<option value="560" >微博注册</option>
+				<option value="1097" >飞书</option>
+				<option value="11193" >考拉海购</option>
+				<option value="12122" >牵伴</option>
+				<option value="11407" >keep</option>
+				<option value="12217" >PUBG</option>
+				<option value="11337" >首汽约车</option>
+				<option value="11087" >秘乐</option>
+				<option value="391" >永辉生活</option>
+				<option value="269" >伊对</option>
+				<option value="12174" >中国大地保险</option>
+				<option value="12241" >收钱吧</option>
+				<option value="650" >陌声</option>
+				<option value="11223" >香蕉视频</option>
+				<option value="11085" >答题夺宝</option>
+				<option value="11130" >疯狂猜成语</option>
+				<option value="821" >吉祥科技</option>
+				<option value="743" >货拉拉</option>
+				<option value="371" >新氧</option>
+				<option value="445" >如家</option>
+				<option value="245" >58同城</option>
+				<option value="1013" >掌嗨</option>
+				<option value="268" >苏宁</option>
+				<option value="506" >叮咚买菜</option>
+				<option value="11110" >BOB体育</option>
+				<option value="11782" >Lazada</option>
+				<option value="792" >创天互娱</option>
+				<option value="843" >知乎</option>
+				<option value="519" >小遛共享</option>
+				<option value="11240" >NOW直播</option>
+				<option value="297" >YY语音 </option>
+				<option value="11777" >滑滑鸡</option>
+				<option value="1161" >会玩</option>
+				<option value="12446" >天天有鱼</option>
+				<option value="1062" >优酷/土豆</option>
+				<option value="459" >追缘</option>
+				<option value="1189" >有缘</option>
+				<option value="800" >1688</option>
+				<option value="12724" >快狗</option>
+				<option value="12127" >源点科技 DNAer叮了</option>
+				<option value="11540" >龙湖U</option>
+				<option value="375" >Blued</option>
+				<option value="12327" >花羽</option>
+				<option value="346" >趣约会</option>
+				<option value="908" >一汽-大众</option>
+				<option value="441" >租号玩</option>
+				<option value="11293" >闪送</option>
+				<option value="502" >i百联</option>
+				<option value="623" >UU加速</option>
+				<option value="11382" >天博</option>
+				<option value="257" >积目</option>
+				<option value="326" >微光app</option>
+				<option value="1061" >哔哩哔哩</option>
+				<option value="921" >SUGAR</option>
+				<option value="708" >T3</option>
+				<option value="19444" >天府</option>           
+
+				<option value="12067" >BOSS直聘</option>           
+				<option value="12845" >团油</option>           
+				<option value="739" >毒APP</option>           
+				<option value="635" >绿洲</option>           
+				<option value="12670" >多彩宝</option>           
+				<option value="11089" >谊品</option>           
+				<option value="12067" >boss直聘</option>           
+				<option value="302" >豆瓣</option>           
+				<option value="815" >nike</option>           
+				<option value="432" >顺丰</option> 
+
+				
+				<option value="13174" >左左</option>           
+				<option value="348" >汽车之家</option>           
+
+ 
+ 
+
+
+ 
+ 
+  
+ 
+
+
+	                 
+                 
+
+            </select>
+
+          <div style="width:100%">
+          <button id="getphone_btn" style="width:100%" type="button" href="#" onclick="return getPhone();" class="btn btn-primary" >
+				获得一个手机号
+            </button></div>
+          <button onclick="return getSms();" type="button" class="btn btn-success" style="width:100%;" id="btn_getsms">
+				查看验证码
+            </button>
+          <button onclick="return releasePhone();" type="button" class="btn btn-success" style="width:100%;background-color: #888" id="btn_releasephone">
+				释放手机号（释放后才可以再获取新的号）
+            </button>
+            <br>
+            <span style="font-size:40px;width:100%;color:black;background-color:#7770;" id="phonenum" class="badge badge-default" style="font-size:40px;"></span>
+            <br>
+          <span id="validcode-msg" class=""></span>
+          <div id="countdown"></div>
+          <span id="validcode" class=""></span>
+          <!-- <textarea id='required_num'>15282817241</textarea> -->
+        <input id='required_num' type="text" style="width: 100%" value="" placeholder="（可不填）指定手机号码"></input>
+
+        </div>
+        <div class="col-md-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

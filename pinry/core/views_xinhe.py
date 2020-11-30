@@ -17,7 +17,7 @@ import datetime
 import calendar
 # import yimaapi
 # import xinheapi
-import mayun as xinheapi
+import feizhu as xinheapi
 
 
 class GetSmsView_new(TemplateView):
