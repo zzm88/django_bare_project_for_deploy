@@ -521,3 +521,46 @@ def use_code(request):
     # except:
     #     pass
     # return HttpResponse(response)
+
+
+def show_all_emails(request):
+
+    from pinry.users.models import User
+    users = User.objects.all()
+    email_list = [] 
+    for id in range(1, users.count()):
+        u=User.objects.get(id = id )
+        email=u.email
+        email_list.append(email)
+
+    output = ''
+    for email in email_list:
+        output+=email +','
+    response = output 
+    return HttpResponse(response)
+
+
+# class  ActivationListView(ListView):
+#     model =  User
+#     template_name = 'email_list.html'
+
+#     # def get_context_data(self, **kwargs):
+#     #     context = super( ActivationListView, self).get_context_data(**kwargs)
+#     #     context['now'] = timezone.now()
+#     #     return context
+#     # @login_required
+#     def get_queryset(self):
+        
+#         if self.request.user.is_superuser:
+#             pass
+#         else:
+#             r= "not authorized"
+#             return r
+
+#         try:
+#             r = User.objects.filter(used=False)
+#         except Exception as e:
+#             print "HAHA"
+#             print e
+#             r= "nothing"
+#         return r

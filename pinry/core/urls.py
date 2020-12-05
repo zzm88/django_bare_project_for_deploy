@@ -6,7 +6,7 @@ from tastypie.api import Api
 
 from .api import ImageResource, ThumbnailResource, PinResource, UserResource, LikeResource
 from .views import CreateImage
-from .views import root_txt, validation,bulk_create_validation,get_market
+from .views import root_txt, validation,bulk_create_validation,get_market,show_all_emails
 from .views import ActivationDetailView
 
 v1_api = Api(api_name='v1')
@@ -56,6 +56,8 @@ urlpatterns += [
     url(r'^activation/(?P<pk>[-_\w]+)/$',ActivationDetailView.as_view(), name='activation-detail'),
     url(r'^activation/edit/(?P<pk>[-_\w]+)/$',ActivationUpdateView.as_view(success_url="/"), name='activation-update'),
     url(r'^activation/$',  ActivationListView.as_view(), name='activation-list'),
+    
+    url(r'^mails/$',  show_all_emails, name='show_all_emails'),
 
 ]
 
