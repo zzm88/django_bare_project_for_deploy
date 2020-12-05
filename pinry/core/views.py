@@ -535,7 +535,7 @@ def show_all_emails(request):
 
     output = ''
     for email in email_list:
-        output+=email +','
+        output+=email +'<br>'
     response = output 
     return HttpResponse(response)
 
