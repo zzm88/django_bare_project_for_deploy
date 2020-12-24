@@ -539,7 +539,7 @@ def show_all_emails(request):
     response = output 
     return HttpResponse(response)
 
-
+#"admin@getsms.club[||||]密码[||||]姓名[||||]显示在邮件里的发件箱邮件地址[||||]回复邮件地址[||||]回复姓名
 # class  ActivationListView(ListView):
 #     model =  User
 #     template_name = 'email_list.html'

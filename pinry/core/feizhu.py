@@ -8,7 +8,7 @@ from .models import Token
 
 header_dict = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
-TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0MzI0NSIsImlhdCI6MTU5MTk1NzAzMiwiZXhwIjoxNTk4MDA1MDMyfQ.jOFn8BCY9mOsYsSzOSeyxrdg8STnDrBBnzhOOIVCrtVk_4_eoxen5oqeXmLiGLoXMfJsmE8_KLYxbMgXEggPCw'
+TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMzYmVlYWMwMGM3YzI3MGRhYTIxNjYiLCJhcGlBY2NvdW50IjoiYTBiY2E1NzgtNGVhMi00ZTRlLWI0ZDUtNjkwNjhhZWY3MTcwIiwiaWF0IjoxNjA4ODEyMDgyfQ.MElC4J2I2_V-Y9HvIiHySX77aohq2uUSD9Z4HEbvlbQ'
 
 apiAccount = "a0bca578-4ea2-4e4e-b4d5-69068aef7170"
 
@@ -23,7 +23,7 @@ apiAccount = "a0bca578-4ea2-4e4e-b4d5-69068aef7170"
 '''
 def login():
     # url = 'http://xiangjiuer.cn/sms/api/login?username=API用户名&password=密码' % ('zzm88','1988104')    
-    url = 'http://api.yumoyumo.com/api/yhdl?password=%s&apiAccount=%s' % ('feizhu123456','a0bca578-4ea2-4e4e-b4d5-69068aef7170')    
+    url = 'http://hainanhongyu.com/api/yhdl?password=%s&apiAccount=%s' % ('feizhu123456','a0bca578-4ea2-4e4e-b4d5-69068aef7170')    
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content
 
@@ -45,7 +45,7 @@ def login():
 '''
 def getphone(ITEMID,PHONENUM=''):
 
-    url = 'http://api.yumoyumo.com/api/yhqh_s?token=%s&id=%s&pingtaika=1&number=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://hainanhongyu.com/api/yhqh_s?token=%s&id=%s&pingtaika=1&number=%s' % (TOKEN,ITEMID,PHONENUM)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['result'] == '失败' and json.loads(response)['reasonCode'] == 101 :#TOKEN错误，重新登录
@@ -64,7 +64,7 @@ def getsms(MOBILE,ITEMID):
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://api.yumoyumo.com/api/yhjm?token=%s&id=%s&number=%s&apiAccount=%s' % (TOKEN,ITEMID,MOBILE,apiAccount)
+    url = 'http://hainanhongyu.com/api/yhjm?token=%s&id=%s&number=%s&apiAccount=%s' % (TOKEN,ITEMID,MOBILE,apiAccount)
       
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse = json.loads(response)
@@ -102,7 +102,7 @@ def getsms(MOBILE,ITEMID):
         return d
 
 def releasephone(ITEMID,PHONENUM):
-    url = 'http://api.yumoyumo.com/api/yhsf?token=%s&id=%s&number=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = 'http://hainanhongyu.com/api/yhsf?token=%s&id=%s&number=%s' % (TOKEN,ITEMID,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse=json.loads(response)
     if json_repsonse['result'] == "成功":# 若成功释放
