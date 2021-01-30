@@ -12,6 +12,7 @@ TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmMzYmVlYWMwMGM3YzI3MG
 
 apiAccount = "a0bca578-4ea2-4e4e-b4d5-69068aef7170"
 
+api_addresss = "http://api.bailongma123.com"
 
 
 
@@ -23,7 +24,7 @@ apiAccount = "a0bca578-4ea2-4e4e-b4d5-69068aef7170"
 '''
 def login():
     # url = 'http://xiangjiuer.cn/sms/api/login?username=API用户名&password=密码' % ('zzm88','1988104')    
-    url = 'http://hainanhongyu.com/api/yhdl?password=%s&apiAccount=%s' % ('feizhu123456','a0bca578-4ea2-4e4e-b4d5-69068aef7170')    
+    url = '%s/api/yhdl?password=%s&apiAccount=%s' % (api_addresss,'feizhu123456','a0bca578-4ea2-4e4e-b4d5-69068aef7170')    
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content
 
@@ -45,7 +46,7 @@ def login():
 '''
 def getphone(ITEMID,PHONENUM=''):
 
-    url = 'http://hainanhongyu.com/api/yhqh_s?token=%s&id=%s&pingtaika=1&number=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = '%s/api/yhqh_s?token=%s&id=%s&pingtaika=1&number=%s' % (api_addresss,TOKEN,ITEMID,PHONENUM)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
     response = requests.get(url=url, headers=header_dict).content
     if json.loads(response)['result'] == '失败' and json.loads(response)['reasonCode'] == 101 :#TOKEN错误，重新登录
@@ -64,7 +65,7 @@ def getsms(MOBILE,ITEMID):
     WAIT = 60 # 接受短信时长60s
     
    
-    url = 'http://hainanhongyu.com/api/yhjm?token=%s&id=%s&number=%s&apiAccount=%s' % (TOKEN,ITEMID,MOBILE,apiAccount)
+    url = '%s/api/yhjm?token=%s&id=%s&number=%s&apiAccount=%s' % (api_addresss,TOKEN,ITEMID,MOBILE,apiAccount)
       
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse = json.loads(response)
@@ -102,7 +103,7 @@ def getsms(MOBILE,ITEMID):
         return d
 
 def releasephone(ITEMID,PHONENUM):
-    url = 'http://hainanhongyu.com/api/yhsf?token=%s&id=%s&number=%s' % (TOKEN,ITEMID,PHONENUM)
+    url = '%s/api/yhsf?token=%s&id=%s&number=%s' % (api_addresss,TOKEN,ITEMID,PHONENUM)
     response = requests.get(url=url, headers=header_dict).content
     json_repsonse=json.loads(response)
     if json_repsonse['result'] == "成功":# 若成功释放
