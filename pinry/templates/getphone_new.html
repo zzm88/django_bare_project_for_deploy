@@ -5,33 +5,101 @@ $(document).ready(function(){
      $.ajax({
       url: 'https://api.npoint.io/b82807a96d501ec3779d',
       beforeSend: function() {
-        console.log('before_send');
+       // console.log('before_send');
 		$('#app_code').append('<option value="">列表加载中...</option>')
 
       },
       complete: function(response) {
 		$('#app_code').html('')
 
-        console.log(response.responseText);
+        //console.log(response.responseText);
         var json = response.responseJSON
 		var notice = json[0].notice
+    var appList = [];
 		$('#notice').html(notice)
+        var appList = [];
+
         for(var i = 0; i < json.length; i++) {
             var obj = json[i];
 
-            console.log(obj.id);
+           // console.log(obj.id);
             $('#app_code').append('<option value="'+ obj.value + '">' +obj.app_name+'</option>')
+            appList.push(obj.app_name);
             
             				
 
         }
+   
+        $(".APPS").autocomplete({ 
+            source: appList 
+        });
         
       },
       error: function(response) {
-        console.log(response.responseText)
       },
     });
+
+        
+    
+
+
+
+
 });
+
+    
+//the function to fill the list with value of Input widget
+function myFunction() {
+input_val = $('#myInput').val()
+
+  $('[name=app_code] option').filter(function() { 
+		return ($(this).text() == input_val ); //To select Blue
+  }).prop('selected', true);
+
+};
+    
+    
+//Event: OnEnter to fill option in the list when text typed and press "Enter"  
+$("#myInput").on('keyup', function (e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        // Do something
+        myFunction();
+    }
+});
+   
+
+///// BACKUP//////////
+// $(document).ready(function(){
+//      $.ajax({
+//       url: 'https://api.npoint.io/b82807a96d501ec3779d',
+//       beforeSend: function() {
+//         console.log('before_send');
+// 		$('#app_code').append('<option value="">列表加载中...</option>')
+
+//       },
+//       complete: function(response) {
+// 		$('#app_code').html('')
+
+//         console.log(response.responseText);
+//         var json = response.responseJSON
+// 		var notice = json[0].notice
+// 		$('#notice').html(notice)
+//         for(var i = 0; i < json.length; i++) {
+//             var obj = json[i];
+
+//             console.log(obj.id);
+//             $('#app_code').append('<option value="'+ obj.value + '">' +obj.app_name+'</option>')
+            
+            				
+
+//         }
+        
+//       },
+//       error: function(response) {
+//         console.log(response.responseText)
+//       },
+//     });
+// });
 
   function releasePhone() {
     app_code = $("#app_code").val()
@@ -162,11 +230,14 @@ $(document).ready(function(){
         
         <div class="col-lg-4 mx-auto">
 				<h3 id="notice"></h3>
-				<a href ="https://tool.getsms.club/getsms-opensource/index.html">本站源代码及教学</a>
-     
-
+				<!-- <a href ="https://tool.getsms.club/getsms-opensource/index.html">本站源代码及教学</a> -->
+     <br>
+        <input oninput="myFunction()" onchange="myFunction()" id="myInput" class="APPS"/>
+        <button  onclick = "myFunction()">查找(回车)
+        </button>
+        <select  name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;"></select>
 						
-            <select name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;">
+            <!-- <select name="app_code" id="app_code" size="1" style="width: 100%;height: 40px;"> -->
 
 							  
 				<!-- <option value="1000177" selected="selected">探探</option> -->
@@ -211,7 +282,7 @@ $(document).ready(function(){
 	                 
                  
 
-            </select>
+            <!-- </select> -->
 
           <div style="width:100%">
           <button id="getphone_btn" style="width:100%" type="button" href="#" onclick="return getPhone();" class="btn btn-primary" >
