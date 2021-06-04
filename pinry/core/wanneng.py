@@ -38,7 +38,7 @@ def login():
     #success response:
     #{"code":1,"msg":"success","data":"693f4780-6686-47f9-9c4a-00da4c9f906f-24537"}
 
-    url =  "%slogin?uname=%s&upwd=%s" % (api_addresss,id,password)    
+    url =  "%slogin?uname=%s&upwd=%s" % (api_address,id,password)    
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312')
     response = requests.get(url=url, headers=header_dict).content.strip('"')
 
