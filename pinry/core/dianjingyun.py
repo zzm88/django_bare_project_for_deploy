@@ -64,7 +64,7 @@ def login():
 
     global TOKEN 
     if response.split('|')[0] == "0": #登陆成功
-        TOKEN = response.split('|')[2]
+        TOKEN = response.split('|')[2].split('=')[1]
     else:
         pass
     
@@ -86,13 +86,17 @@ def getphone(ITEMID,PHONENUM=''):
 
     url = '%sgetjmphone?yysxz=0&token=%s&qylx=0&xmid=%s&qygjz=&yys=0&qyxz=0&author=zzmdianjingyun2' % (api_address,TOKEN,ITEMID)
     # response = requests.get(url=url, headers=header_dict).content.decode('utf-8').encode('gb2312') 
-    response = requests.get(url=url, headers=header_dict).content.strip('"').split("|")
+    response = requests.get(url=url, headers=header_dict).content.decode('gb2312').encode('utf-8').strip('"').split("|")
     key= response[0]
     value = response[1]
 
     if  key == "1"  :#TOKEN错误，重新登录
+        print value #debug
+
         login()#登录
         response = getphone(ITEMID,PHONENUM) #再次获取手机
+
+
         # response = json.loads(response)['reasonCode']
     elif key == "0":#取号成功
        return value
