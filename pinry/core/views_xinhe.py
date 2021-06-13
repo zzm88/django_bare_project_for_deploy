@@ -17,12 +17,7 @@ import datetime
 import calendar
 # import yimaapi
 # import xinheapi
-<<<<<<< HEAD
 import dianjingyun as xinheapi
-=======
-import taishanyun as xinheapi
->>>>>>> 976104719101986e34feac03604d2b85160d1320
-
 
 class GetSmsView_new(TemplateView):
     template_name = "getphone_new.html"
