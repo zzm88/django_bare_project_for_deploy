@@ -17,8 +17,12 @@ password = "123456"
 id = "zzmdianjingyun2"
 
 '''
-format
+1.format
 0|登陆成功|token=bb7bdaaaec034ed1986f1c2620afb848
+
+2.需要转码
+content.decode('gb2312').encode('utf-8')
+
 
 login()
 http://150.242.99.60:8888/api/login?username=zzmdianjingyun2&password=123456
@@ -170,7 +174,7 @@ def getsms(MOBILE,ITEMID):
 
 def releasephone(ITEMID,PHONENUM):
     url = '%sjmSpecified?token=%s&xmid=%s&phone=%s' % (api_address,TOKEN,ITEMID,PHONENUM)
-    response = requests.get(url=url, headers=header_dict).content.strip('"').split('|')
+    response = requests.get(url=url, headers=header_dict).content.decode('gb2312').encode('utf-8').strip('"').split('|')
     key = response[0]
     value = response[1]
     if key == "0":# 若成功释放
