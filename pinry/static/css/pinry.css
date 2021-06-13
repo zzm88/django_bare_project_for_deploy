@@ -375,3 +375,20 @@ right: 0; /* Set the bounds in which to center it, relative to its parent/contai
 /* End Pins */
 
 
+
+.ui-menu {
+    background: white;
+      display: block !important;
+        padding: 0;
+}
+
+li.ui-menu-item {
+list-style-type: none;
+border-width: 1px;
+    border-color: black;
+    border-style: solid;
+
+}
+/* input#myInput {
+    background-color: black;
+} */
