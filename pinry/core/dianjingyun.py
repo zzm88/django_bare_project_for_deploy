@@ -11,7 +11,7 @@ header_dict = {
 TOKEN = 'bb7bdaaaec034ed1986f1c2620afb848'
 
 
-api_address = "http://150.242.99.60:8888/api/"
+api_address = "http://27.221.75.201:8888/api/"
 api = ""
 password = "123456"
 id = "zzmdianjingyun2"
